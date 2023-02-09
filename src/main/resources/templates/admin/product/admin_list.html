@@ -14,123 +14,9 @@
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
+    <script src="/Kmarket2/staic/js/gnb.js"></script>
+    <link rel="stylesheet" href="/Kmarket2/staic/style/admin.css">
     <title>케이마켓::관리자</title>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        var gnb = $('#gnb > li > a');
-
-        gnb.click(function (e) {
-          e.preventDefault();
-          var isOpen = $(this).next().is(':visible');
-
-          if (isOpen) {
-            $(this).next().slideUp(200);
-          } else {
-            $(this).next().slideDown(200);
-          }
-        });
-      });
-    </script>
-    <style>
-      /* all */
-      * {
-        margin: 0;
-        padding: 0;
-        font: normal 12px '고딕';
-      }
-      ul,ol {
-        list-style: none;
-      }
-      a {
-        text-decoration: none;
-        color: #111;
-      }
-
-      /* header */
-      header {
-        background: url(Kmarket/img/admin_bg_header.jpg);
-        
-      }
-      #top_admin{
-        height: 120px;
-      }
-      #nav_admin{
-        height: 100px;
-      }
-
-      /* aside */
-      aside{
-        
-        width: 270px;
-        height: auto;
-        background: url(Kmarket/img/admin_bg_aside.jpg) repeat-y;
-        border-left: 1px solid #c0c0c0;
-        box-sizing: border-box;
-      }
-      #gnb {
-        width: 100%;
-        height: auto;
-        margin: 0;
-        padding: 0;
-      }
-      #gnb > li {
-        width: 100%;
-        min-height: 66px;
-        border-top: 1px solid #c0c0c0;
-        box-sizing: border-box;
-      }
-      #gnb > li:last-child {
-        border-bottom: 1px solid #c0c0c0;
-      }
-      #gnb > li > a {
-        display: block;
-        width: 100%;
-        height: 66px;
-        font-size: 14px;
-        font-weight: bold;
-        color: #222;
-        line-height: 66px;
-        text-indent: 10px;
-      }
-      #gnb > li > a > i {
-        margin-right: 10px;
-        font-size: 20px;
-      }
-      #gnb ol {
-        display: none;
-        width: 100%;
-        height: auto;
-      }
-      #gnb ol > li {
-        width: 100%;
-        height: 32px;
-      }
-      #gnb ol > li > a {
-        display: block;
-        width: 100%;
-        height: 100%;
-        text-indent: 52px;
-      }
-      /* main */
-      .admin_list_img{
-        width: 60px;
-      }
-      #admin_list_info{
-        border: 1px solid #8497BF;
-        background: #A8B2C5;
-      }
-      #main_admin_list .form-check-input{
-        width: 1.5em;
-        height: 1.5em;
-        margin-top: 0em;
-      }
-
-      /* footer */
-      footer {
-        background: #0d3a46;
-      }
-      
-    </style>
   </head>
   <body class="d-flex flex-column h-100">
     <header>
@@ -216,20 +102,24 @@
         <div class="col">
           <div id="admin_nav" class="row align-items-end border-bottom border-1 border-dark pt-5 mb-4">
             <div class="col-6 h3 fw-bold">상품목록</div>
-            <div class="col-6 text-end mb-1">HOME > 상품관리 > <strong>상품목록</strong></div>
-          </div>
-          <div class="row">
-            <div class="col-2">
-              <select name="" id="" class="form-select">
-                <option value="1">상품명</option>
-                <option value="2">상품코드</option>
-                <option value="3">제조사</option>
-                <option value="4">판매자</option>
-              </select>
+            <div class="col-6 text-end mb-1">
+              <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb d-flex justify-content-end mb-0">
+                  <li class="breadcrumb-item">Home</li>
+                  <li class="breadcrumb-item" aria-current="page">상품관리</li>
+                  <li class="breadcrumb-item fw-bold" aria-current="page">상품목록</li>
+                </ol>
+              </nav>
             </div>
-            <div class="col-4 mb-3">
-              <input type="text" class="form-control">
-            </div>            
+          </div>
+          <div class="d-flex justify-content-start mb-3">
+            <select name="" id="" class="form-select w-25 me-3">
+              <option value="1">상품명</option>
+              <option value="2">상품코드</option>
+              <option value="3">제조사</option>
+              <option value="4">판매자</option>
+            </select>
+            <input type="text" class="form-control w-25">
           </div>
           <table class="table border-top text-center align-middle">
             <thead class="table-light">
@@ -260,8 +150,9 @@
                 <td>qwqwqw1</td>
                 <td>1000</td>
                 <td>
-                  <button type="button" class="btn btn-info">수정</button>
-                  <button type="button" class="btn btn-danger">삭제</button>
+                  <a href="">[수정]</a>
+
+                  <a href="">[삭제]</a>
                 </td>
               </tr>
               <tr>
@@ -276,8 +167,8 @@
                 <td>qwqwqw1</td>
                 <td>1000</td>
                 <td>
-                  <button type="button" class="btn btn-info">수정</button>
-                  <button type="button" class="btn btn-danger">삭제</button>
+                  <a href="">[수정]</a>
+                  <a href="">[삭제]</a>
                 </td>
               </tr>
               <tr>
@@ -292,8 +183,8 @@
                 <td>qwqwqw1</td>
                 <td>1000</td>
                 <td>
-                  <button type="button" class="btn btn-info">수정</button>
-                  <button type="button" class="btn btn-danger">삭제</button>
+                  <a href="">[수정]</a>
+                  <a href="">[삭제]</a>
                 </td>
               </tr>
               <tr>
@@ -308,8 +199,8 @@
                 <td>qwqwqw1</td>
                 <td>1000</td>
                 <td>
-                  <button type="button" class="btn btn-info">수정</button>
-                  <button type="button" class="btn btn-danger">삭제</button>
+                  <a href="">[수정]</a>
+                  <a href="">[삭제]</a>
                 </td>
               </tr>
               <tr>
@@ -324,8 +215,8 @@
                 <td>qwqwqw1</td>
                 <td>1000</td>
                 <td>
-                  <button type="button" class="btn btn-info">수정</button>
-                  <button type="button" class="btn btn-danger">삭제</button>
+                  <a href="">[수정]</a>
+                  <a href="">[삭제]</a>
                 </td>
               </tr>
               <tr>
@@ -340,8 +231,8 @@
                 <td>qwqwqw1</td>
                 <td>1000</td>
                 <td>
-                  <button type="button" class="btn btn-info">수정</button>
-                  <button type="button" class="btn btn-danger">삭제</button>
+                  <a href="">[수정]</a>
+                  <a href="">[삭제]</a>
                 </td>
               </tr>
               <tr>
@@ -356,8 +247,8 @@
                 <td>qwqwqw1</td>
                 <td>1000</td>
                 <td>
-                  <button type="button" class="btn btn-info">수정</button>
-                  <button type="button" class="btn btn-danger">삭제</button>
+                  <a href="">[수정]</a>
+                  <a href="">[삭제]</a>
                 </td>
               </tr>
               <tr>
@@ -372,8 +263,8 @@
                 <td>qwqwqw1</td>
                 <td>1000</td>
                 <td>
-                  <button type="button" class="btn btn-info">수정</button>
-                  <button type="button" class="btn btn-danger">삭제</button>
+                  <a href="">[수정]</a>
+                  <a href="">[삭제]</a>
                 </td>
               </tr>
               <tr>
@@ -388,8 +279,8 @@
                 <td>qwqwqw1</td>
                 <td>1000</td>
                 <td>
-                  <button type="button" class="btn btn-info">수정</button>
-                  <button type="button" class="btn btn-danger">삭제</button>
+                  <a href="">[수정]</a>
+                  <a href="">[삭제]</a>
                 </td>
               </tr>
               <tr>
@@ -404,26 +295,30 @@
                 <td>qwqwqw1</td>
                 <td>1000</td>
                 <td>
-                  <button type="button" class="btn btn-info">수정</button>
-                  <button type="button" class="btn btn-danger">삭제</button>
+                  <a href="">[수정]</a>
+                  <a href="">[삭제]</a>
                 </td>
               </tr>
               
             </tbody>
           </table>
           <div class="text-start">
-            <button type="button" class="btn btn-light btn-lg border">선택삭제</button>
+            <button type="button" class="btn btn-light border">선택삭제</button>
           </div>
           <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
-              <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
               </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link active" href="#">1</a></li>
               <li class="page-item"><a class="page-link" href="#">2</a></li>
               <li class="page-item"><a class="page-link" href="#">3</a></li>
               <li class="page-item">
-                <a class="page-link" href="#">Next</a>
+                <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
               </li>
             </ul>
           </nav>

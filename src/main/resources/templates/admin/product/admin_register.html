@@ -14,120 +14,10 @@
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
+    <script src="/Kmarket2/staic/js/gnb.js"></script>
+    <link rel="stylesheet" href="/Kmarket2/staic/style/admin.css">
     <title>케이마켓::관리자</title>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        var gnb = $('#gnb > li > a');
-
-        gnb.click(function (e) {
-          e.preventDefault();
-          var isOpen = $(this).next().is(':visible');
-
-          if (isOpen) {
-            $(this).next().slideUp(200);
-          } else {
-            $(this).next().slideDown(200);
-          }
-        });
-      });
-    </script>
-    <style>
-      /* all */
-      * {
-        margin: 0;
-        padding: 0;
-        font: normal 12px '고딕';
-      }
-      ul,ol {
-        list-style: none;
-      }
-      a {
-        text-decoration: none;
-        color: #111;
-      }
-
-      /* header */
-      header {
-        background: url(Kmarket/img/admin_bg_header.jpg);
-        
-      }
-      #nav_admin{
-        height: 100px;
-      }
-      #top_admin{
-        height: 120px;
-      }
-
-      /* aside */
-      aside{
-        
-        width: 270px;
-        height: auto;
-        background: url(Kmarket/img/admin_bg_aside.jpg) repeat-y;
-        border-left: 1px solid #c0c0c0;
-        box-sizing: border-box;
-      }
-      #gnb {
-        width: 100%;
-        height: auto;
-        margin: 0;
-        padding: 0;
-      }
-      #gnb > li {
-        width: 100%;
-        min-height: 66px;
-        border-top: 1px solid #c0c0c0;
-        box-sizing: border-box;
-      }
-      #gnb > li:last-child {
-        border-bottom: 1px solid #c0c0c0;
-      }
-      #gnb > li > a {
-        display: block;
-        width: 100%;
-        height: 66px;
-        font-size: 14px;
-        font-weight: bold;
-        color: #222;
-        line-height: 66px;
-        text-indent: 10px;
-      }
-      #gnb > li > a > i {
-        margin-right: 10px;
-        font-size: 20px;
-      }
-      #gnb ol {
-        display: none;
-        width: 100%;
-        height: auto;
-      }
-      #gnb ol > li {
-        width: 100%;
-        height: 32px;
-      }
-      #gnb ol > li > a {
-        display: block;
-        width: 100%;
-        height: 100%;
-        text-indent: 52px;
-      }
-      /* main */
-      .bg_describe {
-        background: #eaeaea;
-      }
-      .form-select{
-        width: 250px;
-      }
-      #admin_register_alert{
-        border: 1px solid #FDD845;
-        background: #FFF6BF;
-      }
-      /* footer */
-      footer {
-        background: #0d3a46;
-      }
       
-    </style>
   </head>
   <body class="d-flex flex-column h-100">
     <header>
@@ -213,7 +103,15 @@
         <div class="col">
           <div id="admin_nav" class="row align-items-end border-bottom border-1 border-dark pt-5 mb-4">
             <div class="col-6 h3 fw-bold">상품등록</div>
-            <div class="col-6 text-end mb-1">HOME > 상품관리 > <strong>상품등록</strong></div>
+            <div class="col-6 text-end mb-1">
+              <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb d-flex justify-content-end mb-0">
+                  <li class="breadcrumb-item">Home</li>
+                  <li class="breadcrumb-item" aria-current="page">상품관리</li>
+                  <li class="breadcrumb-item fw-bold" aria-current="page">상품등록</li>
+                </ol>
+              </nav>
+            </div>
           </div>
           <div class="h5 fw-bold mb-2">상품분류</div>
           <div class="bg_describe w-100 p-3 mb-3">기본분류는 반드시 선택하셔야합니다. 하나의 상품에 1개의 분류를 지정합니다.</div>
