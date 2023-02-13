@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+  <head>
+    <meta charset="UTF-8">
+    <script src="https://kit.fontawesome.com/e8f010a863.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/Kmarket2/style/my/my.css">
+    <script src="/Kmarket2/js/my/home.js"></script>
+    <title>케이마켓::온라인 1등 쇼핑몰</title>
+  </head>
+  <body>
+    <div id="wrapper">
+      <header>
+        <div id="top">
+          <div>
+            <a href="">로그인</a>
+            <a href="">회원가입</a>
+            <a href="">마이페이지</a>
+            <a href=""><i class="fa-solid fa-cart-shopping"></i>&nbsp;장바구니</a>
+          </div>
+        </div>
+        <div id="logo">
+          <div>
+            <a href="">
+              <img src="/Kmarket2/img/my/header_logo.png" alt="">
+            </a>
+            <form action="">
+              <input type="text">
+              <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+            
+          </div>
+        </div>
+        <div id="my_k">
+          <div>
+            <a href="">
+              <img src="/Kmarket2/img/my/my_logo.jpg" alt="" id="my_logo">
+            </a>
+            <ol>
+              <li>
+                <a href="">주문 배송</a>
+                <p id="nav_my_delivery">1</p>
+              </li>
+              <li>
+                <a href="">할인쿠폰</a>
+                <p id="nav_my_coupon">1</p>
+              </li>
+              <li>
+                <a href="">포인트</a>
+                <p id="nav_my_point">1,000</p>
+              </li>
+              <li>
+                <a href="">문의내역</a>
+                <p id="nav_my_qna">1</p>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </header>
+      <main id="info">
+        <aside>
+          <span id="piece"></span>
+          <ul>
+            <li class="aside_on"><a href="">전체주문내역</a></li>
+            <li class="aside_on"><a href="">포인트내역</a></li>
+            <li class="aside_on"><a href="">쿠폰</a></li>
+            <li class="aside_on"><a href="">나의리뷰</a></li>
+            <li class="aside_on"><a href="">문의하기</a></li>
+            <li class="aside_on"><a href="">나의설정</a></li>
+          </ul>
+        </aside>
+        <!-- section -->
+        <section>
+          <div id="banner">
+            <a href="" id="my_banner2"></a>
+          </div>
+
+          <div id="my_info">
+            <h3>회원정보 설정</h3>
+            <table>
+              <tbody>
+                <tr>
+                  <td>사용자 ID</td>
+                  <td>use****</td>
+                </tr>
+                <tr>
+                  <td>비밀번호</td>
+                  <td><button>비밀번호 수정</button></td>
+                </tr>
+                <tr>
+                  <td>이름</td>
+                  <td>홍*동</td>
+                </tr>
+                <tr>
+                  <td>생년월일</td>
+                  <td>2022년 02월 02일</td>
+                </tr>
+                <tr>
+                  <td>E-mail</td>
+                  <td>
+                    <input type="text" name="" id="email_id">
+                    <span>@</span>
+                    <input type="text" name="" id="email_domain">
+                    <select name="" id="">
+                      <option selected>직접입력</option>
+                      <option value="nate">nate.com</option>
+                      <option value="naver">naver.com</option>
+                      <option value="daum">daum.com</option>
+                      <option value="gmail">gmail.com</option>
+                      <option value="outlook">outlook.com</option>
+                    </select>
+                    <button>수정하기</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>휴대폰</td>
+                  <td>
+                    <input type="text" name="" id="">
+                    <span>-</span>
+                    <input type="text" name="" id="">
+                    <span>-</span>
+                    <input type="text" name="" id="">
+                    <button>수정하기</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>주소</td>
+                  <td>
+                    <input type="text" name="" id=""><button>주소검색</button><br>
+                    <input type="text" name="" id=""><br>
+                    <input type="text" name="" id="">
+                  </td>
+                </tr>
+                <tr>
+                  <td>회원탈퇴</td>
+                  <td><button>탈퇴하기</button></td>
+                </tr>
+              </tbody>
+            </table>
+            <div>
+              <button id="modify_info">수정하기</button>
+            </div>
+          </div>
+         
+        </section>
+      </main>
+      <footer>
+        <ul>
+          <li><a href="">회사소개</a></li>
+          <li><a href="">서비스이용약관</a></li>
+          <li><a href="">개인정보처리방침</a></li>
+          <li><a href="">전자금융거래약관</a></li>
+        </ul>
+        <div id="my_footer_info">
+          <div><img src="/Kmarket2/img/my/footer_logo.png" alt=""></div>
+          <div>
+            <strong>(주)KMARKET</strong>
+            <p>
+              부산시 강남구 테헤란로 152 (역삼동 강남파이낸스센터)<br>
+              대표이사 : 홍길동<br>
+              사업자등록번호 : 220-81-83676 사업자정보확인<br>
+              통신판매업신고 : 강남 10630호 Fax : 02-589-8842
+            </p>
+          </div>
+          <div>
+            <strong>고객센터</strong>
+            <p>
+              Tel : 1234-5678 (평일 09:00~18:00)<br>
+              스마일클럽/SVIP 전용 : 1522-5700 (365일 09:00~18:00)<br>
+              경기도 부천시 원미구 부일로 223(상동) 투나빌딩 6층<br>              
+              Fax : 051-123-4567 | Mail : kmarket@kmarket.co.kr
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
