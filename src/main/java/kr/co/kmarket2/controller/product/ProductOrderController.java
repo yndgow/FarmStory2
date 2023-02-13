@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ProductOrderController {
 	
-	@GetMapping("list")
-	public String list(){
-		return "list";
+	@GetMapping("order")
+	public String order(){
+		return "order";
 	}
 
 }

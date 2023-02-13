@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ProductViewController {
 	
-	@GetMapping("list")
-	public String list(){
-		return "list";
+	@GetMapping("view")
+	public String view(){
+		return "view";
 	}
 
 }
