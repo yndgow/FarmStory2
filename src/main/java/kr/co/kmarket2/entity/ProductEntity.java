@@ -1,13 +1,16 @@
 package kr.co.kmarket2.entity;
 
+import java.time.LocalDateTime;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.lang.Nullable;
 
 import lombok.Data;
 
@@ -17,6 +20,7 @@ import lombok.Data;
 @EntityListeners(AuditingEntityListener.class)
 public class ProductEntity {
 	@Id
+	@Column(nullable = true)
 	private int prodNo;
 	private int prodCate1;
 	private int prodCate2;
@@ -44,10 +48,5 @@ public class ProductEntity {
 	private String origin;
 	private String ip;
 	@CreatedDate
-	private String rdate;
-	private int etc1;
-	private int etc2;
-	private String etc3;
-	private String etc4;
-	private String etc5;
+	private LocalDateTime rdate;
 }

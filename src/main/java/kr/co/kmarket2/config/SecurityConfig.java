@@ -3,8 +3,6 @@ package kr.co.kmarket2.config;
 
 import javax.sql.DataSource;
 
-import org.mybatis.spring.annotation.MapperScan;
-import org.mybatis.spring.annotation.MapperScans;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

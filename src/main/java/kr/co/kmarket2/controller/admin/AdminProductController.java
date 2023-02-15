@@ -7,10 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import kr.co.kmarket2.dto.ProductDTO;
 import kr.co.kmarket2.entity.ProductEntity;
 import kr.co.kmarket2.mappers.ProductMapper;
 import kr.co.kmarket2.repository.ProductRepo;
-import kr.co.kmarket2.vo.ProductVO;
 
 @Controller
 public class AdminProductController {
@@ -35,12 +35,18 @@ public class AdminProductController {
 	}
 	
 	@PostMapping("admin/product/register")
-	public String insert(ProductVO vo, HttpServletRequest req) {
+	public String insert(ProductDTO dto, HttpServletRequest req) {
 		
-		vo.setIp(req.getRemoteAddr());
-		ProductEntity entity = ProductMapper.INSTANCE.toEntity(vo);
+		dto.setIp(req.getRemoteAddr());
+		
+		ProductEntity entity = ProductMapper.INSTANCE.toEntity(dto);
+//		entity.setThumb1(dto.getThumb1().getName());
+//		entity.setThumb1(dto.getThumb2().getName());
+//		entity.setThumb1(dto.getThumb3().getName());
+//		entity.setThumb1(dto.getDetail().getName());
 		
 		productRepo.save(entity);
 		return "redirect:admin/product/register";
 	}
+	
 }
