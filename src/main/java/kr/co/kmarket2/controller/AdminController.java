@@ -9,7 +9,7 @@ public class AdminController {
 	
 	@GetMapping("admin")
 	public String index(Model model) {
-		model.addAttribute("imagesEndpoint", "images");
+		model.addAttribute("imagesEndpoint", "images/");
 		model.addAttribute("filename", "cat-g893543a6c_640.jpg");
 		return "admin/index";
 	}

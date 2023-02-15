@@ -8,8 +8,8 @@
           <div id="admin_nav" class="row align-items-end border-bottom border-1 border-dark pt-5 mb-4">
             <div class="col-6 h3 fw-bold">관리자 메인</div>
             <img alt="" style="width: 50px; height: 50px" th:src="|images/${filename}|">
-            <img alt="" style="width: 50px; height: 50px" th:src="|${imagesEndpoint}/${filename}|">
-            <img alt="" style="width: 50px; height: 50px" th:src="|${imagesEndpoint}/${filename}|">
+            <img alt="" style="width: 50px; height: 50px" th:src="|${imagesEndpoint}${filename}|">
+            <img alt="" style="width: 50px; height: 50px" th:src="|${imagesEndpoint}${filename}|">
             <div th:text="${test1}"></div>
             <div class="col-6 text-end mb-1">
               <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
