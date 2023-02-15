@@ -36,4 +36,8 @@ public class ProductVO {
 	private String etc3;
 	private String etc4;
 	private String etc5;
+	
+	//추가 필드
+	private String c1Name;
+	private String c2Name;
 }

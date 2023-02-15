@@ -11,7 +11,9 @@ import kr.co.kmarket2.vo.ProductVO;
 @Repository
 public interface ProductDAO {
 
-	public List<ProductVO> selectProducts();
+	public int selectCountTotal(String cate1, String cate2); //홍민준 list paging
+	
+	public List<ProductVO> selectProducts(String cate1, String cate2, String sort);
 	public ProductVO selectProduct(int prodNo);
 	public void insertProduct(ProductVO vo);
 	public void updateProduct(ProductVO vo);
