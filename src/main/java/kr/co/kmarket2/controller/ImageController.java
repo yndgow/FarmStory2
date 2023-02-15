@@ -19,9 +19,9 @@ public class ImageController {
     @Autowired
     private ResourceLoader resourceLoader;
     
-    @GetMapping("/images/{filename:.+}")
-    public ResponseEntity<Resource> getImage(@PathVariable("filename") String filename) {
-        Resource image = resourceLoader.getResource("file:file/" + filename);
+    @GetMapping("/images/{path}/{filename:.+}")
+    public ResponseEntity<Resource> getImage(@PathVariable("filename") String filename, @PathVariable("path") String path) {
+        Resource image = resourceLoader.getResource("file:file/" + path + "/" + filename);
         
         if (image.exists() && image.isReadable()) {
             String contentType = URLConnection.guessContentTypeFromName(filename);
