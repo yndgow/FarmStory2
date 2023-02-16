@@ -12,8 +12,31 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
     
-    
-    let admin_cate1 = document.getElementById("admin_cate1");
+    //cateList();
+/*    
+	let admin_price = document.getElementById("admin_price");
+	let admin_point = document.getElementById("admin_point");
+	admin_price.addEventListener("focusout", ()=>{
+		admin_point.value = Math.floor(Number(admin_price.value) * 0.1);	
+	});*/
+	
+/*	const form  = document.getElementById("admin_form");
+	const input = document.getElementById("admin_input"); 
+	form.addEventListener("submit", function(e){
+		e.preventDefault();
+		console.log("alert");
+	});
+	
+	input.addEventListener("keypress", function(event) {
+   		if (event.keyCode === 13) {
+      		form.dispatchEvent(new Event("submit"));
+    	}	
+  	});*/
+	
+});
+
+function cateList(){
+	    let admin_cate1 = document.getElementById("admin_cate1");
     let admin_cate2 = document.getElementById("admin_cate2");
     admin_cate1.addEventListener("change", ()=>{
 		let cate1 = admin_cate1.value;
@@ -29,11 +52,4 @@ document.addEventListener('DOMContentLoaded', () => {
       
 			});
 	});
-	let admin_price = document.getElementById("admin_price");
-	let admin_point = document.getElementById("admin_point");
-	admin_price.addEventListener("focusout", ()=>{
-		admin_point.value = Math.floor(Number(admin_price.value) * 0.1);	
-	});
-	
-	
-});
+}

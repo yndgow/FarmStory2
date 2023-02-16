@@ -25,6 +25,7 @@ import kr.co.kmarket2.dao.AdminDAO;
 import kr.co.kmarket2.dto.ProductDTO;
 import kr.co.kmarket2.entity.ProductEntity;
 import kr.co.kmarket2.repository.ProductRepo;
+import kr.co.kmarket2.specification.ProductSpecification;
 import kr.co.kmarket2.vo.ProductCate2VO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -49,16 +50,6 @@ public class AdminService{
 	// 상품 등록
 	public void insertProduct(ProductEntity entity) {
 		productRepo.save(entity);
-	}
-	
-	// 상품 목록
-	public List<ProductEntity> selectProducts(){
-		return productRepo.findAll();
-	}
-	public Page<ProductEntity> getLatestProducts(int pageNum) {
-	    Pageable pageable = PageRequest.of(pageNum, 10, Sort.by("rdate").descending());
-	    Page<ProductEntity> products = productRepo.findAll(pageable);
-	    return products;
 	}
 	
 	public List<Integer> getPageNumbers(Page<ProductEntity> productPage) {

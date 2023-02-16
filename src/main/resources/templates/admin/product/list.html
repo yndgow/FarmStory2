@@ -17,16 +17,16 @@
               </nav>
             </div>
           </div>
-          <form>
-	          <div class="d-flex justify-content-start mb-3">
-	            <select name="condition" id="" class="form-select w-25 me-3">
-	              <option value="1">상품명</option>
-	              <option value="2">상품코드</option>
-	              <option value="3">제조사</option>
-	              <option value="4">판매자</option>
-	            </select>
-	            <input type="text" class="form-control w-25">
-	          </div>
+          <form id="admin_form">
+          <div class="d-flex justify-content-start mb-3">
+            <select name="condition" id="admin_condition" class="form-select w-25 me-3">
+              <option value="prodName">상품명</option>
+              <option value="prodNo">상품코드</option>
+              <option value="company">제조사</option>
+              <option value="seller">판매자</option>
+            </select>
+            <input type="text" name="search_value" class="form-control w-25">
+          </div>
           </form>
           <table class="table border-top text-center align-middle">
             <thead class="table-light">
@@ -49,13 +49,13 @@
                 <td><input type="checkbox" name="" id="" class="form-check-input"></td>
                 <td class="admin_list_img"><img th:src="@{|/images/${product .thumb1}|}" alt="" class="img-fluid"></td>
                 <td th:text="${product.prodNo}"></td>
-                <td>오리털 글램핑 텐트</td>
-                <td>86000</td>
-                <td>10</td>
-                <td>8600</td>
-                <td>1000</td>
-                <td>qwqwqw1</td>
-                <td>1000</td>
+                <td th:text="${product.prodName}">오리털 글램핑 텐트</td>
+                <td th:text="${product.price}">86000</td>
+                <td th:text="${product.discount}">10</td>
+                <td th:text="${product.point}">8600</td>
+                <td th:text="${product.stock}">1000</td>
+                <td th:text="${product.seller}">qwqwqw1</td>
+                <td th:text="${product.hit}">1000</td>
                 <td>
                   <a href="">[수정]</a>
                   <a href="">[삭제]</a>
