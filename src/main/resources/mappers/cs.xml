@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.kmarket2.dao.CsDAO">
+	
+	<select id="selectIndexNotice" resultType="kr.co.kmarket2.vo.CsNoticeVO">
+		select * from `km_cs_notice`
+		order by `no` desc
+		limit 0, 5;
+	</select>
+	
+	<select id="selectIndexQna" resultType="kr.co.kmarket2.vo.CsQnaVO">
+		select * from `km_cs_qna`
+		order by `no` desc
+		limit 0, 5;
+	</select>
+	
+
+</mapper>
