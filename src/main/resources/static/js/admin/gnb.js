@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let admin_cate2 = document.getElementById("admin_cate2");
     admin_cate1.addEventListener("change", ()=>{
 		let cate1 = admin_cate1.value;
-		let tag = `<option selected>2차 분류 선택</option>`;
+		let tag = `<option value="" selected>2차 분류 선택</option>`;
 		fetch("/kmarket2/cate1/" + cate1)
 			.then(res => res.json())
     		.then((result) => {
@@ -29,4 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
       
 			});
 	});
+	let admin_price = document.getElementById("admin_price");
+	let admin_point = document.getElementById("admin_point");
+	admin_price.addEventListener("focusout", ()=>{
+		admin_point.value = Math.floor(Number(admin_price.value) * 0.1);	
+	});
+	
+	
 });

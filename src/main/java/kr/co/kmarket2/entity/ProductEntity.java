@@ -2,7 +2,6 @@ package kr.co.kmarket2.entity;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.Id;
@@ -10,17 +9,19 @@ import javax.persistence.Table;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.lang.Nullable;
 
 import lombok.Data;
-
+/*
+ * 날짜 : 2023/02/16
+ * 이름 : 김지홍
+ * 내용 : Product Entity
+ */
 @Data
 @Entity
 @Table(name = "km_product")
 @EntityListeners(AuditingEntityListener.class)
 public class ProductEntity {
 	@Id
-	@Column(nullable = true)
 	private int prodNo;
 	private int prodCate1;
 	private int prodCate2;

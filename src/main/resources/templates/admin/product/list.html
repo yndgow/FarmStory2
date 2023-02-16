@@ -17,15 +17,17 @@
               </nav>
             </div>
           </div>
-          <div class="d-flex justify-content-start mb-3">
-            <select name="" id="" class="form-select w-25 me-3">
-              <option value="1">상품명</option>
-              <option value="2">상품코드</option>
-              <option value="3">제조사</option>
-              <option value="4">판매자</option>
-            </select>
-            <input type="text" class="form-control w-25">
-          </div>
+          <form>
+	          <div class="d-flex justify-content-start mb-3">
+	            <select name="condition" id="" class="form-select w-25 me-3">
+	              <option value="1">상품명</option>
+	              <option value="2">상품코드</option>
+	              <option value="3">제조사</option>
+	              <option value="4">판매자</option>
+	            </select>
+	            <input type="text" class="form-control w-25">
+	          </div>
+          </form>
           <table class="table border-top text-center align-middle">
             <thead class="table-light">
               <tr>
@@ -43,10 +45,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr th:each="product : ${products}">
                 <td><input type="checkbox" name="" id="" class="form-check-input"></td>
-                <td class="admin_list_img"><img th:src="@{|${imagesEndpoint}${path}${filename}|}" alt="" class="img-fluid"></td>
-                <td>1000162</td>
+                <td class="admin_list_img"><img th:src="@{|/images/${product .thumb1}|}" alt="" class="img-fluid"></td>
+                <td th:text="${product.prodNo}"></td>
                 <td>오리털 글램핑 텐트</td>
                 <td>86000</td>
                 <td>10</td>
@@ -56,177 +58,36 @@
                 <td>1000</td>
                 <td>
                   <a href="">[수정]</a>
+                  <a href="">[삭제]</a>
+                </td>
+              </tr>
 
-                  <a href="">[삭제]</a>
-                </td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" name="" id="" class="form-check-input"></td>
-                <td class="admin_list_img"><img src="Kmarket/img/sample_thumb.jpg" alt="" class="img-fluid"></td>
-                <td>1000162</td>
-                <td>오리털 글램핑 텐트</td>
-                <td>86000</td>
-                <td>10</td>
-                <td>8600</td>
-                <td>1000</td>
-                <td>qwqwqw1</td>
-                <td>1000</td>
-                <td>
-                  <a href="">[수정]</a>
-                  <a href="">[삭제]</a>
-                </td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" name="" id="" class="form-check-input"></td>
-                <td class="admin_list_img"><img src="Kmarket/img/sample_thumb.jpg" alt="" class="img-fluid"></td>
-                <td>1000162</td>
-                <td>오리털 글램핑 텐트</td>
-                <td>86000</td>
-                <td>10</td>
-                <td>8600</td>
-                <td>1000</td>
-                <td>qwqwqw1</td>
-                <td>1000</td>
-                <td>
-                  <a href="">[수정]</a>
-                  <a href="">[삭제]</a>
-                </td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" name="" id="" class="form-check-input"></td>
-                <td class="admin_list_img"><img src="Kmarket/img/sample_thumb.jpg" alt="" class="img-fluid"></td>
-                <td>1000162</td>
-                <td>오리털 글램핑 텐트</td>
-                <td>86000</td>
-                <td>10</td>
-                <td>8600</td>
-                <td>1000</td>
-                <td>qwqwqw1</td>
-                <td>1000</td>
-                <td>
-                  <a href="">[수정]</a>
-                  <a href="">[삭제]</a>
-                </td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" name="" id="" class="form-check-input"></td>
-                <td class="admin_list_img"><img src="Kmarket/img/sample_thumb.jpg" alt="" class="img-fluid"></td>
-                <td>1000162</td>
-                <td>오리털 글램핑 텐트</td>
-                <td>86000</td>
-                <td>10</td>
-                <td>8600</td>
-                <td>1000</td>
-                <td>qwqwqw1</td>
-                <td>1000</td>
-                <td>
-                  <a href="">[수정]</a>
-                  <a href="">[삭제]</a>
-                </td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" name="" id="" class="form-check-input"></td>
-                <td class="admin_list_img"><img src="Kmarket/img/sample_thumb.jpg" alt="" class="img-fluid"></td>
-                <td>1000162</td>
-                <td>오리털 글램핑 텐트</td>
-                <td>86000</td>
-                <td>10</td>
-                <td>8600</td>
-                <td>1000</td>
-                <td>qwqwqw1</td>
-                <td>1000</td>
-                <td>
-                  <a href="">[수정]</a>
-                  <a href="">[삭제]</a>
-                </td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" name="" id="" class="form-check-input"></td>
-                <td class="admin_list_img"><img src="Kmarket/img/sample_thumb.jpg" alt="" class="img-fluid"></td>
-                <td>1000162</td>
-                <td>오리털 글램핑 텐트</td>
-                <td>86000</td>
-                <td>10</td>
-                <td>8600</td>
-                <td>1000</td>
-                <td>qwqwqw1</td>
-                <td>1000</td>
-                <td>
-                  <a href="">[수정]</a>
-                  <a href="">[삭제]</a>
-                </td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" name="" id="" class="form-check-input"></td>
-                <td class="admin_list_img"><img src="Kmarket/img/sample_thumb.jpg" alt="" class="img-fluid"></td>
-                <td>1000162</td>
-                <td>오리털 글램핑 텐트</td>
-                <td>86000</td>
-                <td>10</td>
-                <td>8600</td>
-                <td>1000</td>
-                <td>qwqwqw1</td>
-                <td>1000</td>
-                <td>
-                  <a href="">[수정]</a>
-                  <a href="">[삭제]</a>
-                </td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" name="" id="" class="form-check-input"></td>
-                <td class="admin_list_img"><img src="Kmarket/img/sample_thumb.jpg" alt="" class="img-fluid"></td>
-                <td>1000162</td>
-                <td>오리털 글램핑 텐트</td>
-                <td>86000</td>
-                <td>10</td>
-                <td>8600</td>
-                <td>1000</td>
-                <td>qwqwqw1</td>
-                <td>1000</td>
-                <td>
-                  <a href="">[수정]</a>
-                  <a href="">[삭제]</a>
-                </td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" name="" id="" class="form-check-input"></td>
-                <td class="admin_list_img"><img src="Kmarket/img/sample_thumb.jpg" alt="" class="img-fluid"></td>
-                <td>1000162</td>
-                <td>오리털 글램핑 텐트</td>
-                <td>86000</td>
-                <td>10</td>
-                <td>8600</td>
-                <td>1000</td>
-                <td>qwqwqw1</td>
-                <td>1000</td>
-                <td>
-                  <a href="">[수정]</a>
-                  <a href="">[삭제]</a>
-                </td>
-              </tr>
-              
             </tbody>
           </table>
           <div class="text-start">
             <button type="button" class="btn btn-light border">선택삭제</button>
           </div>
-          <nav aria-label="Page navigation example">
+          
+          <nav th:if="${totalPages gt 1}">
             <ul class="pagination justify-content-center">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
+            
+              <li th:if="${startPages gt 1}">
+                <a class="page-link" th:href="@{/admin/product/list(pageNum=${startPages}-1)}" aria-label="Previous">
                   <span aria-hidden="true">&laquo;</span>
                 </a>
               </li>
-              <li class="page-item"><a class="page-link active" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
+              
+              <li class="page-item" th:each="page : ${pageNumbers}" th:class="${currentPage eq page} ? active">
+              	<a class="page-link" th:href="@{/admin/product/list(pageNum=${page})}" th:text="${page}"></a>
+              </li>
+              <li class="page-item" th:if="${endPages lt totalPages}">
+                <a class="page-link" th:href="@{/admin/product/list(pageNum=${endPages}+1)}" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
                 </a>
               </li>
             </ul>
           </nav>
+          
           <div class="py-4 text-center my-5 h6" id="admin_list_info">
             <img th:src="@{/img/admin/admin_ico_info.png}" alt="">
             Tip! 전자상거래 등에서의 상품 등의 정보제공에 관한 고시에 따라 총 35개 상품군에 대해 상품 특성 등을 양식에 따라 입력할 수 있습니다.

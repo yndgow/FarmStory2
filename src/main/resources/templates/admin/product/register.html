@@ -26,8 +26,8 @@
               <tr class="align-middle">
                 <td class="w-25 text-center table-light border-start-0">1차분류</td>
                 <td class="border-end-0">
-                  <select name="prodCate1" id="admin_cate1" class="form-select">
-                    <option selected>1차 분류 선택</option>
+                  <select name="prodCate1" id="admin_cate1" class="form-select" required="required">
+                    <option value="" selected>1차 분류 선택</option>
                     <option value="10">브랜드패션</option>
                     <option value="11">패션의류/잡화/뷰티</option>
                     <option value="12">유아동</option>
@@ -43,9 +43,8 @@
               <tr class="align-middle">
                 <td class="text-center table-light border-start-0">2차분류</td>
                 <td class="border-end-0">
-                  <select name="prodCate2" id="admin_cate2" class="form-select">
-                    <option selected>2차 분류 선택</option>
-                    <option value="10">브랜드패션</option>
+                  <select name="prodCate2" id="admin_cate2" class="form-select" required="required">
+                    <option value="" selected>2차 분류 선택</option>
                   </select>
                 </td>
               </tr>
@@ -55,7 +54,7 @@
             <table class="table mb-4 table-bordered">
               <tr class="align-middle">
                 <td class="w-25 text-center table-light border-start-0">상품명</td>
-                <td class="border-end-0"><input type="text" class="form-control w-50" name="prodName"></td>
+                <td class="border-end-0"><input type="text" class="form-control w-50" name="prodName" required="required"></td>
               </tr>
               <tr class="align-middle">
                 <td class="w-25 text-center table-light border-start-0">기본설명</td>
@@ -66,13 +65,13 @@
               </tr>
               <tr class="align-middle">
                 <td class="w-25 text-center table-light border-start-0">제조사</td>
-                <td class="border-end-0"><input type="text" class="form-control w-25" name="company"></td>
+                <td class="border-end-0"><input type="text" class="form-control w-25" name="company" required="required"></td>
               </tr>
               <tr class="align-middle">
                 <td class="w-25 text-center table-light border-start-0" >판매가격</td>
                 <td class="border-end-0">
                   <div class="input-group w-25">
-                    <input type="text" class="form-control rounded-end" name="price">
+                    <input type="text" class="form-control rounded-end" name="price" id="admin_price" required="required">
                     <span class="input-group-text bg-white border-white">원</span>
                   </div>
                 </td>
@@ -82,7 +81,7 @@
                 <td class="border-end-0">
                   <span>0을 입력하면 할인율 없음</span>
                   <div class="input-group w-25">
-                  <input type="text" class="form-control rounded-end" name="discount"> 
+                  <input type="text" class="form-control rounded-end" name="discount" required="required"> 
                   <span class="input-group-text bg-white border-white">%</span>
                 </div></td>
               </tr>
@@ -91,7 +90,7 @@
                 <td class="border-end-0">
                   <span>0을 입력하면 포인트 없음</span>
                   <div class="input-group w-25">
-                    <input type="text" class="form-control rounded-end" name="point">
+                    <input type="text" class="form-control rounded-end" name="point" id="admin_point" required="required">
                     <span class="input-group-text bg-white border-white">점</span>
                   </div></td>
               </tr>
@@ -99,7 +98,7 @@
                 <td class="w-25 text-center table-light border-start-0">재고수량</td>
                 <td class="border-end-0">                
                   <div class="input-group w-25">
-                    <input type="text" class="form-control rounded-end" name="stock">
+                    <input type="text" class="form-control rounded-end" name="stock" required="required">
                     <span class="input-group-text bg-white border-white">개</span>
                   </div></td>
               </tr>
@@ -108,7 +107,7 @@
                 <td class="border-end-0">                
                   <span>0을 입력하면 배송비 무료</span>
                   <div class="input-group w-25">
-                    <input type="text" class="form-control rounded-end" name="delivery">
+                    <input type="text" class="form-control rounded-end" name="delivery" required="required">
                     <span class="input-group-text bg-white border-white">원</span>
                   </div></td>
               </tr>
@@ -116,18 +115,18 @@
                 <td class="w-25 text-center table-light border-start-0">상품 썸네일</td>
                 <td class="border-end-0">
                   <span>크기 190 x 190, 상품 목록에 출력될 이미지 입니다.</span>
-                  <input type="file" class="form-control w-50 mb-3" name="thumb1">
+                  <input type="file" class="form-control w-50 mb-3" name="thumb1" required="required">
                   <span>크기 230 x 230, 상품 목록에 출력될 이미지 입니다.</span>
-                  <input type="file" class="form-control w-50 mb-3" name="thumb2">
+                  <input type="file" class="form-control w-50 mb-3" name="thumb2" required="required">
                   <span>크기 456 x 456, 상품 목록에 출력될 이미지 입니다.</span>
-                  <input type="file" class="form-control w-50" name="thumb3">
+                  <input type="file" class="form-control w-50" name="thumb3" required="required">
                 </td>
               </tr>
               <tr class="align-middle">
                 <td class="w-25 text-center table-light border-start-0">상세 상품정보</td>
                 <td class="border-end-0">
                   <span>크기 가로 940px 높이 제약없음, 크기 최대 1MB, 상세페이지 상품정보에 출력될 이미지 입니다.</span>
-                  <input type="file" class="form-control w-50" name="detail">
+                  <input type="file" class="form-control w-50" name="detail" required="required">
                 </td>
               </tr>
             </table>
@@ -137,37 +136,37 @@
               <tr class="align-middle">
                 <td class="w-25 text-center table-light border-start-0">판매자</td>
                 <td class="border-end-0">
-                  <input type="text" class="form-control w-25" name="seller">
+                  <input type="text" class="form-control w-25" name="seller" required="required">
                 </td>
               </tr>
               <tr class="align-middle">
                 <td class="w-25 text-center table-light border-start-0">상품상태</td>
                 <td class="border-end-0">
-                  <input type="text" class="form-control w-25" placeholder="새상품" name="status">
+                  <input type="text" class="form-control w-25" value="새상품" name="status" required="required">
                 </td>
               </tr>
               <tr class="align-middle">
                 <td class="w-25 text-center table-light border-start-0">부가세 면세여부</td>
                 <td class="border-end-0">
-                  <input type="text" class="form-control w-25" placeholder="과세상품" name="duty">
+                  <input type="text" class="form-control w-25" value="과세상품" name="duty" required="required">
                 </td>
               </tr>
               <tr class="align-middle">
                 <td class="w-25 text-center table-light border-start-0">영수증발행</td>
                 <td class="border-end-0">
-                  <input type="text" class="form-control w-50" placeholder="발행가능 - 싱용카드 전표, 온라인 현금 영수증" name="receipt">
+                  <input type="text" class="form-control w-50" value="발행가능 - 신용카드 전표, 온라인 현금 영수증" name="receipt" required="required">
                 </td>
               </tr>
               <tr class="align-middle">
                 <td class="w-25 text-center table-light border-start-0">사업자구분</td>
                 <td class="border-end-0">
-                  <input type="text" class="form-control w-25" placeholder="사업자 판매자" name="bizType">
+                  <input type="text" class="form-control w-25" value="사업자 판매자" name="bizType" required="required">
                 </td>
               </tr>
               <tr class="align-middle">
                 <td class="w-25 text-center table-light border-start-0">원산지</td>
                 <td class="border-end-0">
-                  <input type="text" class="form-control w-25" placeholder="국내산" name="origin">
+                  <input type="text" class="form-control w-25" value="국내산" name="origin" required="required">
                 </td>
               </tr>
             </table>

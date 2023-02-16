@@ -14,7 +14,7 @@ import kr.co.kmarket2.vo.ProductCate2VO;
 /*
  * 날짜: 2023/02/15
  * 이름: 김지홍
- * 내용: cate1의 선택에 따라 cate2를 json 형태로 반환 
+ * 내용: adminRegisterCate2 : cate1의 선택에 따라 cate2를 json 형태로 반환 
  */
 
 @RestController

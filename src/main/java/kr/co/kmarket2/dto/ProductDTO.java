@@ -4,7 +4,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Builder;
 import lombok.Data;
-
+/*
+ *  날짜 : 2023/02/15
+ *  이름 : 김지홍
+ *  내용 : Product DTO
+ */
 @Data
 @Builder
 public class ProductDTO {

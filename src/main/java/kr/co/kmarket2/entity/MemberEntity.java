@@ -7,6 +7,12 @@ import javax.persistence.Table;
 import lombok.Builder;
 import lombok.Data;
 
+/*
+ * 날짜 : 2023/02/16
+ * 이름 : 김지홍
+ * 내용 : Member Entity
+ */
+
 @Data
 @Entity
 @Builder
