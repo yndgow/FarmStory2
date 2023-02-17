@@ -19,7 +19,10 @@ public interface CsDAO {
 	// notice
 	public CsNoticeVO selectNotice();
 	public List<CsNoticeVO> selectNoticeByGroup();
-	public List<CsNoticeVO> selectNotices();
+	public List<CsNoticeVO> selectNotices(int start);
+	public List<CsNoticeVO> selectNoticesCate(int start, String cate1);
+	public int selectCountNotice(String cate1);
+	public int selectCountNotices();
 	
 	// qna
 	public void selectQna();
