@@ -9,6 +9,7 @@ public class CsFaqController {
 	
 	@GetMapping("cs/faq/list")
 	public String faqlist() {
+		
 		return "cs/faq/list";
 	}
 	
