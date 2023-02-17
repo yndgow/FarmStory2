@@ -17,17 +17,17 @@
               </nav>
             </div>
           </div>
-          <form id="admin_form">
           <div class="d-flex justify-content-start mb-3">
-            <select name="condition" id="admin_condition" class="form-select w-25 me-3">
+            <select name="condition" class="form-select w-25 me-3" id="admin_condition">
               <option value="prodName">상품명</option>
               <option value="prodNo">상품코드</option>
               <option value="company">제조사</option>
               <option value="seller">판매자</option>
             </select>
-            <input type="text" name="search_value" class="form-control w-25">
+            <input type="text" name="search_value" class="form-control w-25 me-3" id="search_value">
+            <button class="btn btn-secondary" id="btn_admin_search">검색</button>
           </div>
-          </form>
+          
           <table class="table border-top text-center align-middle">
             <thead class="table-light">
               <tr>
@@ -72,16 +72,16 @@
             <ul class="pagination justify-content-center">
             
               <li th:if="${startPages gt 1}">
-                <a class="page-link" th:href="@{/admin/product/list(pageNum=${startPages}-1)}" aria-label="Previous">
+                <a class="page-link" th:href="@{/admin/product/list(pageNum=${startPages}-1, condition=${condition}, search_value=${search_value})}" aria-label="Previous">
                   <span aria-hidden="true">&laquo;</span>
                 </a>
               </li>
               
-              <li class="page-item" th:each="page : ${pageNumbers}" th:class="${currentPage eq page} ? active">
-              	<a class="page-link" th:href="@{/admin/product/list(pageNum=${page})}" th:text="${page}"></a>
+              <li class="page-item" th:each="page : ${#numbers.sequence(startPages,endPages)}" th:class="${currentPage eq page} ? active">
+              	<a class="page-link" th:href="@{/admin/product/list(pageNum=${page}, condition=${condition}, search_value=${search_value})}" th:text="${page}"></a>
               </li>
               <li class="page-item" th:if="${endPages lt totalPages}">
-                <a class="page-link" th:href="@{/admin/product/list(pageNum=${endPages}+1)}" aria-label="Next">
+                <a class="page-link" th:href="@{/admin/product/list(pageNum=${endPages}+1, condition=${condition}, search_value=${search_value})}" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
                 </a>
               </li>

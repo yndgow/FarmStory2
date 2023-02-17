@@ -49,21 +49,31 @@ public class AdminProductController {
 						@RequestParam(required = false) String company,
 						@RequestParam(required = false) String seller,
 						String condition, String search_value) {
-		
+		if(condition != null) {
+			if(condition.equals("prodName")) {
+				prodName = search_value;
+			}else if(condition.equals("prodNo")) {
+				prodNo = search_value;
+			}else if(condition.equals("company")) {
+				company = search_value;
+			}else if(condition.equals("seller")) {
+				seller = search_value;
+			}
+		}
 		
 		Specification<ProductEntity> specification = new ProductSpecification(prodName, prodNo, company, seller);
 		Page<ProductEntity> products = productRepo.findAll(specification, PageRequest.of(pageNum-1, 10, Sort.by("rdate")));
 		
-		List<Integer> pageNumbers = adminService.getPageNumbers(products);
+		int[] pageNumbers = adminService.getPageNumbers(products);
 		
-		model.addAttribute("pageNumbers", pageNumbers);
+		model.addAttribute("condition", condition);
+		model.addAttribute("search_value", search_value);
 		model.addAttribute("products", products);
 		model.addAttribute("currentPage", pageNum);
 		model.addAttribute("totalPages", products.getTotalPages());
+		model.addAttribute("startPages", pageNumbers[0]);
+		model.addAttribute("endPages", pageNumbers[1]);
 		
-		  
-		model.addAttribute("startPages", pageNumbers.get(0));
-		model.addAttribute("endPages", pageNumbers.get(pageNumbers.size()-1));
 		
 		return "admin/product/list";
 	}

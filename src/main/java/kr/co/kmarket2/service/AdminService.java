@@ -52,18 +52,19 @@ public class AdminService{
 		productRepo.save(entity);
 	}
 	
-	public List<Integer> getPageNumbers(Page<ProductEntity> productPage) {
+	public int[] getPageNumbers(Page<ProductEntity> productPage) {
 	    int totalPages = productPage.getTotalPages();
 	    int currentPage = productPage.getNumber() + 1;
 
 	    int startPage = ((currentPage - 1) / 10) * 10 + 1;
 	    int endPage = Math.min(startPage + 9, totalPages);
 
-	    List<Integer> pageNumbers = new ArrayList<>();
-	    for (int i = startPage; i <= endPage; i++) {
-	        pageNumbers.add(i);
-	    }
+//	    List<Integer> pageNumbers = new ArrayList<>();
+//	    for (int i = startPage; i <= endPage; i++) {
+//	        pageNumbers.add(i);
+//	    }
 
+	    int[] pageNumbers = {startPage, endPage};
 	    return pageNumbers;
 	}
 	
