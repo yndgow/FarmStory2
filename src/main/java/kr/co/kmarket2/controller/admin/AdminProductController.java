@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
@@ -49,38 +50,25 @@ public class AdminProductController {
 						@RequestParam(required = false) String company,
 						@RequestParam(required = false) String seller,
 						String condition, String search_value) {
-		if(condition != null) {
-			if(condition.equals("prodName")) {
-				prodName = search_value;
-			}else if(condition.equals("prodNo")) {
-				prodNo = search_value;
-			}else if(condition.equals("company")) {
-				company = search_value;
-			}else if(condition.equals("seller")) {
-				seller = search_value;
-			}
-		}
 		
-		Specification<ProductEntity> specification = new ProductSpecification(prodName, prodNo, company, seller);
-		Page<ProductEntity> products = productRepo.findAll(specification, PageRequest.of(pageNum-1, 10, Sort.by("rdate")));
+		Pageable pageable = PageRequest.of(pageNum-1, 10, Sort.by("rdate"));
+		
+		Page<ProductEntity> products = productRepo.findAll(pageable);
+		
+		//Page<ProductEntity> products = adminService.getProducts(pageNum, prodName, prodNo, company, seller);
 		
 		int[] pageNumbers = adminService.getPageNumbers(products);
 		
-		model.addAttribute("condition", condition);
-		model.addAttribute("search_value", search_value);
+//		model.addAttribute("condition", condition);
+//		model.addAttribute("search_value", search_value);
 		model.addAttribute("products", products);
 		model.addAttribute("currentPage", pageNum);
 		model.addAttribute("totalPages", products.getTotalPages());
 		model.addAttribute("startPages", pageNumbers[0]);
 		model.addAttribute("endPages", pageNumbers[1]);
 		
-		
 		return "admin/product/list";
 	}
-	
-
-	
-	
 	
 	// admim 상품등록 페이지
 	@GetMapping("admin/product/register")

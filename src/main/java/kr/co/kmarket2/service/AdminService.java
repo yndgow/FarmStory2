@@ -18,15 +18,24 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.kmarket2.dao.AdminDAO;
 import kr.co.kmarket2.dto.ProductDTO;
+import kr.co.kmarket2.entity.CsFaqEntity;
+import kr.co.kmarket2.entity.CsNoticeEntity;
+import kr.co.kmarket2.entity.CsQnaEntity;
+import kr.co.kmarket2.entity.ProductCate2Entity;
 import kr.co.kmarket2.entity.ProductEntity;
+import kr.co.kmarket2.repository.CsFaqRepo;
+import kr.co.kmarket2.repository.CsNoticeRepo;
+import kr.co.kmarket2.repository.CsQnaRepo;
+import kr.co.kmarket2.repository.ProductCate2Repo;
 import kr.co.kmarket2.repository.ProductRepo;
 import kr.co.kmarket2.specification.ProductSpecification;
-import kr.co.kmarket2.vo.ProductCate2VO;
 import lombok.extern.slf4j.Slf4j;
 
 /*
@@ -41,10 +50,19 @@ public class AdminService{
 
 	private final AdminDAO adminDAO;
 	private final ProductRepo productRepo;
+	private final ProductCate2Repo cate2Repo;
+	private final CsFaqRepo csFaqRepo;
+	private final CsQnaRepo csQnaRepo;
+	private final CsNoticeRepo csNoticeRepo;
 	
-	public AdminService(AdminDAO adminDAO, ProductRepo productRepo) {
-		this.productRepo = productRepo;
+	public AdminService(AdminDAO adminDAO, ProductRepo productRepo, ProductCate2Repo cate2Repo, CsFaqRepo csFaqRepo,
+			CsQnaRepo csQnaRepo, CsNoticeRepo csNoticeRepo) {
 		this.adminDAO = adminDAO;
+		this.productRepo = productRepo;
+		this.cate2Repo = cate2Repo;
+		this.csFaqRepo = csFaqRepo;
+		this.csQnaRepo = csQnaRepo;
+		this.csNoticeRepo = csNoticeRepo;
 	}
 
 	// 상품 등록
@@ -52,27 +70,13 @@ public class AdminService{
 		productRepo.save(entity);
 	}
 	
-	public int[] getPageNumbers(Page<ProductEntity> productPage) {
-	    int totalPages = productPage.getTotalPages();
-	    int currentPage = productPage.getNumber() + 1;
-
-	    int startPage = ((currentPage - 1) / 10) * 10 + 1;
-	    int endPage = Math.min(startPage + 9, totalPages);
-
-//	    List<Integer> pageNumbers = new ArrayList<>();
-//	    for (int i = startPage; i <= endPage; i++) {
-//	        pageNumbers.add(i);
-//	    }
-
-	    int[] pageNumbers = {startPage, endPage};
-	    return pageNumbers;
-	}
-	
-
-	public List<ProductCate2VO> selectAdminCate2(int cate1) {
-		List<ProductCate2VO> cate2List =  adminDAO.selectAdminCate2(cate1);
+	// cate 1에 따라 cate2 불러오기
+	public List<ProductCate2Entity> selectAdminCate2(int cate1) {
+		//List<ProductCate2VO> cate2List =  adminDAO.selectAdminCate2(cate1);
+		List<ProductCate2Entity> cate2List = cate2Repo.findByCate1(cate1);
 		return cate2List;
 	}
+	
 	// IPv4 형식의 ip 값 가져오기
     public String getRemoteIP(HttpServletRequest request){
         String ip = request.getHeader("X-FORWARDED-FOR"); 
@@ -84,6 +88,7 @@ public class AdminService{
         return ip;
    }
     
+   // 파일 업로드
    public List<String> upload(ProductDTO dto) {
 	   MultipartFile[] files = {dto.getThumb1(), dto.getThumb2(), dto.getThumb3(), dto.getDetail()};
 	   List<String> fList = new ArrayList<>();
@@ -114,5 +119,38 @@ public class AdminService{
 	   
 	   return fList;
    }
+   
+	// admin product list - jpa 로 페이징 하기
+	public Page<ProductEntity> getProducts(int pageNum, String prodName, String prodNo, String company, String seller){
+		Specification<ProductEntity> specification = new ProductSpecification(prodName, prodNo, company, seller);
+		Pageable pageable = PageRequest.of(pageNum-1, 10, Sort.by("rdate"));
+		return productRepo.findAll(specification, pageable);
+	}
 	
+	// 페이징에 필요한 start, endpage 가져오기
+	public int[] getPageNumbers(Page<ProductEntity> productPage) {
+	    int totalPages = productPage.getTotalPages();
+	    int currentPage = productPage.getNumber() + 1;
+
+	    int startPage = ((currentPage - 1) / 10) * 10 + 1;
+	    int endPage = Math.min(startPage + 9, totalPages);
+
+	    int[] pageNumbers = {startPage, endPage};
+	    return pageNumbers;
+	}
+
+	// cs notice list
+	public List<CsNoticeEntity> getNoticeList(){
+		return csNoticeRepo.findAllByOrderByRdateDesc();
+	}
+	
+	// cs faq list
+	public List<CsFaqEntity> getFaqList(Model model){
+		return null;
+	}
+	
+	// cs qna list
+	public List<CsQnaEntity> getQnaList(Model model){
+		return null;
+	}
 }
