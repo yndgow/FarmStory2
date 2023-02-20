@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.kmarket2.dao.ProductDAO;
+import kr.co.kmarket2.vo.ProductReviewVO;
 import kr.co.kmarket2.vo.ProductVO;
 
 @Service
@@ -18,8 +19,23 @@ public class ProductService {
 		return dao.selectProducts(cate1,cate2,sort);
 	}
 	
+	public ProductVO selectProduct(int prodNo) {
+		return dao.selectProduct(prodNo);
+	}
+	
+	public ProductReviewVO selectProductReview(int prodNo) {
+		return dao.selectProductReview(prodNo);
+	}
+	
+	
+	
+	
 	public int selectCountTotal(String cate1, String cate2) {
 		return dao.selectCountTotal(cate1, cate2);
+	}
+	
+	public int selectCountTotalRe(int prodNo) {
+		return dao.selectCountTotalRe(prodNo);
 	}
 	
 	

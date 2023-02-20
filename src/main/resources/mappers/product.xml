@@ -20,10 +20,26 @@
 				</otherwise>
 			</choose>
 		</if>
-		
 	</select>
+	<select id="selectProduct" resultType="kr.co.kmarket2.vo.ProductVO">
+		SELECT * FROM `km_product` WHERE `prodNo` = #{prodNo};
+	</select>
+
+	<select id="selectProductReview" resultType="kr.co.kmarket2.vo.ProductReviewVO">
+		SELECT a.*, b.prodName FROM `km_product_review` AS a
+		JOIN `km_product` AS b ON a.`prodNo` = b.`prodNo`
+		WHERE b.`prodNo` = ${prodNo}
+		order by `rdate` desc;
+	</select>
+		
+	
+	
+	
 	<select id="selectCountTotal" resultType="int">
 		select count(`prodNo`) from `km_product` WHERE prodCate1=#{cate1} AND prodCate2=#{cate2};
+	</select>
+	<select id="selectCountTotalRe" resultType="int">
+		select count(`revMo`) from `km_product_review` WHERE `prodNo`=${prodNo};
 	</select>
 	
 
