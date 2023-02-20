@@ -1,5 +1,6 @@
 package kr.co.kmarket2.repository;
 
+<<<<<<< HEAD
 
 import java.util.List;
 
@@ -21,4 +22,14 @@ public interface CsNoticeRepo extends JpaRepository<CsNoticeEntity, Integer>{
 	@Query(value = "SELECT n FROM CsNoticeEntity n LEFT JOIN FETCH n.cate1Entity c", countQuery = "SELECT COUNT(n) FROM CsNoticeEntity n")
 	Page<CsNoticeEntity> findAllWithCsCate1Entities(Pageable pageable);
 	
+=======
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import kr.co.kmarket2.entity.CsNoticeEntity;
+
+public interface CsNoticeRepo extends JpaRepository<CsNoticeEntity, Integer>{
+	List<CsNoticeEntity> findAllByOrderByRdateDesc();
+>>>>>>> remotes/origin/hongminjun
 }

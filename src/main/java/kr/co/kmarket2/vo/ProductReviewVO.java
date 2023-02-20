@@ -11,4 +11,6 @@ public class ProductReviewVO {
 	private int rating;
 	private String regip;
 	private String rdate;
+	//추가필드
+	private String prodName;
 }
