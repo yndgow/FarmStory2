@@ -18,31 +18,31 @@
             </div>
           </div>
           <!-- section -->
-          <form>
+          <form th:action="@{/admin/cs/notice/write}" method="post">
             <table class="table align-middle border-top">
               <tbody>
                 <tr>
                   <th scope="row" class="text-center fw-bold fs-5 table-light">유 형</th>
                   <td>
-                    <select name="" id="" class="form-select w-25">
+                    <select name="cate1" id="" class="form-select w-25">
                       <option selected>1차 유형</option>
-                      <option value="1">고객서비스</option>
-                      <option value="2">안전거래</option>
-                      <option value="3">위해상품</option>
-                      <option value="4">이벤트당첨</option>
+                      <option value="8">고객서비스</option>
+                      <option value="9">안전거래</option>
+                      <option value="10">위해상품</option>
+                      <option value="11">이벤트당첨</option>
                     </select>
                   </td>
                 </tr>
                 <tr>
                   <th scope="row" class="text-center fw-bold fs-5 table-light">제 목</th>
                   <td>
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" name="title">
                   </td>
                 </tr>
                 <tr>
                   <th scope="row" class="text-center fw-bold fs-5 table-light">내 용</th>
                   <td>
-                    <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
+                    <textarea name="content" id="" cols="30" rows="10" class="form-control" ></textarea>
                   </td>
                 </tr>
               </tbody>

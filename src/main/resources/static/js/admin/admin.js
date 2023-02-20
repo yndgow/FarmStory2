@@ -134,3 +134,18 @@ function updatePagination(currentPage) {
   currentPage = currentPage > 10 ? currentPage - 10 : currentPage;
   curPage[currentPage-1].classList.add('active');
 }
+
+function adminDeleteNotice(){
+	let deleteList = document.getElementsByClassName('btnDeleteNotice');
+	for(let i=0; i < deleteList.length; i++){
+		deleteList[i].addEventListener('click', function(e){
+			let id = e.target.id;
+			e.preventDefault();
+			fetch('/kmarket2/admin/cs/notice/delete?no='+id,{method:"DELETE",})
+			.then(res => res.json())
+			.then(data =>{
+				console.log(data);
+			})
+		});
+	}
+}

@@ -1,4 +1,9 @@
 <th:block th:include="@{admin/_header.html}"/>
+	<script>
+		document.addEventListener("DOMContentLoaded", ()=>{
+			adminDeleteNotice();
+		});
+	</script>
     <main id="main_admin_qna_list" class="flex-shrink-0">
       <div class="container d-flex flex-row">
         <div class="me-4">
@@ -41,12 +46,12 @@
                     <input type="checkbox" name="" id="" class="form-check-input">
                   </td>
                   <td th:text="${notice.no}">75</td>
-                  <td th:text="${notice.title}">이벤트당첨</td>
-                  <td class="text-start ellipsis"><span><a th:href="@{/admin/cs/notice/view(no=${notice.no})}" th:text="${notice.no}">테스트 이벤트 당첨 테스트</a></span></td>
+                  <td th:text="${notice.cate1Entity.c1Name}">이벤트당첨</td>
+                  <td class="text-start ellipsis"><span><a th:href="@{/admin/cs/notice/view(no=${notice.no})}" th:text="${notice.title}">테스트 이벤트 당첨 테스트</a></span></td>
                   <td th:text="${notice.hit}">1000</td>
                   <td th:text="${#dates.format(notice.rdate, 'yy-MM-dd')}">22-12-30</td>
                   <td>
-                    <a th:href="@{/admin/cs/notice/delet(no = ${notice.no})}">[삭제]</a>
+                    <a th:href="@{/admin/cs/notice/delete(no = ${notice.no})}" class="btnDeleteNotice" th:id="${notice.no}">[삭제]</a>
                     <a th:href="@{/admin/cs/notice/modify(no = ${notice.no})}">[수정]</a>
                   </td>
                 </tr>
@@ -62,23 +67,29 @@
                 <a class="btn btn-primary" th:href="@{/admin/cs/notice/write}" role="button">작성하기</a>
               </div>
             </div>
-            <nav aria-label="Page navigation example">
-              <ul class="pagination justify-content-center">
-                <li class="page-item">
-                  <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                  <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
+            
+			<div id="paging_nav">
+			<nav th:if="${totalPages gt 1}">
+			  <ul class="pagination justify-content-center">
+			  
+			    <li th:if="${startPages gt 1}">
+			      <a class="page-link" th:href="@{/admin/cs/notice/list(pageNum=${startPages}-1)}" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			    
+			    <li class="page-item" th:each="page : ${#numbers.sequence(startPages,endPages)}" th:class="${currentPage eq page} ? active">
+			    	<a class="page-link" th:href="@{/admin/cs/notice/list(pageNum=${page})}" th:text="${page}"></a>
+			    </li>
+			    <li class="page-item" th:if="${endPages lt totalPages}">
+			      <a class="page-link" th:href="@{/admin/cs/notice/list(pageNum=${endPages}+1)}" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>
+			  </ul>
+			</nav>
+			</div>
+            
           </div>
         </div>
       </div>

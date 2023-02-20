@@ -14,6 +14,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,11 +26,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.kmarket2.dao.AdminDAO;
 import kr.co.kmarket2.dto.ProductDTO;
+import kr.co.kmarket2.entity.CsCate1Entity;
 import kr.co.kmarket2.entity.CsFaqEntity;
 import kr.co.kmarket2.entity.CsNoticeEntity;
 import kr.co.kmarket2.entity.CsQnaEntity;
 import kr.co.kmarket2.entity.ProductCate2Entity;
 import kr.co.kmarket2.entity.ProductEntity;
+import kr.co.kmarket2.repository.CsCate1Repo;
 import kr.co.kmarket2.repository.CsFaqRepo;
 import kr.co.kmarket2.repository.CsNoticeRepo;
 import kr.co.kmarket2.repository.CsQnaRepo;
@@ -48,23 +51,29 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class AdminService{
 
+	
 	private final AdminDAO adminDAO;
 	private final ProductRepo productRepo;
 	private final ProductCate2Repo cate2Repo;
 	private final CsFaqRepo csFaqRepo;
 	private final CsQnaRepo csQnaRepo;
 	private final CsNoticeRepo csNoticeRepo;
+	private final CsCate1Repo cate1Repo;
 	
 	public AdminService(AdminDAO adminDAO, ProductRepo productRepo, ProductCate2Repo cate2Repo, CsFaqRepo csFaqRepo,
-			CsQnaRepo csQnaRepo, CsNoticeRepo csNoticeRepo) {
+			CsQnaRepo csQnaRepo, CsNoticeRepo csNoticeRepo, CsCate1Repo cate1Repo) {
+		super();
 		this.adminDAO = adminDAO;
 		this.productRepo = productRepo;
 		this.cate2Repo = cate2Repo;
 		this.csFaqRepo = csFaqRepo;
 		this.csQnaRepo = csQnaRepo;
 		this.csNoticeRepo = csNoticeRepo;
+		this.cate1Repo = cate1Repo;
 	}
 
+	private final int PAGESIZE = 10;
+	
 	// 상품 등록
 	public void insertProduct(ProductEntity entity) {
 		productRepo.save(entity);
@@ -123,12 +132,12 @@ public class AdminService{
 	// admin product list - jpa 로 페이징 하기
 	public Page<ProductEntity> getProducts(int pageNum, String prodName, String prodNo, String company, String seller){
 		Specification<ProductEntity> specification = new ProductSpecification(prodName, prodNo, company, seller);
-		Pageable pageable = PageRequest.of(pageNum-1, 10, Sort.by("rdate"));
+		Pageable pageable = PageRequest.of(pageNum-1, PAGESIZE, Sort.by("rdate"));
 		return productRepo.findAll(specification, pageable);
 	}
 	
 	// 페이징에 필요한 start, endpage 가져오기
-	public int[] getPageNumbers(Page<ProductEntity> productPage) {
+	public int[] getPageNumbers(Page<?> productPage) {
 	    int totalPages = productPage.getTotalPages();
 	    int currentPage = productPage.getNumber() + 1;
 
@@ -140,9 +149,28 @@ public class AdminService{
 	}
 
 	// cs notice list
-	public List<CsNoticeEntity> getNoticeList(){
-		return csNoticeRepo.findAllByOrderByRdateDesc();
+	public Page<CsNoticeEntity> getNoticeList(int pageNum){
+		
+		Pageable pageable = PageRequest.of(pageNum-1, PAGESIZE, Sort.by("rdate").descending());
+		return csNoticeRepo.findAllWithCsCate1Entities(pageable);
+//		return csNoticeRepo.findAllByOrderByRdateDesc(pageable);
 	}
+	
+	// cs notice write
+	public void writeNotice(CsNoticeEntity csNoticeEntity, int cate1, HttpServletRequest req) {
+		CsCate1Entity cate1Entity = cate1Repo.findById(cate1).orElse(null);
+		if (cate1Entity != null) {
+		    csNoticeEntity.setCate1Entity(cate1Entity);
+		    csNoticeEntity.setRegip(getRemoteIP(req));
+		    csNoticeRepo.save(csNoticeEntity);
+		}
+	}
+	
+	// cs notice delete
+	public void deleteNotice(int no) {
+		csNoticeRepo.deleteById(no);
+	}
+	
 	
 	// cs faq list
 	public List<CsFaqEntity> getFaqList(Model model){

@@ -52,15 +52,10 @@ public class AdminProductController {
 						String condition, String search_value) {
 		
 		Pageable pageable = PageRequest.of(pageNum-1, 10, Sort.by("rdate"));
-		
 		Page<ProductEntity> products = productRepo.findAll(pageable);
-		
-		//Page<ProductEntity> products = adminService.getProducts(pageNum, prodName, prodNo, company, seller);
 		
 		int[] pageNumbers = adminService.getPageNumbers(products);
 		
-//		model.addAttribute("condition", condition);
-//		model.addAttribute("search_value", search_value);
 		model.addAttribute("products", products);
 		model.addAttribute("currentPage", pageNum);
 		model.addAttribute("totalPages", products.getTotalPages());
