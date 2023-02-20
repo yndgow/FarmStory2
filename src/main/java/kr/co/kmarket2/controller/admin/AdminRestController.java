@@ -42,8 +42,7 @@ public class AdminRestController {
 										@RequestParam(required = false) String prodName,
 										@RequestParam(required = false) String prodNo,
 										@RequestParam(required = false) String company,
-										@RequestParam(required = false) String seller,
-										String condition, String search_value){
+										@RequestParam(required = false) String seller){
 		Page<ProductEntity> pages = adminService.getProducts(pageNum, prodName, prodNo, company, seller);
 		return pages;
 	}

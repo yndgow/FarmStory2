@@ -51,8 +51,8 @@ public class ProductSpecification implements Specification<ProductEntity>{
         }
         
         if (seller != null && !seller.isEmpty()) {
-            Predicate companyPredicate = builder.equal(root.get("seller"), seller);
-            predicates.add(companyPredicate);
+            Predicate sellerPredicate = builder.equal(root.get("seller"), seller);
+            predicates.add(sellerPredicate);
         }
 
         if (predicates.size() == 0) {

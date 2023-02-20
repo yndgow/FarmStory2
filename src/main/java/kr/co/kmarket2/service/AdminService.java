@@ -37,6 +37,7 @@ import kr.co.kmarket2.repository.CsNoticeRepo;
 import kr.co.kmarket2.repository.CsQnaRepo;
 import kr.co.kmarket2.repository.ProductCate2Repo;
 import kr.co.kmarket2.repository.ProductRepo;
+import kr.co.kmarket2.specification.AdminNoticeSpecification;
 import kr.co.kmarket2.specification.ProductSpecification;
 import lombok.extern.slf4j.Slf4j;
 
@@ -145,12 +146,18 @@ public class AdminService{
 	}
 
 	// cs notice list
-	public Page<CsNoticeEntity> getNoticeList(int pageNum){
-		
+	public Page<CsNoticeEntity> getNoticeList(int cate1, int pageNum){
+		Specification<CsNoticeEntity> specification = new AdminNoticeSpecification(cate1);
 		Pageable pageable = PageRequest.of(pageNum-1, PAGESIZE, Sort.by("rdate").descending());
-		return csNoticeRepo.findAllWithCsCate1Entities(pageable);
+		return csNoticeRepo.findAll(specification, pageable);
 //		return csNoticeRepo.findAllByOrderByRdateDesc(pageable);
 	}
+	
+	// cs noite one
+	public CsNoticeEntity getNoticeOne(int no) {
+		return csNoticeRepo.findById(no).get();
+	}
+	
 	
 	// cs notice write
 	public void writeNotice(CsNoticeEntity csNoticeEntity, int cate1, HttpServletRequest req) {
