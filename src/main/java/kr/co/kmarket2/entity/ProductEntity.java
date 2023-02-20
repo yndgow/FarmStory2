@@ -1,14 +1,25 @@
 package kr.co.kmarket2.entity;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Data;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import lombok.Data;
+/*
+ * 날짜 : 2023/02/16
+ * 이름 : 김지홍
+ * 내용 : Product Entity
+ */
 @Data
 @Entity
 @Table(name = "km_product")
+@EntityListeners(AuditingEntityListener.class)
 public class ProductEntity {
 	@Id
 	private int prodNo;
@@ -37,10 +48,6 @@ public class ProductEntity {
 	private String bizType;
 	private String origin;
 	private String ip;
-	private String rdate;
-	private int etc1;
-	private int etc2;
-	private String etc3;
-	private String etc4;
-	private String etc5;
+	@CreatedDate
+	private LocalDateTime rdate;
 }

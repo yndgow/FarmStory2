@@ -1,0 +1,59 @@
+package kr.co.kmarket2.controller.admin;
+
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import kr.co.kmarket2.entity.CsNoticeEntity;
+import kr.co.kmarket2.service.AdminService;
+
+/*
+ * 날짜: 2023/02/15
+ * 이름: 김지홍
+ * 내용: admin/cs controller 
+ */
+
+@Controller
+public class AdminCsController {
+	
+	private final AdminService adminService;
+	
+	public AdminCsController(AdminService adminService) {
+		super();
+		this.adminService = adminService;
+	}
+
+	@GetMapping("admin")
+	public String index(Model model) {
+		return "admin/index";
+	}
+	
+	@GetMapping("admin/cs/notice/list")
+	public String noticeList(Model model) {
+		List<CsNoticeEntity> list = adminService.getNoticeList();
+		model.addAttribute("noticeList", list);
+		
+		return "admin/cs/notice/list";
+		
+	}
+	
+	@GetMapping("admin/cs/{type}/write")
+	public String write(@PathVariable String type) {
+		return "admin/cs/"+type+"/write";
+	}
+	
+	@GetMapping("admin/cs/{type}/modify")
+	public String modify(@PathVariable String type, String no) {
+		return "admin/cs/"+type+"/modify";
+	}
+	
+	@GetMapping("admin/cs/{type}/view")
+	public String view(@PathVariable String type, String no) {
+		return "admin/cs/"+type+"/view";
+	}
+	
+}

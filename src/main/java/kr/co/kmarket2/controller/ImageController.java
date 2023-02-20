@@ -13,15 +13,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+/*
+ * 날짜: 2023/02/15
+ * 이름: 김지홍
+ * 내용: 외부폴더에서 이미지를 불러오는 Controller 
+ * 		 path 는 상품등록일에 따라 생성되도록 할 예정
+ */
+
 @RestController
 public class ImageController {
     
     @Autowired
     private ResourceLoader resourceLoader;
     
-    @GetMapping("/images/{filename:.+}")
-    public ResponseEntity<Resource> getImage(@PathVariable("filename") String filename) {
-        Resource image = resourceLoader.getResource("file:file/" + filename);
+    @GetMapping("/images/{path}/{filename:.+}")
+    public ResponseEntity<Resource> getImage(@PathVariable("filename") String filename, @PathVariable("path") String path) {
+        Resource image = resourceLoader.getResource("file:file/" + path + "/" + filename);
         
         if (image.exists() && image.isReadable()) {
             String contentType = URLConnection.guessContentTypeFromName(filename);

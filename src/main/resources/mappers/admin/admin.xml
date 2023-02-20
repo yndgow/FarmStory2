@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	날짜 : 2023/02/15
+	이름 : 김지홍 
+	내용 : admin mybatis
+ -->
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.kmarket2.dao.AdminDAO">
+
+	<select id="selectAdminCate2" resultType="kr.co.kmarket2.vo.ProductCate2VO">
+		select * from km_product_cate2 where cate1 = #{cate1};
+	</select>
+	
+</mapper>
