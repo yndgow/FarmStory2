@@ -134,8 +134,6 @@ function updatePagination(currentPage) {
   currentPage = currentPage > 10 ? currentPage - 10 : currentPage;
   curPage[currentPage-1].classList.add('active');
 }
-<<<<<<< HEAD
-
 function adminDeleteNotice(){
 	let deleteList = document.getElementsByClassName('btnDeleteNotice');
 	for(let i=0; i < deleteList.length; i++){
@@ -150,5 +148,3 @@ function adminDeleteNotice(){
 		});
 	}
 }
-=======
->>>>>>> remotes/origin/hongminjun

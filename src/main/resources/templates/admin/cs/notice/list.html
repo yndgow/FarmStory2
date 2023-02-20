@@ -1,12 +1,9 @@
 <th:block th:include="@{admin/_header.html}"/>
-<<<<<<< HEAD
 	<script>
 		document.addEventListener("DOMContentLoaded", ()=>{
 			adminDeleteNotice();
 		});
 	</script>
-=======
->>>>>>> remotes/origin/hongminjun
     <main id="main_admin_qna_list" class="flex-shrink-0">
       <div class="container d-flex flex-row">
         <div class="me-4">
@@ -49,21 +46,12 @@
                     <input type="checkbox" name="" id="" class="form-check-input">
                   </td>
                   <td th:text="${notice.no}">75</td>
-<<<<<<< HEAD
                   <td th:text="${notice.cate1Entity.c1Name}">이벤트당첨</td>
                   <td class="text-start ellipsis"><span><a th:href="@{/admin/cs/notice/view(no=${notice.no})}" th:text="${notice.title}">테스트 이벤트 당첨 테스트</a></span></td>
                   <td th:text="${notice.hit}">1000</td>
                   <td th:text="${#dates.format(notice.rdate, 'yy-MM-dd')}">22-12-30</td>
                   <td>
                     <a th:href="@{/admin/cs/notice/delete(no = ${notice.no})}" class="btnDeleteNotice" th:id="${notice.no}">[삭제]</a>
-=======
-                  <td th:text="${notice.title}">이벤트당첨</td>
-                  <td class="text-start ellipsis"><span><a th:href="@{/admin/cs/notice/view(no=${notice.no})}" th:text="${notice.no}">테스트 이벤트 당첨 테스트</a></span></td>
-                  <td th:text="${notice.hit}">1000</td>
-                  <td th:text="${#dates.format(notice.rdate, 'yy-MM-dd')}">22-12-30</td>
-                  <td>
-                    <a th:href="@{/admin/cs/notice/delet(no = ${notice.no})}">[삭제]</a>
->>>>>>> remotes/origin/hongminjun
                     <a th:href="@{/admin/cs/notice/modify(no = ${notice.no})}">[수정]</a>
                   </td>
                 </tr>
