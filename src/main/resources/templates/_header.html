@@ -18,6 +18,37 @@
 	          $(".slider > ul").bxSlider({
 	            easing: "linear",
 	          });
+	          
+	          /* 스크롤 이동 */
+	          $('.scrollBtnHit').on('click', function(e){
+	        	  e.preventDefault();
+	        	  let location = document.querySelector("#hit").offsetTop;
+	
+	        	  window.scrollTo({top:location, behavior:'smooth'});
+	        	  
+	          });
+	          $('.scrollBtnScore').on('click', function(e){
+	        	  e.preventDefault();
+	        	  let location = document.querySelector("#recommend").offsetTop;
+	
+	        	  window.scrollTo({top:location, behavior:'smooth'});
+	        	  
+	          });
+	          $('.scrollBtnNew').on('click', function(e){
+	        	  e.preventDefault();
+	        	  let location = document.querySelector("#new").offsetTop;
+	
+	        	  window.scrollTo({top:location, behavior:'smooth'});
+	        	  
+	          });
+	          $('.scrollBtnDis').on('click', function(e){
+	        	  e.preventDefault();
+	        	  let location = document.querySelector("#discount").offsetTop;
+	
+	        	  window.scrollTo({top:location, behavior:'smooth'});
+	        	  
+	          });
+	          
 	        });
 	        $(function(){
 	            let best = $("aside > .best");
@@ -67,11 +98,10 @@
             <div class="menu">
                 <div>
                     <ul>
-                        <li><a href="#">히트상품</a></li>
-                        <li><a href="#">추천상품</a></li>
-                        <li><a href="#">최신상품</a></li>
-                        <li><a href="#">인기상품</a></li>
-                        <li><a href="#">할인상품</a></li>
+                        <li><a href="#" class="scrollBtnHit">히트상품</a></li>
+                        <li><a href="#" class="scrollBtnScore">추천상품</a></li>
+                        <li><a href="#" class="scrollBtnNew">최신상품</a></li>
+                        <li><a href="#" class="scrollBtnDis">할인상품</a></li>
                     </ul>
                     <ul>
                         <li><a href="#">쿠폰존</a></li>
