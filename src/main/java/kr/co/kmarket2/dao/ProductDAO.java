@@ -12,6 +12,14 @@ import kr.co.kmarket2.vo.ProductVO;
 @Repository
 public interface ProductDAO {
 
+	//main list
+	public List<ProductVO> selectProductsBest();
+	public List<ProductVO> selectProductsHit();
+	public List<ProductVO> selectProductsScore();
+	public List<ProductVO> selectProductsNew();
+	public List<ProductVO> selectProductsDiscount();
+
+	
 	public int selectCountTotal(String cate1, String cate2); //홍민준 list paging
 	public int selectCountTotalRe(int prodNo); //홍민준 review paging
 	

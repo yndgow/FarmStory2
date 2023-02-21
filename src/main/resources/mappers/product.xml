@@ -5,6 +5,23 @@
 <mapper namespace="kr.co.kmarket2.dao.ProductDAO">
 
 	<insert id=""></insert>
+	<select id="selectProductsBest" resultType="kr.co.kmarket2.vo.ProductVO">
+		SELECT * from `km_product` order by `sold` desc limit 5;
+	</select>
+	<select id="selectProductsHit" resultType="kr.co.kmarket2.vo.ProductVO">
+		SELECT * from `km_product` order by `hit` desc limit 8;
+	</select>
+	<select id="selectProductsScore" resultType="kr.co.kmarket2.vo.ProductVO">
+		SELECT * from `km_product` order by `score` desc limit 8;
+	</select>
+	<select id="selectProductsNew" resultType="kr.co.kmarket2.vo.ProductVO">
+		SELECT * from `km_product` order by `rdate` desc limit 8;
+	</select>
+	<select id="selectProductsDiscount" resultType="kr.co.kmarket2.vo.ProductVO">
+		SELECT * from `km_product` order by `discount` desc limit 8;
+	</select>
+	
+	
 	<select id="selectProducts" resultType="kr.co.kmarket2.vo.ProductVO">
 		SELECT a.*, b.c1Name, c.c2Name FROM `km_product` AS a 
 		JOIN `km_product_cate1` AS b ON a.prodCate1 = b.cate1

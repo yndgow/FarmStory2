@@ -15,6 +15,23 @@ public class ProductService {
 	@Autowired
 	private ProductDAO dao;
 	
+	//main list
+	public List<ProductVO> selectProductsBest(){
+		return dao.selectProductsBest();
+	}
+	public List<ProductVO> selectProductsHit(){
+		return dao.selectProductsHit();
+	}
+	public List<ProductVO> selectProductsScore(){
+		return dao.selectProductsScore();
+	}
+	public List<ProductVO> selectProductsNew(){
+		return dao.selectProductsNew();
+	}
+	public List<ProductVO> selectProductsDiscount(){
+		return dao.selectProductsDiscount();
+	}
+	
 	public List<ProductVO> selectProducts(String cate1, String cate2, String sort){
 		return dao.selectProducts(cate1,cate2,sort);
 	}
