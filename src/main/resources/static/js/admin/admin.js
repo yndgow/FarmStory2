@@ -161,17 +161,15 @@ function getAdminCate1Notice(){
 	let cate1 = document.getElementById('admin_cs_cate1');
 	cate1.addEventListener('change', function(e){
 		location.href = '/kmarket2/admin/cs/notice/list?cate1='+cate1.value;
-		/*ler url = '/kmarket2/admin/cs/notice/list';
-		fetch(url).then(res=>{
-			if(res.ok){
-				alert('조회 성공');
-			}else{
-				alert('조회 실패');
-			}
-		})*/
 	});
 }
-
+// adimin cs faq cate1 이 바뀔때 테이블 업데이트
+function getAdminCate1Faq(){
+	let cate1 = document.getElementById('admin_cs_cate1');
+	cate1.addEventListener('change', function(e){
+		location.href = '/kmarket2/admin/cs/faq/list?cate1='+cate1.value;
+	});
+}
 // cate 값이 존재할때 select 값 설정
 function setAdminCate(){
 	let urlSearch = new URLSearchParams(location.search);
@@ -186,4 +184,24 @@ function setAdminCate(){
 		cate2.value = cate2Value;
 	}
 }
+// cate1 값이 변화할때 cate2 select 불러오기
+function setAdminCate2Select(){
+	let cate1 = document.getElementById('admin_cs_cate1');
+	let cate2 = document.getElementById('admin_cs_cate2');
+	if(cate1.value != 0 && cate1 != null){
+		let url = '/kmarket2/admin/cs/cate2/'+cate1.value;
+		fetch(url).then(res=>res.json()).then(data=>{
+			console.log(data);
+			data.forEach(ele =>{
+				const option = document.createElement('option');
+				option.value = ele.cate2;
+				option.textContent = ele.c2Name;
+				cate2.appendChild(option);
+			})
+			
+			
+		})	
+	}
+}
+
 

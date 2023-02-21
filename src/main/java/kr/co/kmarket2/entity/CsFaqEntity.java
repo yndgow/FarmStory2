@@ -1,12 +1,19 @@
 package kr.co.kmarket2.entity;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,16 +29,28 @@ import lombok.ToString;
 @ToString
 @Builder
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "km_cs_faq")
 public class CsFaqEntity {
 	@Id
 	private int no;
-	private int cate1;
-	private int cate2;
+//	private int cate1;
+//	private int cate2;
 	private String title;
 	private String content;
 	private int hit;
 	private String regip;
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
-	private LocalDateTime rdate;
+	private Date rdate;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "cate1")
+	private CsCate1Entity cate1Entity;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "cate2")
+	private CsCate2Entity cate2Entity;
+	
 }

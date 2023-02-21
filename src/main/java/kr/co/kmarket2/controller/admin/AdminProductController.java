@@ -51,7 +51,7 @@ public class AdminProductController {
 						@RequestParam(required = false) String seller,
 						String condition, String search_value) {
 		
-		Pageable pageable = PageRequest.of(pageNum-1, 10, Sort.by("rdate"));
+		Pageable pageable = PageRequest.of(pageNum-1, 10, Sort.by("rdate").descending());
 		Page<ProductEntity> products = productRepo.findAll(pageable);
 		
 		int[] pageNumbers = adminService.getPageNumbers(products);

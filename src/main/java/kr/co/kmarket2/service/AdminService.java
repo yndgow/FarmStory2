@@ -26,17 +26,20 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.co.kmarket2.dao.AdminDAO;
 import kr.co.kmarket2.dto.ProductDTO;
 import kr.co.kmarket2.entity.CsCate1Entity;
+import kr.co.kmarket2.entity.CsCate2Entity;
 import kr.co.kmarket2.entity.CsFaqEntity;
 import kr.co.kmarket2.entity.CsNoticeEntity;
 import kr.co.kmarket2.entity.CsQnaEntity;
 import kr.co.kmarket2.entity.ProductCate2Entity;
 import kr.co.kmarket2.entity.ProductEntity;
 import kr.co.kmarket2.repository.CsCate1Repo;
+import kr.co.kmarket2.repository.CsCate2Repo;
 import kr.co.kmarket2.repository.CsFaqRepo;
 import kr.co.kmarket2.repository.CsNoticeRepo;
 import kr.co.kmarket2.repository.CsQnaRepo;
 import kr.co.kmarket2.repository.ProductCate2Repo;
 import kr.co.kmarket2.repository.ProductRepo;
+import kr.co.kmarket2.specification.AdminFaqSpecification;
 import kr.co.kmarket2.specification.AdminNoticeSpecification;
 import kr.co.kmarket2.specification.ProductSpecification;
 import lombok.extern.slf4j.Slf4j;
@@ -53,24 +56,30 @@ public class AdminService{
 
 	private final AdminDAO adminDAO;
 	private final ProductRepo productRepo;
-	private final ProductCate2Repo cate2Repo;
+	private final ProductCate2Repo prodCate2Repo;
 	private final CsFaqRepo csFaqRepo;
 	private final CsQnaRepo csQnaRepo;
 	private final CsNoticeRepo csNoticeRepo;
 	private final CsCate1Repo cate1Repo;
+	private final CsCate2Repo csCate2Repo;
 	
-	public AdminService(AdminDAO adminDAO, ProductRepo productRepo, ProductCate2Repo cate2Repo, CsFaqRepo csFaqRepo,
-			CsQnaRepo csQnaRepo, CsNoticeRepo csNoticeRepo, CsCate1Repo cate1Repo) {
+	public AdminService(AdminDAO adminDAO, ProductRepo productRepo, ProductCate2Repo prodCate2Repo, CsFaqRepo csFaqRepo,
+			CsQnaRepo csQnaRepo, CsNoticeRepo csNoticeRepo, CsCate1Repo cate1Repo, CsCate2Repo csCate2Repo) {
 		this.adminDAO = adminDAO;
 		this.productRepo = productRepo;
-		this.cate2Repo = cate2Repo;
+		this.prodCate2Repo = prodCate2Repo;
 		this.csFaqRepo = csFaqRepo;
 		this.csQnaRepo = csQnaRepo;
 		this.csNoticeRepo = csNoticeRepo;
 		this.cate1Repo = cate1Repo;
+		this.csCate2Repo = csCate2Repo;
 	}
-
-	private final int PAGESIZE = 10;
+	
+	// pageable 반환
+	private Pageable getPageable(int pageNum) {
+		return PageRequest.of(pageNum-1, 10, Sort.by("rdate").descending());
+	}
+	
 	// 상품 등록
 	public void insertProduct(ProductEntity entity) {
 		productRepo.save(entity);
@@ -79,7 +88,7 @@ public class AdminService{
 	// cate 1에 따라 cate2 불러오기
 	public List<ProductCate2Entity> selectAdminCate2(int cate1) {
 		//List<ProductCate2VO> cate2List =  adminDAO.selectAdminCate2(cate1);
-		List<ProductCate2Entity> cate2List = cate2Repo.findByCate1(cate1);
+		List<ProductCate2Entity> cate2List = prodCate2Repo.findByCate1(cate1);
 		return cate2List;
 	}
 	
@@ -129,8 +138,7 @@ public class AdminService{
 	// admin product list - jpa 로 페이징 하기
 	public Page<ProductEntity> getProducts(int pageNum, String prodName, String prodNo, String company, String seller){
 		Specification<ProductEntity> specification = new ProductSpecification(prodName, prodNo, company, seller);
-		Pageable pageable = PageRequest.of(pageNum-1, PAGESIZE, Sort.by("rdate"));
-		return productRepo.findAll(specification, pageable);
+		return productRepo.findAll(specification, getPageable(pageNum));
 	}
 	
 	// 페이징에 필요한 start, endpage 가져오기
@@ -148,7 +156,7 @@ public class AdminService{
 	// cs notice list
 	public Page<CsNoticeEntity> getNoticeList(int cate1, int pageNum){
 		Specification<CsNoticeEntity> specification = new AdminNoticeSpecification(cate1);
-		Pageable pageable = PageRequest.of(pageNum-1, PAGESIZE, Sort.by("rdate").descending());
+		Pageable pageable = PageRequest.of(pageNum-1, 10, Sort.by("rdate").descending());
 		return csNoticeRepo.findAll(specification, pageable);
 //		return csNoticeRepo.findAllByOrderByRdateDesc(pageable);
 	}
@@ -157,7 +165,6 @@ public class AdminService{
 	public CsNoticeEntity getNoticeOne(int no) {
 		return csNoticeRepo.findById(no).get();
 	}
-	
 	
 	// cs notice write
 	public void writeNotice(CsNoticeEntity csNoticeEntity, int cate1, HttpServletRequest req) {
@@ -169,6 +176,16 @@ public class AdminService{
 		}
 	}
 	
+	// cs notice modify
+	public void modifyNotice(CsNoticeEntity entity, int cate1, HttpServletRequest req) {
+		CsCate1Entity cate1Entity = cate1Repo.findById(cate1).get();
+		if(cate1Entity != null) {
+			entity.setCate1Entity(cate1Entity);
+			entity.setRegip(getRemoteIP(req));
+			csNoticeRepo.save(entity);
+		}
+	}
+	
 	// cs notice delete
 	public void deleteNotice(int no) {
 		csNoticeRepo.deleteById(no);
@@ -176,12 +193,24 @@ public class AdminService{
 	
 	
 	// cs faq list
-	public List<CsFaqEntity> getFaqList(Model model){
-		return null;
+	public Page<CsFaqEntity> getFaqList(int pageNum, int cate1, int cate2){
+		Specification<CsFaqEntity> specification = new AdminFaqSpecification(cate1, cate2);
+		return csFaqRepo.findAll(specification, getPageable(pageNum));
 	}
+	
+	
+	
+	
 	
 	// cs qna list
 	public List<CsQnaEntity> getQnaList(Model model){
 		return null;
+	}
+	
+	
+	
+	// cs cate2 list
+	public List<CsCate2Entity> getCate2List(int cate1){
+		return csCate2Repo.findByCate1(cate1);
 	}
 }
