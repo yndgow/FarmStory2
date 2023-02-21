@@ -2,6 +2,22 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <th:block th:include="@{cs/_header.html}"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script>
+$(() => {
+	  $('.more').click(function (e) {
+	        e.preventDefault();
+	        let status = $(this).prev().css('display') === 'none';
+	      if (status) {
+	        $(this).siblings('li:nth-child(n+4)').css('display','block');
+	        $(this).children('a').text('간단히 보기');
+	      } else{
+	        $(this).siblings('li:nth-child(n+4)').css('display','none');
+	        $(this).children('a').text('더보기');
+	      }
+	    });
+});
+</script>
 
       <section id="cs">
         <div class="faq">
@@ -14,61 +30,56 @@
             <aside>
               <h2>자주묻는 질문</h2>
               <ul>
-                <li class="on"><a href="#">회원</a></li>
-                <li><a href="#">쿠폰/이벤트</a></li>
-                <li><a href="#">주문/결제</a></li>
-                <li><a href="#">배송</a></li>
-                <li><a href="#">취소/반품/교환</a></li>
-                <li><a href="#">여행/숙박/항공</a></li>
-                <li><a href="#">안전거래</a></li>
+                <li th:classappend="${cate1} eq 1 ?'on':'off'"><a th:href="@{/cs/faq/list?group=faq&cate1=1}">회원</a></li>
+                <li th:classappend="${cate1} eq 2 ?'on':'off'"><a th:href="@{/cs/faq/list?group=faq&cate1=2}">쿠폰/혜택/이벤트</a></li>
+                <li th:classappend="${cate1} eq 3 ?'on':'off'"><a th:href="@{/cs/faq/list?group=faq&cate1=3}">주문/결제</a></li>
+                <li th:classappend="${cate1} eq 4 ?'on':'off'"><a th:href="@{/cs/faq/list?group=faq&cate1=4}">배송</a></li>
+                <li th:classappend="${cate1} eq 5 ?'on':'off'"><a th:href="@{/cs/faq/list?group=faq&cate1=5}">취소/반품/교환</a></li>
+                <li th:classappend="${cate1} eq 6 ?'on':'off'"><a th:href="@{/cs/faq/list?group=faq&cate1=6}">여행/숙박/항공</a></li>
+                <li th:classappend="${cate1} eq 9 ?'on':'off'"><a th:href="@{/cs/faq/list?group=faq&cate1=9}">안전거래</a></li>
               </ul>
             </aside>
             <article>              
-              <nav>
+              <nav th:if="${cate1} eq 1">
                 <h1>회원</h1>
                 <h2>가장 자주 묻는 질문입니다.</h2>
               </nav>
-              <div>
-                <h3>가입</h3>
+              
+              <nav th:if="${cate1} eq 2">
+                <h1>쿠폰/이벤트</h1>
+                <h2>가장 자주 묻는 질문입니다.</h2>
+              </nav>
+              
+              <nav th:if="${cate1} eq 3">
+                <h1>주문/결제</h1>
+                <h2>가장 자주 묻는 질문입니다.</h2>
+              </nav>
+              
+              <nav th:if="${cate1} eq 4">
+                <h1>배송</h1>
+                <h2>가장 자주 묻는 질문입니다.</h2>
+              </nav>
+              
+              <nav th:if="${cate1} eq 5">
+                <h1>취소/반품/교환</h1>
+                <h2>가장 자주 묻는 질문입니다.</h2>
+              </nav>
+              
+              <nav th:if="${cate1} eq 6">
+                <h1>여행/숙박/항공</h1>
+                <h2>가장 자주 묻는 질문입니다.</h2>
+              </nav>
+              
+              <nav th:if="${cate1} eq 9">
+                <h1>안전거래</h1>
+                <h2>가장 자주 묻는 질문입니다.</h2>
+              </nav>
+              <div th:each="cate:${cate2}">
+                <h3>[[${cate.c2Name}]]</h3>
                 <ul>
-                  <li><a th:href="@{view}"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li><a href="#"><span>Q.</span>개인회원과 법인회원에 차이가 있나요?</a></li>
-                  <li class="more"><a href="#">더보기</a></li>
-                </ul>
-              </div>
-              <div>
-                <h3>탈퇴</h3>
-                <ul>
-                  <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                  <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                  <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                  <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                  <li><a href="#"><span>Q.</span>회원탈퇴 후 재가입이 가능한가요?</a></li>
-                  <li class="more"><a href="#">더보기</a></li>
-                </ul>
-              </div>
-              <div>
-                <h3>회원정보</h3>
-                <ul>
-                  <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                  <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                  <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                  <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                  <li><a href="#"><span>Q.</span>회원정보를 수정하고 싶어요.</a></li>
-                  <li class="more"><a href="#">더보기</a></li>
-                </ul>
-              </div>
-              <div>
-                <h3>로그인</h3>
-                <ul>
-                  <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                  <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                  <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                  <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
-                  <li><a href="#"><span>Q.</span>로그인에 문제가 있어요.</a></li>
+                 <th:block th:each="faq:${faq}">
+                  <li th:if="${faq.cate2} eq ${cate.cate2}"><a th:href="@{/cs/faq/view(group=faq,cate1=${faq.cate1},no=${faq.no})}"><span>Q.</span>[[${faq.title}]]</a></li>
+                 </th:block>
                   <li class="more"><a href="#">더보기</a></li>
                 </ul>
               </div>

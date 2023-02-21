@@ -17,5 +17,9 @@ public class CsQnaVO {
 	private int hit;
 	private String regip;
 	private LocalDateTime rdate;
+	
+	private int comment;
+	
+	private String c2Name;
 }
 

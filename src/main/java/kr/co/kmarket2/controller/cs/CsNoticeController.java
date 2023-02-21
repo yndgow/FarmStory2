@@ -36,6 +36,8 @@ public class CsNoticeController {
 		model.addAttribute("notices", notices);
 		model.addAttribute("notice", notice);
 		model.addAttribute("cate1", cate1);
+		model.addAttribute("pg", pg);
+		
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPageNum", lastPageNum);
 		model.addAttribute("pageStartNum", pageStartNum);
@@ -44,7 +46,13 @@ public class CsNoticeController {
 	}
 	
 	@GetMapping("cs/notice/view")
-	public String noticeview() {
+	public String noticeview(Model model, int no, String cate1, String pg) {
+		
+		CsNoticeVO article = service.selectNotice(no);
+		
+		model.addAttribute("article", article);
+		model.addAttribute("cate1", cate1);
+		model.addAttribute("pg", pg);
 		return "cs/notice/view";
 	}
 	

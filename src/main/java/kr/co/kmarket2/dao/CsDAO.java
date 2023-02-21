@@ -5,8 +5,12 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import kr.co.kmarket2.vo.Cate1VO;
+import kr.co.kmarket2.vo.Cate2VO;
+import kr.co.kmarket2.vo.CsFaqVO;
 import kr.co.kmarket2.vo.CsNoticeVO;
 import kr.co.kmarket2.vo.CsQnaVO;
+
 
 @Mapper
 @Repository
@@ -17,7 +21,7 @@ public interface CsDAO {
 	public List<CsQnaVO> selectIndexQna();
 	
 	// notice
-	public CsNoticeVO selectNotice();
+	public CsNoticeVO selectNotice(int no);
 	public List<CsNoticeVO> selectNoticeByGroup();
 	public List<CsNoticeVO> selectNotices(int start);
 	public List<CsNoticeVO> selectNoticesCate(int start, String cate1);
@@ -25,9 +29,16 @@ public interface CsDAO {
 	public int selectCountNotices();
 	
 	// qna
-	public void selectQna();
+	public int selectCountQnas(String cate1);
+	public List<CsQnaVO> selectQnas(int start, String cate1);
+	public CsQnaVO selectQna(int no);
+	public int insertQna(CsQnaVO vo);
+	public List<Cate1VO> selectCate1();
+	public List<Cate2VO> selectCate2(String cate1);
 	
 	// faq
-	public void selectFaq();
+	public List<CsFaqVO> selectFaqs(String cate1);
+	public List<Cate2VO> selectFaqCate(String cate1);
+	public CsFaqVO selectFaq(int no);
 	
 }

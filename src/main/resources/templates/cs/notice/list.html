@@ -46,24 +46,48 @@
               <table>
               	<th:block th:if="${cate1} eq null">
                 <tr th:each="notices : ${notices}">
-                  <td><a th:href="@{/cs/notice/view(no=${notices.no},cate1=${notices.cate1})}">[[${notices.title}]]</a></td>
-                  <td>[[${notices.rdate}]]</td>
+                  <td><a th:href="@{/cs/notice/view(no=${notices.no},cate1=${notices.cate1},pg=${pg})}">[[${notices.title}]]</a></td>
+                  <td>[[${#strings.substring(notices.rdate,2,10)}]]</td>
                 </tr>
                 </th:block>
                 
                 <th:block th:if="${cate1} ne null">
                 <tr th:each="notice : ${notice}">
-                  <td><a th:href="@{/cs/notice/view(no=${notice.no},cate1=${notice.cate1})}">[[${notice.title}]]</a></td>
-                  <td>[[${notice.rdate}]]</td>
+                  <td><a th:href="@{/cs/notice/view(no=${notice.no},cate1=${notice.cate1},pg=${pg})}">[[${notice.title}]]</a></td>
+                  <td>[[${#strings.substring(notice.rdate,2,10)}]]</td>
                 </tr>
                 </th:block>
               </table>
               <div class="page">
-                <a href="#" class="prev">이전</a>
-                <a href="#" class="num on">1</a>
-                <a href="#" class="num">2</a>
-                <a href="#" class="num">3</a>
-                <a href="#" class="next">다음</a>
+              <th:block th:if="${cate1} eq null">
+              	<th:block th:if="${groups[0]>1}">
+                	<a th:href="@{/cs/notice/list(group=notice,pg=${groups[0]-1})}" class="prev">이전</a>
+                </th:block>
+                
+                <th:block th:each="num:${#numbers.sequence(groups[0],groups[1])}">
+                	<a th:href="@{/cs/notice/list(group=notice,pg=${num})}"
+                   		th:class="${num==currentPage?'num current':'num'}">[[${num}]]</a>
+                </th:block>
+                
+                <th:block th:if="${groups[1]<lastPageNum}">
+                	<a th:href="@{/cs/notice/list(group=notice,pg=${groups[1]+1})}" class="next">다음</a>
+                </th:block>
+              </th:block>
+              
+              <th:block th:if="${cate1} ne null">
+              	<th:block th:if="${groups[0]>1}">
+                	<a th:href="@{/cs/notice/list(group=notice,pg=${groups[0]-1})}" class="prev">이전</a>
+                </th:block>
+                
+                <th:block th:each="num:${#numbers.sequence(groups[0],groups[1])}">
+                	<a th:href="@{/cs/notice/list(group=notice,pg=${num},cate1=${cate1})}"
+                   		th:class="${num==currentPage?'num current':'num'}">[[${num}]]</a>
+                </th:block>
+                
+                <th:block th:if="${groups[1]<lastPageNum}">
+                	<a th:href="@{/cs/notice/list(group=notice,pg=${groups[1]+1})}" class="next">다음</a>
+                </th:block>
+              </th:block>
               </div>
             </article>
           </section>
