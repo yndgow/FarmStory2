@@ -8,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +19,6 @@ import kr.co.kmarket2.entity.ProductEntity;
 import kr.co.kmarket2.mappers.ProductMapper;
 import kr.co.kmarket2.repository.ProductRepo;
 import kr.co.kmarket2.service.AdminService;
-import kr.co.kmarket2.specification.ProductSpecification;
 
 /*
  * 날짜: 2023/02/15

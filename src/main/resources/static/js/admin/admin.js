@@ -173,13 +173,13 @@ function getAdminCate1Faq(){
 // cate 값이 존재할때 select 값 설정
 function setAdminCate(){
 	let urlSearch = new URLSearchParams(location.search);
-	let cate1 = document.getElementById('admin_cs_cate1');
+	//let cate1 = document.getElementById('admin_cs_cate1');
 	let cate2 = document.getElementById('admin_cs_cate2');
-	let cate1Value = urlSearch.get('cate1');
+	//let cate1Value = urlSearch.get('cate1');
 	let cate2Value = urlSearch.get('cate2');
-	if(cate1 != null && cate1Value != null){
+	/*if(cate1 != null && cate1Value != null){
 		cate1.value = cate1Value;
-	}
+	}*/
 	if(cate2 != null && cate2Value != null){
 		cate2.value = cate2Value;
 	}
@@ -188,20 +188,27 @@ function setAdminCate(){
 function setAdminCate2Select(){
 	let cate1 = document.getElementById('admin_cs_cate1');
 	let cate2 = document.getElementById('admin_cs_cate2');
-	if(cate1.value != 0 && cate1 != null){
-		let url = '/kmarket2/admin/cs/cate2/'+cate1.value;
-		fetch(url).then(res=>res.json()).then(data=>{
-			console.log(data);
-			data.forEach(ele =>{
-				const option = document.createElement('option');
-				option.value = ele.cate2;
-				option.textContent = ele.c2Name;
-				cate2.appendChild(option);
-			})
-			
-			
-		})	
-	}
+	cate1.addEventListener('change', function(e){
+		
+		if(cate1.value != 0 && cate1 != null){
+			let url = '/kmarket2/admin/cs/cate2/'+cate1.value;
+			fetch(url).then(res=>res.json()).then(data=>{
+				//console.log(data);
+				cate2.innerHTML = '';
+				const optionDefalut = document.createElement('option');
+				optionDefalut.value = '0'; 
+				optionDefalut.textContent = '2차 유형';
+				cate2.appendChild(optionDefalut);
+				data.forEach(ele =>{
+					const option = document.createElement('option');
+					option.value = ele.cate2;
+					option.textContent = ele.c2Name;
+					cate2.appendChild(option);
+				})
+			})		
+		}			
+	})	
+
 }
 
 

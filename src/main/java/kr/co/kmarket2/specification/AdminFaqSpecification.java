@@ -34,15 +34,21 @@ public class AdminFaqSpecification implements Specification<CsFaqEntity>{
 		List<Predicate> predicates = new ArrayList<>();
 		
 		if(cate1 != 0) {
-			Join<CsFaqEntity, CsCate1Entity> join = root.join("cate1Entity", JoinType.LEFT);
+			Join<CsFaqEntity, CsCate1Entity> join = root.join("cate1Entity", JoinType.INNER);
 			Predicate cate1Predicate = builder.equal(join.get("cate1"), cate1);
 			predicates.add(cate1Predicate);
 		}
+
 		if(cate2 != 0) {
-			Join<CsFaqEntity, CsCate2Entity> join = root.join("cate2Entity", JoinType.LEFT);
+			Join<CsFaqEntity, CsCate2Entity> join = root.join("cate2Entity", JoinType.INNER);
 			Predicate cate2Predicate = builder.equal(join.get("cate2"), cate2);
 			predicates.add(cate2Predicate);
 		}
+//		if(cate2 != 0 && cate1 != 0) {
+//			Join<CsCate1Entity, CsCate2Entity> join = root.join("cate2Entity", JoinType.LEFT);
+//			Predicate cate2Predicate = builder.equal(join.get("cate1"), cate1);
+//			predicates.add(cate2Predicate);
+//		}
         if (predicates.size() == 0) {
             return builder.conjunction();
         }

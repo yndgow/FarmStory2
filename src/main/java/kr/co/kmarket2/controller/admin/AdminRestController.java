@@ -51,9 +51,9 @@ public class AdminRestController {
 	}
 	
 	// 관리자 고객센터 카테고리1차 에 따라 2차 반환 select
-	@GetMapping("/admin/cs/cate2/{cate2}")
-	public List<CsCate2Entity> getCate2ByCate1(@PathVariable int cate2){
-		return adminService.getCate2List(cate2);
+	@GetMapping("/admin/cs/cate2/{cate1}")
+	public List<CsCate2Entity> getCate2ByCate1(@PathVariable int cate1){
+		return adminService.getCate2List(cate1);
 	}
 	
 }

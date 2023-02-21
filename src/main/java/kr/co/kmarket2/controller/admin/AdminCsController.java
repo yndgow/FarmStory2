@@ -1,6 +1,7 @@
 package kr.co.kmarket2.controller.admin;
 
 
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,9 @@ import kr.co.kmarket2.entity.CsNoticeEntity;
 import kr.co.kmarket2.repository.CsFaqRepo;
 import kr.co.kmarket2.repository.CsNoticeRepo;
 import kr.co.kmarket2.service.AdminService;
+import kr.co.kmarket2.utils.PaginationUtils;
+import kr.co.kmarket2.vo.CsQnaVO;
+import kr.co.kmarket2.vo.PageVO;
 
 /*
  * 날짜: 2023/02/15
@@ -127,6 +131,7 @@ public class AdminCsController {
 		
 		int[] pageNumbers = adminService.getPageNumbers(page);
 		
+		
 		model.addAttribute("startPages", pageNumbers[0]);
 		model.addAttribute("endPages", pageNumbers[1]);
 		model.addAttribute("list", page.getContent());
@@ -137,6 +142,29 @@ public class AdminCsController {
 		model.addAttribute("cate2", cate2);
 		return "admin/cs/faq/list";
 		
+	}
+	
+	// 묻고답하기 이동 목록
+	@GetMapping("admin/cs/qna/list")
+	public String qnaList(Model model,
+			@RequestParam(defaultValue = "1", name = "pageNum") int pageNum,
+			@RequestParam(defaultValue = "0", name = "cate1") int cate1,
+			@RequestParam(defaultValue = "0", name = "cate2") int cate2) {
+		int offset = adminService.getOffset(pageNum);
+		int limit = 10;
+		
+		List<CsQnaVO> qnaList = adminService.getQnaList(offset, limit, cate1, cate2);
+		model.addAttribute("list", qnaList);
+		
+		int totalCount = adminService.countTotalQna(cate1, cate2);
+		model.addAttribute("totalCount", totalCount);
+		
+		PageVO pageInfo = PaginationUtils.getPage(10, pageNum, totalCount);
+		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("cate1", cate1);
+		model.addAttribute("cate2", cate2);
+		return "admin/cs/qna/list";
 	}
 	
 }

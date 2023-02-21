@@ -42,6 +42,10 @@ import kr.co.kmarket2.repository.ProductRepo;
 import kr.co.kmarket2.specification.AdminFaqSpecification;
 import kr.co.kmarket2.specification.AdminNoticeSpecification;
 import kr.co.kmarket2.specification.ProductSpecification;
+import kr.co.kmarket2.utils.PaginationUtils;
+import kr.co.kmarket2.vo.CsFaqVO;
+import kr.co.kmarket2.vo.CsQnaVO;
+import kr.co.kmarket2.vo.PageVO;
 import lombok.extern.slf4j.Slf4j;
 
 /*
@@ -203,8 +207,8 @@ public class AdminService{
 	
 	
 	// cs qna list
-	public List<CsQnaEntity> getQnaList(Model model){
-		return null;
+	public List<CsQnaVO> getQnaList(int offset, int limit, int cate1, int cate2){
+		return adminDAO.selectListQna(offset, limit, cate1, cate2);
 	}
 	
 	
@@ -213,4 +217,18 @@ public class AdminService{
 	public List<CsCate2Entity> getCate2List(int cate1){
 		return csCate2Repo.findByCate1(cate1);
 	}
+	
+	public PageVO getPageNumFaq(int pageSize, int currentPage, int countTotal) {
+		return PaginationUtils.getPage(pageSize, currentPage, countTotal);
+	}
+	
+	public int getOffset(int pageNum) {
+		int offset = (pageNum-1) * 10;
+		return offset;
+	}
+	
+	public int countTotalQna(int cate1, int cate2) {
+		return adminDAO.countTotalQna(cate1, cate2);
+	}
+
 }
