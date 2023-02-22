@@ -14,7 +14,9 @@ import kr.co.kmarket2.service.CsService;
 import kr.co.kmarket2.vo.Cate1VO;
 import kr.co.kmarket2.vo.Cate2VO;
 import kr.co.kmarket2.vo.CsQnaVO;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 public class CsQnaController {
 
@@ -59,23 +61,26 @@ public class CsQnaController {
 	}
 	
 	@GetMapping("cs/qna/write")
-	public String qnawrite() {
+	public String qnawrite(Model model, String cate1) {
 		
+		List<Cate1VO> c1Names = service.selectCate1();
+		List<Cate2VO> c2Names = service.selectCate2(cate1);
+		
+		model.addAttribute("c1Names", c1Names);
+		model.addAttribute("c2Names", c2Names);
 		
 		return "cs/qna/write";
 	}
 	
-	@PostMapping("cs/write")
+	@PostMapping("cs/qna/write")
 	public String qnawrite(Model model, CsQnaVO vo, HttpServletRequest req, String cate1) {
 		
-		List<Cate1VO> category = service.selectCate1();
-		List<Cate2VO> category2 = service.selectCate2(cate1);
+
 		vo.setRegip(req.getRemoteAddr());
 		
 		service.insertQna(vo);
 		
-		model.addAttribute("category2", category2);
-		model.addAttribute("category", category);
+
 		model.addAttribute("cate1", cate1);
 		
 		return "redirect:/list";

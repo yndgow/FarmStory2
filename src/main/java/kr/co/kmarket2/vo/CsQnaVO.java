@@ -24,5 +24,12 @@ public class CsQnaVO {
 	
 	// 추가필드 공민혁
 	private int comment;
+	
+	public int getCate1() {
+        return cate1;
+    }
+    public void setCate1(String cate1) {
+        this.cate1 = Integer.parseInt(cate1);
+    }
 }
 

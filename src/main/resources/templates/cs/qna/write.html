@@ -29,6 +29,7 @@ $(function(){
 		alert('작성이 완료되었습니다');
 		
 	});
+	
 });
 </script>
       <section id="cs">
@@ -53,15 +54,16 @@ $(function(){
             </aside>
             <article>
               <form th:action="@{/cs/qna/write}" method="post">
-              <input type="hidden" name="uid" value="100">
+              <input type="hidden" name="uid" th:value="buyer">
                 <table>
                   <tr>
                     <td>문의유형</td>
                     <td>
-                      <select name="type" th:field="*{cate}">
-                        <option value="0">선택</option>
-                        <option th:each="cate:${category}" th:value="1" th:utext="${cate.c1Name}"></option>
+                      <select name="type">
+                        <option value="0">1차 선택</option>
+                        <option th:each="cate:${c1Names}" th:value="2">[[${cate.c1Name}]]</option>
                       </select>
+					  
                     </td>
                   </tr>
                   <tr>
