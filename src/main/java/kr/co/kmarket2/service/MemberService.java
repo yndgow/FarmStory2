@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.kmarket2.dao.MemberDAO;
 import kr.co.kmarket2.repository.MemberRepo;
+import kr.co.kmarket2.vo.MemberTermsVO;
 
 @Service
 public class MemberService {
@@ -16,6 +17,9 @@ public class MemberService {
 		this.memberDAO = memberDAO;
 	}
 	
+	public MemberTermsVO selectTerms() {
+		return memberDAO.selectTerms();
+	}
 	
 	
 	
