@@ -2,7 +2,35 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
       
 <th:block th:include="@{cs/_header.html}"/>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+$(function(){
+	// 문의글 작성 유효성 검사
+	$('.write form').submit(function() {
+		let cate = $('select[name=cate]').val();
+		let title = $('input[name=title]').val();
+		let content = $('textarea[name=content]').val(); 
+		
+		if(cate == 0){
+			alert('카테고리를 선택해주세요.');
+			return false;
+		}
+		if(title == '' || title == null){
+			alert('제목 입력은 필수입니다.');
+			$('input[name=title]').focus();
+			return false;
+		}
+		if(content == '' || content == null){
+			alert('내용 입력은 필수입니다.');
+			$('textarea[name=content]').focus();
+			return false;
+		}
+		
+		alert('작성이 완료되었습니다');
+		
+	});
+});
+</script>
       <section id="cs">
         <div class="qna">
           <nav>
@@ -14,27 +42,25 @@
             <aside>
               <h2>문의하기</h2>
               <ul>
-                <li class="on"><a href="#">회원</a></li>
-                <li><a href="#">쿠폰/이벤트</a></li>
-                <li><a href="#">주문/결제</a></li>
-                <li><a href="#">배송</a></li>
-                <li><a href="#">취소/반품/교환</a></li>
-                <li><a href="#">여행/숙박/항공</a></li>
-                <li><a href="#">안전거래</a></li>
+				<li th:classappend="${cate1} eq 1 ?'on':'off'"><a th:href="@{/cs/qna/list?group=faq&cate1=1}">회원</a></li>
+                <li th:classappend="${cate1} eq 2 ?'on':'off'"><a th:href="@{/cs/qna/list?group=faq&cate1=2}">쿠폰/혜택/이벤트</a></li>
+                <li th:classappend="${cate1} eq 3 ?'on':'off'"><a th:href="@{/cs/qna/list?group=faq&cate1=3}">주문/결제</a></li>
+                <li th:classappend="${cate1} eq 4 ?'on':'off'"><a th:href="@{/cs/qna/list?group=faq&cate1=4}">배송</a></li>
+                <li th:classappend="${cate1} eq 5 ?'on':'off'"><a th:href="@{/cs/qna/list?group=faq&cate1=5}">취소/반품/교환</a></li>
+                <li th:classappend="${cate1} eq 6 ?'on':'off'"><a th:href="@{/cs/qna/list?group=faq&cate1=6}">여행/숙박/항공</a></li>
+                <li th:classappend="${cate1} eq 9 ?'on':'off'"><a th:href="@{/cs/qna/list?group=faq&cate1=9}">안전거래</a></li>
               </ul>
             </aside>
             <article>
-              <form action="#">
+              <form th:action="@{/cs/qna/write}" method="post">
+              <input type="hidden" name="uid" value="100">
                 <table>
                   <tr>
                     <td>문의유형</td>
                     <td>
-                      <select name="type">
+                      <select name="type" th:field="*{cate}">
                         <option value="0">선택</option>
-                        <option>가입</option>
-                        <option>탈퇴</option>
-                        <option>회원정보</option>
-                        <option>로그인</option>
+                        <option th:each="cate:${category}" th:value="1" th:utext="${cate.c1Name}"></option>
                       </select>
                     </td>
                   </tr>

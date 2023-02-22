@@ -21,5 +21,8 @@ public class CsQnaVO {
 	// 추가필드 김지홍
 	private String c1Name;
 	private String c2Name;
+	
+	// 추가필드 공민혁
+	private int comment;
 }
 

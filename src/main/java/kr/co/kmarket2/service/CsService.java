@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.kmarket2.dao.CsDAO;
+import kr.co.kmarket2.vo.Cate1VO;
+import kr.co.kmarket2.vo.Cate2VO;
+import kr.co.kmarket2.vo.CsFaqVO;
 import kr.co.kmarket2.vo.CsNoticeVO;
 import kr.co.kmarket2.vo.CsQnaVO;
 
@@ -81,6 +84,52 @@ public class CsService {
 		return (currentPage - 1) * 10;
 	}
 	
+	public CsNoticeVO selectNotice(int no) {
+		return dao.selectNotice(no);
+	}
 	
+	// FAQ
+	
+	public List<CsFaqVO> selectFaqs(String cate1) {
+		return dao.selectFaqs(cate1);
+	}
+	
+	public List<Cate2VO> selectFaqCate(String cate1) {
+		return dao.selectFaqCate(cate1);
+	}
+	
+	public CsFaqVO selectFaq(int no) {
+		return dao.selectFaq(no);
+	}
+	
+	// QNA
+	
+	public int selectCountQnas(String cate1) { 
+		return dao.selectCountQnas(cate1);
+	}
+	
+	public List<CsQnaVO> selectQnas(int start, String cate1) {
+		return dao.selectQnas(start, cate1);
+	}
+	
+	public CsQnaVO selectQna(int no) {
+		return dao.selectQna(no);
+	}
+	
+	public int insertQna(CsQnaVO vo) {
+		
+		// 글 등록
+		int result = dao.insertQna(vo);
+		
+		return result;	
+	}
+	
+	public List<Cate1VO> selectCate1() {
+		return dao.selectCate1();
+	}
+	
+	public List<Cate2VO> selectCate2(String cate1) {
+		return dao.selectCate2(cate1);
+	}
 	
 }
