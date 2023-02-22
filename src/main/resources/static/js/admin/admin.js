@@ -156,6 +156,8 @@ function adminDeleteNotice(){
 	}
 }
 
+
+
 // adimin cs notice cate1 이 바뀔때 테이블 업데이트
 function getAdminCate1Notice(){
 	let cate1 = document.getElementById('admin_cs_cate1');
@@ -168,6 +170,13 @@ function getAdminCate1Faq(){
 	let cate1 = document.getElementById('admin_cs_cate1');
 	cate1.addEventListener('change', function(e){
 		location.href = '/kmarket2/admin/cs/faq/list?cate1='+cate1.value;
+	});
+}
+// adimin cs faq cate1 이 바뀔때 테이블 업데이트
+function getAdminCate1Qna(){
+	let cate1 = document.getElementById('admin_cs_cate1');
+	cate1.addEventListener('change', function(e){
+		location.href = '/kmarket2/admin/cs/qna/list?cate1='+cate1.value;
 	});
 }
 // cate 값이 존재할때 select 값 설정
@@ -189,8 +198,10 @@ function setAdminCate2Select(){
 	let cate1 = document.getElementById('admin_cs_cate1');
 	let cate2 = document.getElementById('admin_cs_cate2');
 	cate1.addEventListener('change', function(e){
-		
-		if(cate1.value != 0 && cate1 != null){
+		if(cate1.value == 0){
+			location.href = `/kmarket2/admin/cs/qna/list?cate1=0&cate2=0`;
+		}
+		else if(cate1.value != 0 && cate1 != null){
 			let url = '/kmarket2/admin/cs/cate2/'+cate1.value;
 			fetch(url).then(res=>res.json()).then(data=>{
 				//console.log(data);
@@ -206,9 +217,91 @@ function setAdminCate2Select(){
 					cate2.appendChild(option);
 				})
 			})		
-		}			
+		}	
 	})	
-
+}
+// 묻고답하기 cate2 바뀔때 테이블 업데이트
+function getAdminCate2Qna(){
+	let cate1 = document.getElementById('admin_cs_cate1');
+	let cate2 = document.getElementById('admin_cs_cate2');
+	cate2.addEventListener('change', function(e){
+		location.href = `/kmarket2/admin/cs/qna/list?cate1=${cate1.value}&cate2=${cate2.value}`;	
+	})
+}
+// 묻고답하기 삭제
+function adminDeleteQna(){
+	
+	let deleteList = document.getElementsByClassName('btnDeleteQna');
+	deleteList[0].addEventListener('click', function(e){
+		if(!confirm('삭제하시겠습니까?')){
+			e.preventDefault();
+			return false;
+		} 
+		let id = e.target.id;
+		e.preventDefault();
+		fetch('/kmarket2/admin/cs/qna/delete?no='+id,{method:"DELETE",})
+		.then(res =>{
+			if(res.ok){
+				alert('삭제 성공');
+				location.href = '/kmarket2/admin/cs/qna/list';
+			}else{
+				alert('삭제 실패');
+			}		
+		}) 
+	});
+}
+// 문의내역 - 상태 변경(0 = 검토중, 1 = 답변완료) 
+function qnaStat(){
+    let answer = document.getElementsByClassName('qna_stat');
+    for (let i = 0; i < answer.length; i++) {
+        if(answer[i].textContent === '0'){
+            answer[i].textContent = '검토중';
+            answer[i].style.color = 'gray';
+        }else{
+            answer[i].textContent = '답변완료';
+            answer[i].style.color = 'green';
+        }
+    }
+}
+// 모두 체크 설정
+function checkAll(){
+	let checkAll = document.getElementById('check_all');
+	checkAll.addEventListener('change', function(e){
+		let check = document.getElementsByClassName('check_no');
+		for(let i=0; i<check.length; i++){
+			if(check[i].checked == false && checkAll.checked == true){
+				check[i].checked = true;	
+			}else if(check[i].checked == true && checkAll.checked == false){
+				check[i].checked = false;
+			}
+		}
+	});
 }
 
-
+// 선택삭제
+function deleteCheckCs(){
+	let btn_check_delete = document.getElementById('btn_check_delete');
+	btn_check_delete.addEventListener('click', function(e){
+		let deleteList = [];
+		let checkList = document.getElementsByClassName('check_no');
+		for(let i=0; i<checkList.length; i++){
+			if(checkList[i].checked == true){
+				deleteList.push(checkList[i].dataset.no);
+			}
+		}
+		let url = '/kmarket2/admin/cs/qna/delete/check';
+		if(!confirm('선택된 항목을 삭제하시겠습니까?')) return false;
+		fetch(url,
+			{
+				method:"POST", 
+				headers:{
+					'Content-Type': 'application/json',
+				},
+				body:JSON.stringify(deleteList)
+			}).then(res =>{
+			if(res.ok){
+				alert('삭제성공');
+			}
+		})	
+	});
+}

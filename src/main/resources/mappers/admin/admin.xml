@@ -52,4 +52,22 @@
         </where>
     </select>
     
+    <select id="selectQnaById" resultType="kr.co.kmarket2.vo.CsQnaVO">
+		SELECT *
+        FROM 
+        	km_cs_qna AS a 
+        JOIN 
+        	km_cs_cate1 AS b 
+        ON 
+        	a.cate1 = b.cate1 
+        JOIN 
+        	km_cs_cate2 AS c 
+        ON 
+        	a.cate2 = c.cate2 
+        AND 
+        	b.cate1 = c.cate1
+		WHERE 	 
+    		a.no = #{no}
+    </select>
+    
 </mapper>

@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,7 +21,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.kmarket2.dao.AdminDAO;
@@ -195,6 +195,9 @@ public class AdminService{
 		csNoticeRepo.deleteById(no);
 	}
 	
+
+	
+	
 	
 	// cs faq list
 	public Page<CsFaqEntity> getFaqList(int pageNum, int cate1, int cate2){
@@ -210,7 +213,28 @@ public class AdminService{
 	public List<CsQnaVO> getQnaList(int offset, int limit, int cate1, int cate2){
 		return adminDAO.selectListQna(offset, limit, cate1, cate2);
 	}
+	// cs qna count total
+	public int countTotalQna(int cate1, int cate2) {
+		return adminDAO.countTotalQna(cate1, cate2);
+	}
 	
+	// cs qna view
+	public CsQnaVO selectQnaById(int no) {
+		return adminDAO.selectQnaById(no);
+	}
+	
+	// cs qna modify
+	@Transactional
+	public CsQnaEntity updateQna(int no, String answer) {
+		CsQnaEntity entity = csQnaRepo.findById(no).get();
+		entity.setAnswer(answer);
+		entity.setStatus(1);
+		return entity;
+	}
+	// cs qna delete
+	public void deleteQna(int no) {
+		csQnaRepo.deleteById(no);
+	}
 	
 	
 	// cs cate2 list
@@ -218,17 +242,22 @@ public class AdminService{
 		return csCate2Repo.findByCate1(cate1);
 	}
 	
+	
+	// page info 
 	public PageVO getPageNumFaq(int pageSize, int currentPage, int countTotal) {
 		return PaginationUtils.getPage(pageSize, currentPage, countTotal);
 	}
 	
+	// offset
 	public int getOffset(int pageNum) {
 		int offset = (pageNum-1) * 10;
 		return offset;
 	}
 	
-	public int countTotalQna(int cate1, int cate2) {
-		return adminDAO.countTotalQna(cate1, cate2);
+	// delete check
+	public void deleteCheck(int[] checks) {
+		csQnaRepo.deleteAllByNoIn(checks);
 	}
+	
 
 }

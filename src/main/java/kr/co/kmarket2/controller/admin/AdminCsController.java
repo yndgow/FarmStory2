@@ -14,16 +14,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.kmarket2.entity.CsCate2Entity;
 import kr.co.kmarket2.entity.CsFaqEntity;
 import kr.co.kmarket2.entity.CsNoticeEntity;
+import kr.co.kmarket2.entity.CsQnaEntity;
 import kr.co.kmarket2.repository.CsFaqRepo;
 import kr.co.kmarket2.repository.CsNoticeRepo;
 import kr.co.kmarket2.service.AdminService;
 import kr.co.kmarket2.utils.PaginationUtils;
 import kr.co.kmarket2.vo.CsQnaVO;
 import kr.co.kmarket2.vo.PageVO;
+import lombok.extern.slf4j.Slf4j;
 
 /*
  * 날짜: 2023/02/15
@@ -31,6 +36,7 @@ import kr.co.kmarket2.vo.PageVO;
  * 내용: admin/cs controller 
  */
 
+@Slf4j
 @Controller
 public class AdminCsController {
 	
@@ -111,11 +117,11 @@ public class AdminCsController {
 
 	// 공지사항 삭제 기능
 	@DeleteMapping("admin/cs/notice/delete")
-	public ResponseEntity<Void> deleteNotice(@RequestParam int no) {
+	public ResponseEntity<Void> deleteNotice(int no) {
 		adminService.deleteNotice(no);
 		return ResponseEntity.ok().build();
 	}
-	
+
 	// 자주묻는질문
 	
 	// 자주묻는질문 이동 목록
@@ -153,12 +159,19 @@ public class AdminCsController {
 		int offset = adminService.getOffset(pageNum);
 		int limit = 10;
 		
+		// 테이블
 		List<CsQnaVO> qnaList = adminService.getQnaList(offset, limit, cate1, cate2);
 		model.addAttribute("list", qnaList);
 		
+		
+		List<CsCate2Entity> cate2List = adminService.getCate2List(cate1);
+		model.addAttribute("cate2List", cate2List);
+		
+		// 전체 게시글 수
 		int totalCount = adminService.countTotalQna(cate1, cate2);
 		model.addAttribute("totalCount", totalCount);
 		
+		// 페이지네이션 정보
 		PageVO pageInfo = PaginationUtils.getPage(10, pageNum, totalCount);
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("currentPage", pageNum);
@@ -166,5 +179,41 @@ public class AdminCsController {
 		model.addAttribute("cate2", cate2);
 		return "admin/cs/qna/list";
 	}
+
+	// 묻고답하기 이동 보기
+	@GetMapping("admin/cs/qna/view")
+	public String qnaWrite(int no, Model model,
+			@RequestParam(defaultValue = "1", name = "pageNum") int pageNum,
+			@RequestParam(defaultValue = "0", name = "cate1") int cate1,
+			@RequestParam(defaultValue = "0", name = "cate2") int cate2) {
+		model.addAttribute("qna",adminService.selectQnaById(no));
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("cate1",cate1);
+		model.addAttribute("cate2",cate2);
+		return "admin/cs/qna/view";
+	}
+	// 묻고답하기 답변등록
+	@PostMapping("admin/cs/qna/modify")
+	public String qnaWrite(CsQnaVO vo, int pageNum) {
+		CsQnaEntity entity= adminService.updateQna(vo.getNo(), vo.getAnswer());
+		log.info("enNo : " + entity.getNo());
+		
+		return "redirect:/admin/cs/qna/view?cate1="+vo.getCate1()+"&cate2="+vo.getCate2()+"&pageNum="+pageNum+"&no="+vo.getNo();
+	}
 	
+	// 묻고 답하기 삭제
+	@DeleteMapping("admin/cs/qna/delete")
+	public ResponseEntity<Void> deleteQna(int no) {
+		adminService.deleteQna(no);
+		return ResponseEntity.ok().build();
+	}
+	
+	// 묻고 답하기 체크 삭제
+	@PostMapping("admin/cs/qna/delete/check")
+	@ResponseBody
+	public ResponseEntity<Void> deleteCheckQna(@RequestBody int[] checks) {
+		log.info("checks :" + checks);
+		adminService.deleteCheck(checks);
+		return ResponseEntity.ok().build();
+	}
 }

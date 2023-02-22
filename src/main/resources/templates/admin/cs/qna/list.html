@@ -1,8 +1,13 @@
 <th:block th:include="@{admin/_header.html}"/>
 <script>
 	document.addEventListener("DOMContentLoaded", ()=>{
-		setAdminCate2Select();
-		setAdminCate();
+		getAdminCate1Qna(); // adimin cs faq cate1 이 바뀔때 테이블 업데이트
+		setAdminCate2Select(); // cate1 값이 변화할때 cate2 select 불러오기
+		setAdminCate(); // cate 값이 존재할때 select 값 설정
+		getAdminCate2Qna(); // 묻고답하기 cate2 바뀔때 테이블 업데이트
+		qnaStat(); // 문의내역 - 상태 변경(0 = 검토중, 1 = 답변완료)
+		checkAll(); // 모두 체크 설정
+		deleteCheckCs() // 선택삭제
 	});
 </script>
     <main id="main_admin_qna_list" class="flex-shrink-0">
@@ -37,12 +42,15 @@
               </select>
               <select name="" id="admin_cs_cate2" class="form-select w-25">
                 <option value="0">2차 유형</option>
+                <th:block th:each=" list : ${cate2List}">
+                	<option th:value="${list.cate2}" th:text="${list.c2Name}" th:selected="${cate2}==${listStat.count}">2차 유형</option>
+                </th:block>
               </select>
             </div>
             <table class="table border-top text-center align-middle" id="admin_cs_table">
               <thead class="table-light align-middle">
               	<tr>
-	                <th><input type="checkbox" name="" id="" class="form-check-input"></th>
+	                <th><input type="checkbox" name="" id="check_all" class="form-check-input"></th>
 	                <th>번호</th>
 	                <th>1차유형</th>
 	                <th>2차유형</th>
@@ -56,12 +64,12 @@
               
                 <tr th:each="qna : ${list}">
                   <td>
-                    <input type="checkbox" name="" id="" class="form-check-input">
+                    <input type="checkbox" name="" th:value="${qna.no}" th:data-no="|${qna.no}|" class="form-check-input check_no">
                   </td>
                   <td th:text="${totalCount} - ${qnaStat.index} - (${currentPage} - 1) * 10">75</td>
                   <td th:text="${qna.c1Name}">이벤트당첨</td>
                   <td th:text="${qna.c2Name}">이벤트당첨</td>
-                  <td class="text-start w-50"><a th:href="@{/admin/cs/qna/view?no=1}" th:text="${qna.title}">테스트 이벤트 당첨 테스트 이벤트 당첨 테스트 이벤트 당첨</a></td>
+                  <td class="text-start w-50"><a th:href="@{/admin/cs/qna/view(no=${qna.no}, pageNum=${currentPage}, cate1=${cate1}, cate2=${cate2})}" th:text="${qna.title}">테스트 이벤트 당첨 테스트 이벤트 당첨 테스트 이벤트 당첨</a></td>
                   <td th:text="${qna.uid}">userid</td>
                   <td th:text="${#dates.format(qna.rdate, 'yy-MM-dd')}">22-12-30</td>
                   <td class="qna_stat" th:text="${qna.status}">0</td>
@@ -70,7 +78,7 @@
               </tbody>
             </table>
             <div>
-              <button type="button" class="btn btn-secondary">선택삭제</button>
+              <button type="button" id="btn_check_delete" class="btn btn-secondary">선택삭제</button>
             </div>
             <div id="paging_nav">
 				<nav th:if="${pageInfo.totalPages gt 1}">
