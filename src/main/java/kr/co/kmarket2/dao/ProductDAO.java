@@ -29,5 +29,5 @@ public interface ProductDAO {
 	public ProductReviewVO selectProductReview(int prodNo);
 	public void insertProduct(ProductVO vo);
 	public void updateProduct(ProductVO vo);
-	public void deleteProduct(int prodNo);
+	public int deleteCart(int prodNo, String uid);
 }

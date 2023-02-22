@@ -32,6 +32,7 @@ public class ProductService {
 		return dao.selectProductsDiscount();
 	}
 	
+	//
 	public List<ProductVO> selectProducts(String cate1, String cate2, String sort){
 		return dao.selectProducts(cate1,cate2,sort);
 	}
@@ -44,7 +45,9 @@ public class ProductService {
 		return dao.selectProductReview(prodNo);
 	}
 	
-	
+	public int deleteCart(String uid, int prodNo) {
+		return dao.deleteCart(uid, prodNo);
+	}
 	
 	
 	public int selectCountTotal(String cate1, String cate2) {
