@@ -22,9 +22,8 @@ function qnaStat(){
 function asideAddClass(){
     
     let cur_url = window.location.href;
-    let ext = cur_url.lastIndexOf("."); // . 의 마지막 인덱스 가져오기
     let last_index = cur_url.lastIndexOf("/"); // /의 마지막 인덱스 가져오기
-    let str = cur_url.substring(last_index+1, ext); // 현재 주소에서 확장자를 뺀 마지막 경로 이름 가져오기 ex) home
+    let str = cur_url.substring(last_index+1 ); // 현재 주소에서 확장자를 뺀 마지막 경로 이름 가져오기 ex) home
 
     let asideOn = document.getElementsByClassName("aside_on");
     let asideNameList = ["ordered", "point", "coupon", "review", "qna", "info"];

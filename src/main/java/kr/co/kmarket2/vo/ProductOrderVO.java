@@ -21,4 +21,5 @@ public class ProductOrderVO {
 	private int ordPayment;
 	private int ordComplete;
 	private String ordDate;
+	private int deliveryStatus; // 배송상태 추가 김지홍 02/23 
 }

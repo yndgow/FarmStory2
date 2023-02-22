@@ -5,7 +5,8 @@
 */
 
 document.addEventListener("DOMContentLoaded", ()=>{
-	asideSlide();
+	const currentUrl = window.location.href;
+	asideSlide(currentUrl);
 });
 // admin/register 1차 분류 선택시 2차 분류 가져오기
 function cateList(){
@@ -36,7 +37,7 @@ function calcPoint(){
 	});
 }
 // admin 공통 aside 슬라이드
-function asideSlide(){
+function asideSlide(currentUrl){
     let gnb = $('#gnb > li > a');
 
     gnb.click(function (e) {
@@ -49,6 +50,15 @@ function asideSlide(){
         $(this).next().slideDown(200);
       }
     });
+    
+    // 해당 주소 접속시 슬라이드 펼쳐놓기
+     
+	if(currentUrl.includes('product')){
+		$('#gnb > li:nth-child(4) > a').next().css("display", "block");
+	}else if(currentUrl.includes('cs')){
+		$('#gnb > li:nth-child(7) > a').next().css("display", "block");
+	}
+    
 }
 // admin product list 검색 기능
 let totalPosts = 0;
@@ -135,12 +145,27 @@ function updatePagination(currentPage) {
   currentPage = currentPage > 10 ? currentPage - 10 : currentPage;
   curPage[currentPage-1].classList.add('active');
 }
+// admin product list 검색 이벤트
+function adminListSeachEvent(){
+	btn_admin_search.addEventListener('click', function(e){
+		updateTable(1);
+	});
+	search_value.addEventListener('keyup', function(e){
+		if(e.key === 'Enter'){
+			updateTable(1);
+		}
+	});
+}
 
 // admin notice 삭제
 function adminDeleteNotice(){
 	let deleteList = document.getElementsByClassName('btnDeleteNotice');
 	for(let i=0; i < deleteList.length; i++){
 		deleteList[i].addEventListener('click', function(e){
+			if(!confirm('삭제하시겠습니까?')){
+				e.preventDefault();
+				return false;
+			}
 			let id = e.target.id;
 			e.preventDefault();
 			fetch('/kmarket2/admin/cs/notice/delete?no='+id,{method:"DELETE",})
@@ -250,6 +275,30 @@ function adminDeleteQna(){
 		}) 
 	});
 }
+// 관리자 상품 삭제
+function adminDeleteProd(){
+	
+	let deleteList = document.getElementsByClassName('btnDeleteProd');
+		for(let i = 0; i < deleteList.length; i++){
+			deleteList[i].addEventListener('click', function(e){
+			if(!confirm('삭제하시겠습니까?')){
+				e.preventDefault();
+				return false;
+			} 
+			let id = e.target.id;
+			e.preventDefault();
+			fetch('/kmarket2/admin/product/delete?prodNo='+id,{method:"DELETE",})
+			.then(res =>{
+				if(res.ok){
+					alert('삭제 성공');
+					location.href = '/kmarket2/admin/product/list';
+				}else{
+					alert('삭제 실패');
+				}		
+			}) 
+		});	
+	}
+}
 // 문의내역 - 상태 변경(0 = 검토중, 1 = 답변완료) 
 function qnaStat(){
     let answer = document.getElementsByClassName('qna_stat');
@@ -279,7 +328,7 @@ function checkAll(){
 }
 
 // 선택삭제
-function deleteCheckCs(){
+function deleteCheck(deleteurl, outUrl){
 	let btn_check_delete = document.getElementById('btn_check_delete');
 	btn_check_delete.addEventListener('click', function(e){
 		let deleteList = [];
@@ -289,8 +338,12 @@ function deleteCheckCs(){
 				deleteList.push(checkList[i].dataset.no);
 			}
 		}
-		let url = '/kmarket2/admin/cs/qna/delete/check';
-		if(!confirm('선택된 항목을 삭제하시겠습니까?')) return false;
+		let url = deleteurl;
+		if(!confirm('선택된 항목을 삭제하시겠습니까?')){
+			e.preventDefault();
+			return false;
+		}
+		e.preventDefault(); 
 		fetch(url,
 			{
 				method:"POST", 
@@ -301,6 +354,9 @@ function deleteCheckCs(){
 			}).then(res =>{
 			if(res.ok){
 				alert('삭제성공');
+				location.href = outUrl;
+			}else{
+				alert('삭제실패');
 			}
 		})	
 	});

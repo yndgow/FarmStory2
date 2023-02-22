@@ -138,6 +138,17 @@ public class AdminService{
 	   
 	   return fList;
    }
+   	// 상품 체크 삭제
+   public void deleteAllByProdNoIn(int[] checks) {
+	   productRepo.deleteAllByProdNoIn(checks);
+   }
+   // 상품 개별 삭제
+   public void deleteByProdNo(int prodNo) {
+	   productRepo.deleteById(prodNo);
+   }
+   
+   
+   
    
 	// admin product list - jpa 로 페이징 하기
 	public Page<ProductEntity> getProducts(int pageNum, String prodName, String prodNo, String company, String seller){

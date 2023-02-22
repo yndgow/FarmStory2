@@ -54,7 +54,7 @@
               </tbody>
             </table>
             <div class="text-center">
-              <button type="button" class="btn btn-secondary btn-lg">취소</button>
+              <a th:href="@{/admin/cs/notice/list(cate1 = ${cate1}, pageNum = ${currentPage}, no = ${entity.no})}" role="button" class="btn btn-secondary btn-lg">취소</a>
               <button type="submit" class="btn btn-primary btn-lg">수정하기</button>
             </div>
           </form>

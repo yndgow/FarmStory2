@@ -61,9 +61,9 @@
                   <td th:text="${faq.no}">75</td>
                   <td th:text="${faq.cate1Entity.c1Name}">이벤트당첨</td>
                   <td th:text="${faq.cate2Entity.c2Name}">이벤트당첨</td>
-                  <td class="text-start"><a th:href="@{/admin/cs/faq/view?no=1}" th:text="${faq.title}">테스트 이벤트 당첨 테스트 이벤트 당첨 테스트 이벤트 당첨</a></td>
+                  <td class="text-start w-50"><a th:href="@{/admin/cs/faq/view?no=1}" th:text="${faq.title}">테스트 이벤트 당첨 테스트 이벤트 당첨 테스트 이벤트 당첨</a></td>
                   <td th:text="${faq.hit}">1000</td>
-                  <td th:text="${faq.rdate}">22-12-30</td>
+                  <td th:text="${#dates.format(faq.rdate, 'yy-MM-dd')}">22-12-30</td>
                   <td>
                    	<a th:href="@{/admin/cs/faq/delete?no=1}">[삭제]</a>
                     <a th:href="@{/admin/cs/faq/modify?no=1}">[수정]</a>

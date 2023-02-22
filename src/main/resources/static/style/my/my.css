@@ -135,34 +135,35 @@ strong{
     text-align: center;
 }
 #wrapper > header > #my_k > div ol > li:nth-child(1){
-    background: url(/Kmarket2/img/my/ico_delivery.png);
+    background: url(/kmarket2/img/my/ico_delivery.png);
     background-repeat: no-repeat;
     background-position: center 30px;
     border-left: none;
 }
 #wrapper > header > #my_k > div ol > li:nth-child(2){
-    background: url(/Kmarket2/img/my/ico_coupon.jpg);
+    background: url(/kmarket2/img/my/ico_coupon.jpg);
     background-repeat: no-repeat;
     background-position: center 25px;
 }
 #wrapper > header > #my_k > div ol > li:nth-child(3){
-    background: url(/Kmarket2/img/my/ico_point.jpg);
+    background: url(/kmarket2/img/my/ico_point.jpg);
     background-repeat: no-repeat;
     background-position: center 25px;
 }
 #wrapper > header > #my_k > div ol > li:nth-child(4){
-    background: url(/Kmarket2/img/my/ico_qna.png);
+    background: url(/kmarket2/img/my/ico_qna.png);
     background-repeat: no-repeat;
     background-position: center 25px;
     border-right: none;
 }
 #wrapper > header > #my_k > div ol > li > a{
     display: block;
+    height: 100%;
     color: #888;
-    margin-bottom: 45px;    
 }
-#wrapper > header > #my_k > div ol > li > p{
-    display: block;
+#wrapper > header > #my_k > div ol > li > a > span{
+	display: block;
+    margin-top: 45px;
 }
 
 
@@ -180,7 +181,7 @@ strong{
     height: 13px;
     right: -10px;
     top: -13px;
-    background: url(/Kmarket2/img/my/my_sprites.png);
+    background: url(/kmarket2/img/my/my_sprites.png);
     background-position: -160px -50px;
 }
 #wrapper aside > ul{
@@ -233,13 +234,10 @@ strong{
 }
 #wrapper > main > section > #banner > #my_banner1{
     height: 90px;
-    background: url(/Kmarket2/img/my/my_banner1.jpg);
+    background: url(/kmarket2/img/my/my_banner1.jpg);
 }
 #wrapper > main > section > #banner > #my_banner2{
-    background: url(/Kmarket2/img/my/my_banner2.png);
-}
-#wrapper > main > section > #banner .my_banner{
-    
+    background: url(/kmarket2/img/my/my_banner2.png);
 }
 
 #wrapper > main > section > div > h3{
@@ -257,7 +255,7 @@ strong{
     float: right;
     width: 40px;
     height: 18px;
-    background: url(/Kmarket2/img/my/my_sprites.png) 0px -275px;
+    background: url(/kmarket2/img/my/my_sprites.png) 0px -275px;
 }
 #wrapper > main > section > div > table{
     width: 100%;
@@ -283,7 +281,7 @@ strong{
     width: 90px;
     height: 18px;
     margin: 0 auto;
-    background: url(/Kmarket2/img/my/my_rating_star.png);
+    background: url(/kmarket2/img/my/my_rating_star.png);
 }
 #wrapper > main > section > #my_review_list .star1{background-position: 0px -40px;}
 #wrapper > main > section > #my_review_list .star2{background-position: 0px -80px;}
@@ -305,7 +303,7 @@ strong{
     text-indent: 6px;
     line-height: 20px;
     letter-spacing: -1px;
-    background: url(/Kmarket2/img/my/my_sprites.png)
+    background: url(/kmarket2/img/my/my_sprites.png)
 }
 #wrapper > main > section > div > table .my_order_btn.my_receive{background-position: -368px -179px;}
 #wrapper > main > section > div > table .my_order_btn.my_review{background-position: -368px -203px;}
@@ -371,7 +369,7 @@ footer > #my_footer_info > div:nth-child(n+2){
     width: 98px;
     height: 20px;
     margin-bottom: 6px;
-    background: url(/Kmarket2/img/my/my_sprites.png);
+    background: url(/kmarket2/img/my/my_sprites.png);
     background-position: -144px -280px;
 }
 #wrapper > #home > section > #my_confirm > div{
@@ -398,7 +396,7 @@ footer > #my_footer_info > div:nth-child(n+2){
     height: 14px;
     margin-bottom: 10px;
     margin-right: 30px;
-    background: url(/Kmarket2/img/my/my_sprites.png);
+    background: url(/kmarket2/img/my/my_sprites.png);
 }
 
 #wrapper > #home > section > #my_confirm > div > div > #my_address{background-position: -497px -178px;}
@@ -431,12 +429,12 @@ footer > #my_footer_info > div:nth-child(n+2){
 }
 #wrapper > main > section > div > #period > div:nth-child(1){
     width: 60px;
-    background: url(/Kmarket2/img/my/my_sprites.png);
+    background: url(/kmarket2/img/my/my_sprites.png);
     background-position: 0 -218px;
 }
 #wrapper > main > section > div > #period > div:nth-child(2){
     width: 172px;
-    background: url(/Kmarket2/img/my/my_sprites.png);
+    background: url(/kmarket2/img/my/my_sprites.png);
     background-position: -485px -908px;
     height: 28px;
 }
@@ -455,7 +453,7 @@ footer > #my_footer_info > div:nth-child(n+2){
     width: 290px;
     height: 28px;
     text-align: center;
-    background: url(/Kmarket2/img/my/my_sprites.png);
+    background: url(/kmarket2/img/my/my_sprites.png);
     background-position: -377px -937px;
 }
 #wrapper > main > section > div > #period > div:nth-child(3) > ul{
@@ -474,7 +472,7 @@ footer > #my_footer_info > div:nth-child(n+2){
     align-items: center;
     width: 200px;
     height: 28px;
-    background: url(/Kmarket2/img/my/my_sprites.png);
+    background: url(/kmarket2/img/my/my_sprites.png);
     background-position: -461px -879px;
 }
 #wrapper > main > section > div > #period > div:nth-child(4) > input{
@@ -487,7 +485,7 @@ footer > #my_footer_info > div:nth-child(n+2){
 #wrapper > main > section > div > #period > div:nth-child(5){
     width: 75px;
     height: 28px;
-    background: url(/Kmarket2/img/my/my_sprites.png) no-repeat -491px -80px;
+    background: url(/kmarket2/img/my/my_sprites.png) no-repeat -491px -80px;
 }
 #wrapper > main > section > div > #period > div:nth-child(5) > a{
     display: block;
@@ -496,7 +494,7 @@ footer > #my_footer_info > div:nth-child(n+2){
 }
 #wrapper > main > section > div > #period > div > ul > li > a:hover,
 #wrapper > main > section > div > #period > div > ul > li > a.on{
-    background: url(/Kmarket2/img/my/my_sprites.png);
+    background: url(/kmarket2/img/my/my_sprites.png);
     background-position: -377px -908px;
     color:#fff;
 }
@@ -524,13 +522,13 @@ footer > #my_footer_info > div:nth-child(n+2){
     color: #777;
 }
 #wrapper > main > section > div > #page #prev > a{
-    background: url(/Kmarket2/img/my/my_sprites2.png);
+    background: url(/kmarket2/img/my/my_sprites2.png);
     background-position: 0 -300px;
     background-repeat: no-repeat;
     font-size: 0;
 }
 #wrapper > main > section > div > #page #next > a{
-    background: url(/Kmarket2/img/my/my_sprites2.png);
+    background: url(/kmarket2/img/my/my_sprites2.png);
     background-position: -120px -300px;
     background-repeat: no-repeat;
     font-size: 0;
@@ -557,7 +555,7 @@ footer > #my_footer_info > div:nth-child(n+2){
     position: relative;
     width: 100%;
     height: 209px;
-    background: url(/Kmarket2/img/my/my_coupon_bg.gif);
+    background: url(/kmarket2/img/my/my_coupon_bg.gif);
     background-repeat: no-repeat;
     background-size: contain;
     margin-bottom: 10px;

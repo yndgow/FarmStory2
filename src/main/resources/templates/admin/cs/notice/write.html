@@ -26,10 +26,10 @@
                   <td>
                     <select name="cate1" id="" class="form-select w-25" required="required">
                       <option value="0" selected>1차 유형</option>
-                      <option value="8">고객서비스</option>
-                      <option value="9">안전거래</option>
-                      <option value="10">위해상품</option>
-                      <option value="11">이벤트당첨</option>
+		              <option value="8" th:selected="${cate1}==8">고객서비스</option>
+		              <option value="9" th:selected="${cate1}==9">안전거래</option>
+		              <option value="10" th:selected="${cate1}==10">위해상품</option>
+		              <option value="11" th:selected="${cate1}==11">이벤트당첨</option>
                     </select>
                   </td>
                 </tr>
@@ -48,7 +48,7 @@
               </tbody>
             </table>
             <div class="text-center">
-              <button type="button" class="btn btn-secondary btn-lg">취소</button>
+              <a th:href="@{/admin/cs/notice/list(cate1 = ${cate1}, pageNum = ${currentPage})}" role="button" class="btn btn-secondary btn-lg">취소</a>
               <button type="submit" class="btn btn-primary btn-lg">등록하기</button>
             </div>
           </form>
