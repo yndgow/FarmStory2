@@ -40,7 +40,7 @@ $(() => {
 				let price = Number($('input[name=ori-orice]').val());
 				let count = $('input[name=num]').val();
 				let discount = Number($('input[name=discount]').val());
-				let discointPrice = Math.floor((price*discount) / 100);
+				let discountPrice = Math.floor((price*discount) / 100);
 				let delivery = Number($('input[name=delivery]').val());
 				let point = Math.ceil(((price * (100 - discount)) / 100) * count * 0.01);
 				let total = Math.ceil(((price * (100 - discount)) / 100) * count)+ delivery;
