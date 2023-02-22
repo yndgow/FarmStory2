@@ -2,12 +2,16 @@ package kr.co.kmarket2.entity;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,19 +27,16 @@ import lombok.ToString;
 @ToString
 @Builder
 @Entity
-@Table(name = "km_cs_cate1")
-public class CsCate1Entity {
+@Table(name = "km_cs_cate2")
+public class CsCate2Entity {
 
 	@Id
+	private int no;
 	private int cate1;
-	private String c1Name;
+	private int cate2;
+	private String c2Name;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "csNoticeEntity_id")
-//	private CsNoticeEntity csNoticeEntity;
-	@OneToMany(mappedBy = "cate1Entity", fetch = FetchType.LAZY)
-	private List<CsNoticeEntity> csNoticeEntities;
-	
-	@OneToMany(mappedBy = "cate1Entity", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "cate2Entity")
+	@JsonIgnore
 	private List<CsFaqEntity> csFaqEntities;
 }

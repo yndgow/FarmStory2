@@ -34,7 +34,7 @@
             </select>
             <table class="table border-top text-center align-middle" id="admin_cs_table">
               <thead class="table-light align-middle">
-                <th><input type="checkbox" name="" id="" class="form-check-input"></th>
+                <th><input type="checkbox" name="admin_check" id="" class="form-check-input"></th>
                 <th>번호</th>
                 <th>유형</th>
                 <th>제목</th>
@@ -49,12 +49,12 @@
                   </td>
                   <td th:text="${totalPosts - (noticeStat.index + (currentPage-1) * 10)}">75</td>
                   <td th:text="${notice.cate1Entity.c1Name}">이벤트당첨</td>
-                  <td class="text-start ellipsis"><span><a th:href="@{/admin/cs/notice/view(no=${notice.no})}" th:text="${notice.content}">테스트 이벤트 당첨 테스트</a></span></td>
+                  <td class="text-start ellipsis"><span><a th:href="@{/admin/cs/notice/view(no=${notice.no})}" th:text="${notice.title}">테스트 이벤트 당첨 테스트</a></span></td>
                   <td th:text="${notice.hit}">1000</td>
                   <td th:text="${#dates.format(notice.rdate, 'yy-MM-dd')}">22-12-30</td>
                   <td>
                     <a th:href="@{/admin/cs/notice/delete(no = ${notice.no})}" class="btnDeleteNotice" th:id="${notice.no}">[삭제]</a>
-                    <a th:href="@{/admin/cs/notice/modify(no = ${notice.no}, cate1=${notice.cate1Entity.cate1})}">[수정]</a>
+                    <a th:href="@{/admin/cs/notice/modify(no = ${notice.no})}">[수정]</a>
                   </td>
                 </tr>
                

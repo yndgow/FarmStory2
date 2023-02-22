@@ -28,21 +28,21 @@
               <tbody>
                 <tr>
                   <th scope="row" class="text-center fw-bold fs-5 w-25 table-light">유 형</th>
-                  <td>1차유형</td>
+                  <td th:text="${entity.cate1Entity.c1Name}">1차유형</td>
                 </tr>
                 <tr>
                   <th scope="row" class="text-center fw-bold fs-5 table-light">제 목</th>
-                  <td>제목</td>
+                  <td th:text="${entity.title}">제목</td>
                 </tr>
                 <tr>
                   <th scope="row" class="text-center fw-bold fs-5 table-light">내 용</th>
-                  <td>내용</td>
+                  <td th:text="${entity.content}">내용</td>
                 </tr>
               </tbody>
             </table>
             <div class="text-end">
-           	  <a th:href="@{/admin/cs/notice/delete(no=${no})}" class="btn btn-secondary btn-lg btnDeleteNotice" th:id="${no}" role="button">삭제</a>
-              <a th:href="@{/admin/cs/notice/modify(no=${no})}" class="btn btn-secondary btn-lg btnModifyNotice" role="button">수정</a>
+           	  <a th:href="@{/admin/cs/notice/delete(no=${entity.no})}" class="btn btn-secondary btn-lg btnDeleteNotice" th:id="${no}" role="button">삭제</a>
+              <a th:href="@{/admin/cs/notice/modify(no=${entity.no})}" class="btn btn-secondary btn-lg btnModifyNotice" role="button">수정</a>
               <a th:href="@{/admin/cs/notice/list}" class="btn btn-primary btn-lg" role="button">목록</a>
             </div>
           </form>

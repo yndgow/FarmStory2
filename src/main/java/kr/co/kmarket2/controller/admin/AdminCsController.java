@@ -1,33 +1,29 @@
 package kr.co.kmarket2.controller.admin;
 
+
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.co.kmarket2.entity.CsCate1Entity;
+import kr.co.kmarket2.entity.CsFaqEntity;
 import kr.co.kmarket2.entity.CsNoticeEntity;
+import kr.co.kmarket2.repository.CsFaqRepo;
 import kr.co.kmarket2.repository.CsNoticeRepo;
 import kr.co.kmarket2.service.AdminService;
-import kr.co.kmarket2.specification.AdminNoticeSpecification;
+import kr.co.kmarket2.utils.PaginationUtils;
+import kr.co.kmarket2.vo.CsQnaVO;
+import kr.co.kmarket2.vo.PageVO;
 
 /*
  * 날짜: 2023/02/15
@@ -40,17 +36,21 @@ public class AdminCsController {
 	
 	private final AdminService adminService;
 	private final CsNoticeRepo csNoticeRepo;
-	
-	public AdminCsController(AdminService adminService, CsNoticeRepo csNoticeRepo) {
+	private final CsFaqRepo csFaqRepo;
+
+	public AdminCsController(AdminService adminService, CsNoticeRepo csNoticeRepo, CsFaqRepo csFaqRepo) {
 		this.adminService = adminService;
 		this.csNoticeRepo = csNoticeRepo;
+		this.csFaqRepo = csFaqRepo;
 	}
 
+	// 관리자 이동 메인
 	@GetMapping("admin")
 	public String index(Model model) {
 		return "admin/index";
 	}
 	
+	// 관리자 공지사항 목록 이동
 	@GetMapping("admin/cs/notice/list")
 	public String noticeList(
 			Model model, 
@@ -70,53 +70,101 @@ public class AdminCsController {
 		return "admin/cs/notice/list";
 		
 	}
-
-	// 페이지 이동 write
-	@GetMapping("admin/cs/{type}/write")
-	public String write(@PathVariable String type) {
-		return "admin/cs/"+type+"/write";
+	
+	// 공지사항
+	
+	// 공지사항 이동 등록
+	@GetMapping("admin/cs/notice/write")
+	public String write() {
+		return "admin/cs/notice/write";
 	}
 	
-	// 공지사항 글쓰기 
+	// 공지사항 등록 기능
 	@PostMapping("admin/cs/notice/write")
 	public String writeNotice(CsNoticeEntity csNoticeEntity, int cate1,HttpServletRequest req) {
 		adminService.writeNotice(csNoticeEntity, cate1, req);
 		return "redirect:/admin/cs/notice/list";
 	}
 	
-	// 페이지 이동 notice modify
+	// 공지사항 이동 수정
 	@GetMapping("admin/cs/notice/modify")
 	public String modifyNotice(Model model, int no)	{
 		CsNoticeEntity entity= adminService.getNoticeOne(no);
-		model.addAttribute("notice", entity);
+		model.addAttribute("entity", entity);
 		return "admin/cs/notice/modify";
 	}
 	
-	@PutMapping("admin/cs/notice/modify")
-	public String modifyNotice(CsNoticeEntity entity) {
+	// 공지사항 수정 기능
+	@PostMapping("admin/cs/notice/modify")
+	public String modifyNotice(CsNoticeEntity entity, int cate1, HttpServletRequest req) {
+		adminService.modifyNotice(entity, cate1, req);
 		return "redirect:/admin/cs/notice/list";
 	}
 	
-//	@GetMapping("admin/cs/{type}/modify")
-//	public String modify(@PathVariable String type, Model model, int no)	{
-//		CsNoticeEntity entity= adminService.getNoticeOne(no);
-//		model.addAttribute("notice", entity);
-//		return "admin/cs/"+type+"/modify";
-//	}
-	
-	
-	// 페이지 이동 view
-	@GetMapping("admin/cs/{type}/view")
-	public String view(@PathVariable String type, String no, Model model) {
-		model.addAttribute("no", no);
-		return "admin/cs/"+type+"/view";
+	// 공지사항 이동 보기
+	@GetMapping("admin/cs/notice/view")
+	public String view(int no, Model model) {
+		CsNoticeEntity entity= adminService.getNoticeOne(no);
+		model.addAttribute("entity", entity);
+		return "admin/cs/notice/view";
 	}
-	
-	// 공지사항 삭제
+
+	// 공지사항 삭제 기능
 	@DeleteMapping("admin/cs/notice/delete")
 	public ResponseEntity<Void> deleteNotice(@RequestParam int no) {
 		adminService.deleteNotice(no);
 		return ResponseEntity.ok().build();
+	}
+	
+	// 자주묻는질문
+	
+	// 자주묻는질문 이동 목록
+	@GetMapping("admin/cs/faq/list")
+	public String faqList(
+			Model model, 
+			@RequestParam(defaultValue = "1", name = "pageNum") int pageNum, 
+			@RequestParam(defaultValue = "0", name = "cate1") int cate1,
+			@RequestParam(defaultValue = "0", name = "cate2") int cate2) {
+		
+//		List<CsFaqEntity> list = csFaqRepo.findAll();
+		Page<CsFaqEntity> page = adminService.getFaqList(pageNum, cate1, cate2);
+		
+		int[] pageNumbers = adminService.getPageNumbers(page);
+		
+		
+		model.addAttribute("startPages", pageNumbers[0]);
+		model.addAttribute("endPages", pageNumbers[1]);
+		model.addAttribute("list", page.getContent());
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("totalPosts", page.getTotalElements());
+		model.addAttribute("cate1", cate1);
+		model.addAttribute("cate2", cate2);
+		return "admin/cs/faq/list";
+		
+	}
+	
+	// 묻고답하기 이동 목록
+	@GetMapping("admin/cs/qna/list")
+	public String qnaList(Model model,
+			@RequestParam(defaultValue = "1", name = "pageNum") int pageNum,
+			@RequestParam(defaultValue = "0", name = "cate1") int cate1,
+			@RequestParam(defaultValue = "0", name = "cate2") int cate2) {
+		int offset = adminService.getOffset(pageNum);
+		int limit = 10;
+		
+		List<CsQnaVO> qnaList = adminService.getQnaList(offset, limit, cate1, cate2);
+		model.addAttribute("list", qnaList);
+		
+		int totalCount = adminService.countTotalQna(cate1, cate2);
+		model.addAttribute("totalCount", totalCount);
+		
+		PageVO pageInfo = PaginationUtils.getPage(10, pageNum, totalCount);
+		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("currentPage", pageNum);
+		model.addAttribute("cate1", cate1);
+		model.addAttribute("cate2", cate2);
+		return "admin/cs/qna/list";
 	}
 	
 }

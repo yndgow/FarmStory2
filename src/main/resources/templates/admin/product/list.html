@@ -61,7 +61,7 @@
             <tbody>
               <tr th:each="product : ${products}">
                 <td><input type="checkbox" name="" id="" class="form-check-input"></td>
-                <td class="admin_list_img"><img th:src="@{|/images/${product .thumb1}|}" alt="" class="img-fluid"></td>
+                <td class="admin_list_img"><img th:src="@{|/images/${product.thumb1}|}" alt="" class="img-fluid"></td>
                 <td th:text="${product.prodNo}"></td>
                 <td th:text="${product.prodName}">오리털 글램핑 텐트</td>
                 <td th:text="${product.price}">86000</td>

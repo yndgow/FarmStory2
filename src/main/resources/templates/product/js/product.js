@@ -64,15 +64,13 @@ $(() => {
 							location.href = '/Kmarket2/product/order.html?uid=${uid}&prodNo=${prodNo}&count=${count}';
 						}
 					}
-					
 				});
-				
 			}
 		} 
-		
-		
 	});
 	
+
+
 	
 })
 

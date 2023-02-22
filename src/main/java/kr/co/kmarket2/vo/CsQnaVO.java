@@ -1,6 +1,6 @@
 package kr.co.kmarket2.vo;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import lombok.Data;
 
@@ -16,10 +16,13 @@ public class CsQnaVO {
 	private int status;
 	private int hit;
 	private String regip;
-	private LocalDateTime rdate;
+	private Date rdate;
 	
-	private int comment;
-	
+	// 추가필드 김지홍
+	private String c1Name;
 	private String c2Name;
+	
+	// 추가필드 공민혁
+	private int comment;
 }
 
