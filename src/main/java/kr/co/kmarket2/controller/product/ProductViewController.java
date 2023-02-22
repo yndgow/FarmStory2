@@ -4,8 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.kmarket2.service.ProductService;
+import kr.co.kmarket2.vo.ProductCartVO;
 import kr.co.kmarket2.vo.ProductReviewVO;
 import kr.co.kmarket2.vo.ProductVO;
 
@@ -40,5 +44,25 @@ public class ProductViewController {
 		
 		return "product/view";
 	}
+
+	@PostMapping("view")
+	public void view(@RequestBody ProductCartVO cart) {
+		ProductCartVO vo = new ProductCartVO();
+		vo.setUid(cart.getUid());
+		vo.setProdNo(cart.getProdNo());
+		vo.setCount(cart.getCount());
+		vo.setPrice(cart.getPrice());
+		vo.setDiscount(cart.getDiscount());
+		vo.setPoint(cart.getPoint());
+		vo.setDelivery(cart.getDelivery());
+		vo.setTotal(cart.getTotal());
+		vo.setRdate(cart.getRdate());
+		int result = service.insertCart(vo);
+		
+		
+		
+		
+	}
+	
 
 }
