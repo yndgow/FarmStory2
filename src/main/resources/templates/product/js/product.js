@@ -29,7 +29,7 @@ $(() => {
 					dataType: 'json',
 					success: function(data){
 						if(data.result > 0 && confirm('장바구니에 담겼습니다. 이동?')){
-							location.href = '/Kmarket2/product/cart.html?uid='+$('.sessUser_uid').text();
+							location.href = '/Kmarket2/product/cart.?uid='+$('.sessUser_uid').text();
 						}					
 					}
 				});
@@ -61,7 +61,7 @@ $(() => {
 					dataType: 'json',
 					success: function(data){
 						if(data.result > 0){
-							location.href = '/Kmarket2/product/order.html?uid=${uid}&prodNo=${prodNo}&count=${count}';
+							location.href = '/Kmarket2/product/order?uid=${uid}&prodNo=${prodNo}&count=${count}';
 						}
 					}
 				});

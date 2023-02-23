@@ -1,5 +1,66 @@
-<th:block th:include="@{_header.html}"/>        
-    </aside>
+<th:block th:include="@{_header.html}"/>
+<script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>        
+<script>
+
+	$(function() {
+		let isOnce = 0;
+		
+		$('.btnPoint').click(function() {
+			let point = $('input[name=point]').val();
+			let userPoint = $('.userPoint').text();
+			
+			if(point < 5000){
+				alert('5,000점 이상부터 사용 가능합니다.');
+				return false;
+			}else if(point >= 5000){
+				if(point > userPoint){
+					alert('현재 포인트보다 많이 사용할 수 없습니다.');
+					return false;
+				}
+				
+				if(isOnce == 0){
+					$('.pointDC').text(Number(point).toLocaleString());
+					const finTot = parseInt($('.finTot').text().replaceAll(',',''));
+					let result = finTot-point;
+					$('.pointDC').removeAttr("style");
+					$('.finTot').text(result.toLocaleString());
+					isOnce = 1;
+				}else{
+					alert('한 번 적용이 가능합니다.');
+					return false;
+				}
+			}
+		});
+	
+	});
+
+	function postcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var addr = ''; // 주소 변수
+            var extraAddr = ''; // 참고항목 변수
+
+            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                addr = data.roadAddress;
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                addr = data.jibunAddress;
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('zip').value = data.zonecode;
+            document.getElementById("addr1").value = addr;
+            // 커서를 상세주소 필드로 이동한다.
+            document.getElementById("addr2").focus();
+        }
+    }).open();
+}
+</script>
+
     <section class="order">
          <!-- 제목, 페이지 네비 -->
          <nav>
@@ -12,61 +73,53 @@
         <form action="#">
             <!-- 주문 상품 목록 -->                  
             <table>
-                <tr>
-                    <th>상품명</th>
-                    <th>총수량</th>
-                    <th>판매가</th>
-                    <th>배송비</th>
-                    <th>소계</th>
-                </tr>
-                    <tr class="empty">
-                    <td colspan="7">장바구니에 상품이 없습니다.</td>
-                </tr>
-                <tr>
-                    <td>
-                        <article>
-                        <a href="#"><img src="https://via.placeholder.com/80x80" alt="상품사진"></a>
-                        <div>
-                            <h2><a href="#">상품명</a></h2>
-                            <p>상품설명</p>
-                        </div>
-                        </article>
-                    </td>
-                    <td>1</td>
-                    <td>27,000</td>
-                    <td>무료배송</td>
-                    <td>27,000</td>
-                </tr>
+	            <thead>
+	                <tr>
+	                    <th>상품명</th>
+	                    <th>총수량</th>
+	                    <th>판매가</th>
+	                    <th>배송비</th>
+	                    <th>소계</th>
+	                </tr>
+	            </thead>
+				<th:block th:if="${#lists.isEmpty(cart)}">
                 <tr>
                     <td>
                         <article>
                         <a href="#"><img src="https://via.placeholder.com/80x80" alt="상품사진"></a>
                         <div>
-                            <h2><a href="#">상품명</a></h2>
-                            <p>상품설명</p>
+                            <h2><a href="#">[[${product.prodName}]]</a></h2>
+                            <p>[[${product.descript}]]</p>
                         </div>
                         </article>
                     </td>
-                    <td>1</td>
-                    <td>27,000</td>
-                    <td>무료배송</td>
-                    <td>27,000</td>
+                    <td>[[${count}]]</td>
+                    <td>[[${product.price}]]</td>
+                    <td th:if="${product.delivery} == 0">무료배송</td>
+                    <td th:unless="${product.delivery} == 0">배송비 [[${product.delivery}]]</td>
+                    <td>[[${prod.price}*(100-${prod.discount}/100)*${count}]]</td>
                 </tr>
+               	</th:block>
+				<th:block th:if="${product == null}">
+				<th:block th:each="cart , i:${cart}">
                 <tr>
                     <td>
                         <article>
                         <a href="#"><img src="https://via.placeholder.com/80x80" alt="상품사진"></a>
                         <div>
-                            <h2><a href="#">상품명</a></h2>
-                            <p>상품설명</p>
+                            <h2><a href="#">[[${cart.prodName}]]</a></h2>
+                            <p>[[${cart.descript}]]</p>
                         </div>
                         </article>
                     </td>
-                    <td>1</td>
-                    <td>27,000</td>
-                    <td>무료배송</td>
-                    <td>27,000</td>
-                </tr>                    
+                    <td>[[${cart.count}]]</td>
+                    <td>[[${cart.price}]]</td>
+                    <td th:if="${cart.delivery} == 0">무료배송</td>
+                    <td th:unless="${cart.delivery} == 0">배송비 [[${cart.delivery}]]</td>
+                    <td>[[${cart.price}*(100-${cart.discount}/100)*${cart.count}]]</td>
+                </tr>
+				</th:block>
+               	</th:block>
             </table>  
             <!-- 최종 결제 정보 -->
             <div class="final">
@@ -74,11 +127,16 @@
                 <table border="0">
                     <tr>
                         <td>총</td>
-                        <td>2 건</td>
+                        <td class="ordCount" th:text="${product==null?cartList.size():'1'}+건"></td>
                     </tr>
                     <tr>
                         <td>상품금액</td>
-                        <td>27,000</td>
+                        <th:block th:if="${product == null}">
+                       		<td class="ordPrice" th:text=${}></td>
+                        </th:block>
+                        <th:block th:unless="${product == null}">
+                        	<td class="ordPrice" th:text="${product.price * count}"></td>
+                        </th:block>
                     </tr>
                     <tr>
                         <td>할인금액</td>
@@ -105,29 +163,29 @@
                 <table>
                     <tr>
                         <td>주문자</td>
-                        <td><input type="text" name="orderer"></td>
+                        <td><input type="text" name="orderer" th:value="${mem.name}"></td>
                     </tr>
                     <tr>
                         <td>휴대폰</td>
                         <td>
-                            <input type="text" name="hp">
+                            <input type="text" name="hp" th:value="${mem.hp}">
                             <span>- 포함 입력</span>
                         </td>
                     </tr>
                     <tr>
                         <td>우편번호</td>
                         <td>
-                            <input type="text" name="zip">
-                            <input type="button" value="검색">
-                        </td>
+                            <input type="text" name="zip" th:value="${mem.zip}">
+                            <input type="button" value="검색" th:onclick="postcode()">
+                        </td> 
                     </tr>
                     <tr>
                         <td>기본주소</td>
-                        <td><input type="text" name="addr1"></td>
+                        <td><input type="text" name="addr1" th:value="${mem.addr1}"></td>
                     </tr>
                     <tr>
                         <td>상세주소</td>
-                        <td><input type="text" name="addr2"></td>
+                        <td><input type="text" name="addr2" th:value="${mem.addr2}"></td>
                     </tr>
                     <tr>
                         <td>요청사항</td>
@@ -139,10 +197,10 @@
             <article class="discount">
                 <h1>할인정보</h1>
                 <div>
-                    <p>현재 포인트 : <span>7200</span>점</p>
+                    <p>현재 포인트 : <span class="userPoint" sec:authentication="principal.member.point"></span>점</p>
                     <label>
                         <input type="text" name="point">점
-                        <input type="button" value="적용">
+                        <input type="button" class="btnPoint" value="적용">
                     </label>
                     <span>포인트 5,000점 이상이면 현금처럼 사용 가능합니다.</span>
                 </div>
@@ -180,7 +238,7 @@
                         </label>
                         <label>
                             <input type="radio" name="payment" value="type6">카카오페이
-                            <img src="../img/ico_kakaopay.gif" alt="카카오페이">
+                            <img th:src="@{/img/product/ico_kakaopay.gif}" alt="카카오페이">
                         </label>
                     </p>
                 </div>

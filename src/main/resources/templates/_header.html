@@ -15,6 +15,12 @@
     <link rel="stylesheet" th:href="@{/style/product/style.css}"/>
 	<script>
 	    $(document).ready(function(){
+	    
+      		  $('#top').click(function(){
+	            $(window).scrollTop(0);
+	  	      });
+	       
+	    
 	          $(".slider > ul").bxSlider({
 	            easing: "linear",
 	          });
@@ -85,7 +91,7 @@
             <div class="logo">
                 <div>
                     <a href="#">
-                        <img src="img/header_logo.png" alt="로고">
+                        <img th:src="@{/img/main/header_logo.png}" alt="로고">
                     </a>
                     <form action="#">
                         <input type="text" name="keyword">
@@ -122,87 +128,88 @@
                         카테고리
                     </li>
                     <li>
-                        <a th:href="@{product/list(cate1=10)}">
+                        <a th:href="@{/product/list(cate1=10)}">
                             <i class="fas fa-tshirt" aria-hidden="true"></i>
                             패션·의류·뷰티
                             <i class="fas fa-angle-right" aria-hidden="true"></i>
                         </a>
                         <ol>
                             <li>
-                                <a th:href="@{product/list(cate1=10,cate2=10)}">남성의류</a>
+                                <a th:href="@{/product/list(cate1=10,cate2=10)}">남성의류</a>
                             </li>
                             <li>
-                                <a th:href="@{product/list(cate1=10,cate2=11)}">여성의류</a>
+                                <a th:href="@{/product/list(cate1=10,cate2=11)}">여성의류</a>
                             </li>
                             <li>
-                                <a th:href="@{product/list(cate1=10,cate2=12)}">잡화</a>
+                                <a th:href="@{/product/list(cate1=10,cate2=12)}">잡화</a>
                             </li>
                             <li>
-                                <a th:href="@{product/list(cate1=10,cate2=13)}">뷰티</a>
+                                <a th:href="@{/product/list(cate1=10,cate2=13)}">뷰티</a>
                             </li>
                         </ol>
                     </li>
                     <li>
-                        <a th:href="@{product/list(cate1=11)}">
+                        <a th:href="@{/product/list(cate1=11)}">
                             <i class="fas fa-laptop" aria-hidden="true"></i>
                             가전·디지털
                             <i class="fas fa-angle-right" aria-hidden="true"></i>
                         </a>
                         <ol>
                             <li>
-                                <a th:href="@{product/list(cate1=11,cate2=10)}">노트북/PC</a>
+                                <a th:href="@{/product/list(cate1=11,cate2=10)}">노트북/PC</a>
                             </li>
                             <li>
-                                <a th:href="@{product/list(cate1=11,cate2=11)}">가전</a>
+                                <a th:href="@{/product/list(cate1=11,cate2=11)}">가전</a>
                             </li>
                             <li>
-                                <a th:href="@{product/list(cate1=11,cate2=12)}">휴대폰</a>
+                                <a th:href="@{/product/list(cate1=11,cate2=12)}">휴대폰</a>
                             </li>
                             <li>
-                                <a th:href="@{product/list(cate1=11,cate2=13)}">기타</a>
+                                <a th:href="@{/product/list(cate1=11,cate2=13)}">기타</a>
                             </li>
                         </ol>
                     </li>
                     <li>
-                        <a th:href="@{product/list(cate1=12)}">
+                        <a th:href="@{/product/list(cate1=12)}">
                             <i class="fas fa-utensils" aria-hidden="true"></i>
                             식품·생필품
                             <i class="fas fa-angle-right" aria-hidden="true"></i>
                         </a>
                         <ol>
                             <li>
-                                <a th:href="@{product/list(cate1=12,cate2=10)}">신선식품</a>
+                                <a th:href="@{/product/list(cate1=12,cate2=10)}">신선식품</a>
                             </li>
                             <li>
-                                <a th:href="@{product/list(cate1=12,cate2=11)}">가공식품</a>
+                                <a th:href="@{/product/list(cate1=12,cate2=11)}">가공식품</a>
                             </li>
                             <li>
-                                <a th:href="@{product/list(cate1=12,cate2=12)}">건강식품</a>
+                                <a th:href="@{/product/list(cate1=12,cate2=12)}">건강식품</a>
                             </li>
                             <li>
-                                <a th:href="@{product/list(cate1=12,cate2=13)}">생필품</a>
+                                <a th:href="@{/product/list(cate1=12,cate2=13)}">생필품</a>
                             </li>
                         </ol>
                     </li>
                     <li>
-                        <a th:href="@{product/list(cate1=13)}">
+                        <a th:href="@{/product/list(cate1=13)}">
                             <i class="fas fa-home" aria-hidden="true"></i>
                             홈·문구·취미
                             <i class="fas fa-angle-right" aria-hidden="true"></i>
                         </a>
                         <ol>
                             <li>
-                                <a th:href="@{product/list(cate1=13,cate2=10)}">가구/DIY</a>
+                                <a th:href="@{/product/list(cate1=13,cate2=10)}">가구/DIY</a>
                             </li>
                             <li>
-                                <a th:href="@{product/list(cate1=13,cate2=11)}">침구·커튼</a>
+                                <a th:href="@{/product/list(cate1=13,cate2=11)}">침구·커튼</a>
                             </li>
                             <li>
-                                <a th:href="@{product/list(cate1=13,cate2=12)}">생활용품</a>
+                                <a th:href="@{/product/list(cate1=13,cate2=12)}">생활용품</a>
                             </li>
                             <li>
-                                <a th:href="@{product/list(cate1=13,cate2=13)}">사무용품</a>
+                                <a th:href="@{/product/list(cate1=13,cate2=13)}">사무용품</a>
                             </li>
                         </ol>
                     </li>
                 </ul>
+    		</aside>

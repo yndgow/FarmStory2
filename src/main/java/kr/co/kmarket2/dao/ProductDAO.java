@@ -21,17 +21,26 @@ public interface ProductDAO {
 	public List<ProductVO> selectProductsNew();
 	public List<ProductVO> selectProductsDiscount();
 
-	
-	public int selectCountTotal(String cate1, String cate2); //홍민준 list paging
-	public int selectCountTotalRe(int prodNo); //홍민준 review paging
-	
-	public List<ProductOrderVO> selectOrder(String uid);
-	public List<ProductCartVO> selectCartProducts(String uid);
+	//list
 	public List<ProductVO> selectProducts(String cate1, String cate2, String sort);
-	public ProductVO selectProduct(int prodNo);
-	public ProductReviewVO selectProductReview(int prodNo);
+	public int selectCountTotal(String cate1, String cate2); //홍민준 list paging
+
+	//view
+	public ProductVO selectProduct(String prodNo);
+	
+	// review
+	public List<ProductReviewVO> selectReview(String prodNo, int start);
+	public int selectCountTotalReview(String prodNo);
+	
+	//cart
 	public int insertCart(ProductCartVO vo);
+	public List<ProductCartVO> selectCartProducts(String uid);
+	public int deleteCart(List<String> chks);
+	
+	// order
+	public List<ProductCartVO> selectCartByCartNo(List<String> cartNo);
+
+	public List<ProductOrderVO> selectOrder(String uid);
 	public int insertOrder(ProductOrderVO ovo);
 	public void updateProduct(ProductVO vo);
-	public int deleteCart(int prodNo, String uid);
 }
