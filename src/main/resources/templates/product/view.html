@@ -1,15 +1,107 @@
-<th:block th:include="@{_header.html}"/>         
-    </aside>
-    <!-- 카테고리 aside 끝 -->
-
+<th:block th:include="@{_header.html}"/>
+<script>
+	//수량 변경 + 자동 총 합계 계산
+		$(function(){
+			
+			let price = parseInt($('input[name=price]').val());
+			let discount = parseInt($('input[name=discount]').val());
+			let delivery = parseInt($('input[name=delivery]').val());
+			let totalPrice = 1 * Math.round(price*(100-discount)/100) + delivery;
+			$('.total > span').text(totalPrice.toLocaleString());
+			
+			$('.increase').on('click', function(){
+				let quantity = $(this).parent("div").find("input").val();
+				$(this).parent("div").find("input").val(++quantity);
+				let count = parseInt($('input[name=num]').val());
+				let totalPrice = count * Math.round(price*(100-discount)/100) + delivery;
+				$('.total > span').text(totalPrice.toLocaleString());
+			});
+			
+			$(".decrease").on("click", function(){
+				let quantity = $(this).parent("div").find("input").val();
+				if(quantity > 1){
+					$(this).parent("div").find("input").val(--quantity);		
+				}
+				let count = parseInt($('input[name=num]').val());
+				let totalPrice = count * Math.round(price*(100-discount)/100) + delivery;
+				$('.total > span').text(totalPrice.toLocaleString());
+			});
+			
+			// 장바구니 클릭
+			$('.cart').click(function(){
+				
+				let uid = $('span[name=uid]').text();
+				let prodNo = $('input[name=prodNo]').val();
+				let count = $('input[name=num]').val();
+				let price = $('input[name=price]').val();
+				let discount = $('input[name=discount]').val();
+				let point = $('input[name=point]').val();
+				let delivery = $('input[name=delivery]').val();
+				let total = $('.total > span').text().replaceAll(',','');
+				console.log(uid);
+				
+				let jsonData = {
+						"uid": uid,
+						"prodNo": prodNo,
+						"count": count,
+						"price": price,
+						"discount": discount,
+						"point": point,
+						"delivery": delivery,
+						"total": total,
+				};
+				console.log(jsonData);
+				if(uid){
+					$.ajax({
+						url: '/Kmarket2/product/view',
+						type: 'post',
+						data: jsonData,
+						dataType: 'json',
+						success: function(data){
+							if(confirm('장바구니에 추가되었습니다.\n장바구니로 이동하시겠습니까?')){
+								location.href = "/Kmarket2/product/cart";
+							
+							}else{
+								return;
+							}
+						}
+					});
+				}else{
+					alert('로그인 후 이용 가능합니다.');
+				}
+			});
+			
+			// 주문하기 클릭
+			$('.order').click(function(){
+				let count = $('input[name=num]').val();
+				let uid = $('span[name=uid]').text();
+				let prodNo = $('input[name=prodNo]').val();
+				
+				if(uid){
+					location.href = "/Kmarket2/product/order?prodNo="+prodNo+"&count="+count;
+				}else{
+					alert('로그인 후 이용 가능합니다.');				
+					return;
+				}
+			});
+			
+		});
+</script>
+         
     <!-- 상품 상세페이지 시작 -->
     <section class="view">
+    <label sec:authorize="isAuthenticated()"><span class="uid" name="uid" sec:authentication="principal.member.uid">길동</span></label>
+    <input type="hidden" name="price" th:value="${product.price}">
+    <input type="hidden" name="prodNo" th:value="${product.prodNo}">
+    <input type="hidden" name="discount" th:value="${product.discount}">
+    <input type="hidden" name="point" th:value="${product.point}">
+    <input type="hidden" name="delivery" th:value="${product.delivery}">
         <!-- 제목, 페이지 네비 -->
         <nav>
             <h1>상품보기</h1>
             <p>
-                HOME > <span>패션·의류·뷰티</span>
-                > <strong>남성의류</strong>
+                HOME > <span>[[${products.c1Name]]</span>
+                > <strong>[[${products.c2Name]]</strong>
             </p>
         </nav>
         <!-- 상품 전체 정보 -->
@@ -42,7 +134,7 @@
                     <li th:if="${prod.delivery} == 0"><span class="free-delivery">무료배송</span></li>
                 	<li th:unless="${prod.delivery} == 0"><span>배송비 [[${prod.delivery}]]</span></li>
                     <span class="arrival">(금) 7/8 도착예정</span>
-                    <span class="desc">본 상품은 국내 배송만 가능합니다.</span>
+                    <span class="desc">[[${product.descript}]]</span>
                 </nav>
                 <nav>
                     <span class="card cardfree"><i>아이콘</i>무이자 할부</span>
@@ -51,22 +143,17 @@
                 <nav>
                     <span class="origin">원산지-상세설명 참조</span>
                 </nav>
-                <img src="../img/vip_plcc_banner.png" alt="광고" class="banner">
+                <img th:src="@{/img/main/vip_plcc_banner.png}" alt="광고" class="banner">
                 <div class="count">
                     <button class="decrease">-</button>
                     <input type="text" name="num" value="1" readonly>
                     <button class="increase">+</button>
                 </div>
                 <div class="total">
-                    <span>35,000</span>
+                    <span></span>
                     <em>총 상품 금액</em>
                 </div>
                 <div class="button">
-                	<input type="hidden" name="prodNo" value="${product.prodNo}">
-                	<input type="hidden" name="ori-price" value="${product.price}">
-                	<input type="hidden" name="dis-price" value="${product.price *(100-product.discount)/100}">
-                	<input type="hidden" name="discount" value="${product.discount}">
-                	<input type="hidden" name="delivery" value="${product.delivery}">
                     <input type="button" class="cart" value="장바구니">
                     <input type="button" class="order" value="구매하기">
                 </div>
@@ -177,31 +264,29 @@
                 <h1>상품리뷰</h1>
             </nav>
             <ul>
-                <li th:each="re,i:${review}">
+                <li th:each="re,i:${reviews}">
                     <div>
                         <h5 class="rating ${re.rating}">[[${re.content}]]</h5>
-                        <span>[[${re.uid}]] [[${re.rdate}]]</span>
+                        <span>[[${re.uid.substring(0,3)}]]**** [[${re.rdatesubstring(2, 10)}]]</span>
                     </div>
                     <h3>[[${re.prodName}]]</h3>
-                    <p>
-						[[${re.content}]]
-                    </p>
+                    <p>[[${re.content}]]</p>
                 </li>
             </ul>
             <div>
                 <th:block th:if="#{groups[0]>1}">
-	            <span class="prev"><a href="@{/view(pg=${groups[0]-1},prodNo=${product.prodNo})}">&lt;이전</a></span>
+	            <span class="prev"><a href="@{/product/view(pg=${groups[0]-1},prodNo=${product.prodNo},cate1=${cate1},cate2=${cate2})}">&lt;이전</a></span>
         	</th:block>
 
         	<th:block th:each="num:${#numbers.sequence(groups[0].groups[1])}">
 	            <span class="num">
-	                <a th:href="@{/view(pg=${num},prodNo=${product.prodNo})}" 
+	                <a th:href="@{/product/view(pg=${num},prodNo=${product.prodNo},cate1=${cate1},cate2=${cate2})}" 
 	                   th:class="${num == currentPage ? 'num on' : 'num'}">[[${num}]]</a>
 	            </span>
         	</th:block>
     
         	<th:block th:if="#{groups[1]<lastPageNum}">
-	            <span class="prev"><a href="@{/view(pg=${groups[1]+1},prodNo=${product.prodNo})}">다음&gt;</a></span>
+	            <span class="prev"><a href="@{/product/view(pg=${groups[1]+1},prodNo=${product.prodNo},cate1=${cate1},cate2=${cate2})}">다음&gt;</a></span>
         	</th:block>
             </div>
         </article>

@@ -1,5 +1,6 @@
 package kr.co.kmarket2.controller.main;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ public class MainController {
 	@Autowired
 	private ProductService service;
 	
-	@GetMapping(value={" ", "index"})
-	public String main(Model model) {
+	@GetMapping(value={"", "index"})
+	public String main(Principal principal ,Model model) {
 		List<ProductVO> productsbest = service.selectProductsBest();
 		List<ProductVO> productshit = service.selectProductsHit();
 		List<ProductVO> productsscore = service.selectProductsScore();
@@ -35,6 +36,6 @@ public class MainController {
 		model.addAttribute("imagesEndpoint", "images/");
 		model.addAttribute("filename", "cat-g893543a6c_640.jpg");
 
-		return "/, /index";
+		return "index";
 	}
 }

@@ -20,7 +20,6 @@ public class ProductService {
 	
 	//main list
 	public List<ProductVO> selectProductsBest(){
-		
 		return dao.selectProductsBest();
 	}
 	public List<ProductVO> selectProductsHit(){
@@ -36,99 +35,145 @@ public class ProductService {
 		return dao.selectProductsDiscount();
 	}
 	
-	//
+	// list
 	public List<ProductVO> selectProducts(String cate1, String cate2, String sort){
 		return dao.selectProducts(cate1,cate2,sort);
 	}
-	
-	public ProductVO selectProduct(int prodNo) {
-		return dao.selectProduct(prodNo);
-	}
-	
-	public ProductReviewVO selectProductReview(int prodNo) {
-		return dao.selectProductReview(prodNo);
-	}
-	
-	public int insertCart(ProductCartVO vo) {
-		return dao.insertCart(vo);
-	}
-	
-	public int insertOrder(ProductOrderVO ovo) {
-		return dao.insertOrder(ovo);
-	}
 
-	public int deleteCart(String uid, int prodNo) {
-		return dao.deleteCart(prodNo, uid);
-
-	}
-	
-	public List<ProductCartVO> selectCartProduct(String uid){
-		return dao.selectCartProducts(uid);
-	}
-	
 	public int selectCountTotal(String cate1, String cate2) {
 		return dao.selectCountTotal(cate1, cate2);
 	}
 	
-	public int selectCountTotalRe(int prodNo) {
-		return dao.selectCountTotalRe(prodNo);
+	// view
+	public ProductVO selectProduct(String prodNo) {
+		return dao.selectProduct(prodNo);
 	}
 	
-	public List<ProductOrderVO> selectOrder(String uid){
-		return dao.selectOrder(uid);
+	// cart
+	public int insertCart(ProductCartVO vo) {
+		return dao.insertCart(vo);
 	}
-
-    // 현재 페이지 번호
-    public int getCurrentPage(String pg) {
-        int currentPage = 1;
-
-        if(pg != null) {
-            currentPage = Integer.parseInt(pg);
-        }
-
-        return currentPage;
-    }
-
-    // 페이지 시작값
-    public int getLimitStart(int currentPage) {
-        return (currentPage - 1) * 10;
-    }
-
-    // 마지막 페이지 번호
-    public int getLastPageNum(int total) {
-
-        int lastPageNum = 0;
-
-        if(total % 10 == 0) {
-            lastPageNum = total / 10;
-        }else {
-            lastPageNum = total / 10 + 1;
-        }
-        return lastPageNum;
-    }
-
-    // 페이지 시작 번호
-    public int getPageStartNum(int total, int start) {
-        return total - start;
-    }
-
-    // 페이지 그룹
-    public int[] getPageGroup(int currentPage, int lastPageNum) {
-
-        int groupCurrent = (int) Math.ceil(currentPage / 10.0);
-        int groupStart = (groupCurrent - 1) * 10 + 1;
-        int groupEnd = groupCurrent * 10;
-
-        if(groupEnd > lastPageNum) {
-            groupEnd = lastPageNum;
-        }
-
-        int[] groups = {groupStart, groupEnd};
-
-        return groups;
-    }
+	public List<ProductCartVO> selectCartProduct(String uid){
+		return dao.selectCartProducts(uid);
+	}
+	public int deleteCart(List<String> chks) {
+		return dao.deleteCart(chks);
+	}
 	
-    
+	// order
+	public List<ProductCartVO> selectCartByCartNo(List<String> cartNo){
+		return dao.selectCartByCartNo(cartNo);
+	}
+		
+
+	// review
+	public List<ProductReviewVO> selectReview(String prodNo, int start){
+		return dao.selectReview(prodNo, start);
+	}
+	public int selectCountTotalReview(String prodNo) {
+		return dao.selectCountTotalReview(prodNo);
+	}
+	
+	// 현재 페이지 번호
+	public int getCurrentPage(String pg) {
+	  int currentPage = 1;
+	
+	  if(pg != null) {
+	      currentPage = Integer.parseInt(pg);
+	  }
+	  return currentPage;
+	}
+	
+	// 페이지 시작값
+	public int getLimitStart(int currentPage) {
+	  return (currentPage - 1) * 10;
+	}
+	
+	// 마지막 페이지 번호
+	public int getLastPageNum(int total) {
+	
+	  int lastpageNum = 0;
+	
+	  if(total % 10 == 0) {
+	      lastpageNum = total / 10;
+	
+	  }else {
+	      lastpageNum = total / 10 + 1;
+	  }
+	  return lastpageNum;
+	}
+	
+	// 페이지 시작 번호
+	public int getpageStartNum(int total, int start) {
+	  return total - start;
+	}
+	
+	// 페이지 그룹
+	public int[] getPageGroup(int currentPage, int lastPageNum) {
+	
+	  int groupCurrent = (int) Math.ceil(currentPage / 10.0);
+	  int groupStart = (groupCurrent - 1) * 10 + 1;
+	  int groupEnd = groupCurrent * 10;
+	
+	  if(groupEnd > lastPageNum) {
+	      groupEnd = lastPageNum;
+	  }
+	
+	  int[] groups = {groupStart, groupEnd};
+	
+	  return groups;
+	}
+	
+/////// review 페이징 처리
+	// 현재 페이지 번호
+	public int getCurrentPage2(String pg) {
+	  int currentPage = 1;
+	
+	  if(pg != null) {
+	      currentPage = Integer.parseInt(pg);
+	  }
+	  return currentPage;
+	}
+	
+	// 페이지 시작값
+	public int getLimitStart2(int currentPage) {
+	  return (currentPage - 1) * 5;
+	}
+	
+	// 마지막 페이지 번호
+	public int getLastPageNum2(int total) {
+	
+	  int lastpageNum = 0;
+	
+	  if(total % 10 == 0) {
+	      lastpageNum = total / 5;
+	
+	  }else {
+	      lastpageNum = total / 5 + 1;
+	  }
+	  return lastpageNum;
+	}
+	
+	// 페이지 시작 번호
+	public int getpageStartNum2(int total, int start) {
+	  return total - start;
+	}
+	
+	// 페이지 그룹
+	public int[] getPageGroup2(int currentPage, int lastPageNum) {
+	
+	  int groupCurrent = (int) Math.ceil(currentPage / 5.0);
+	  int groupStart = (groupCurrent - 1) * 5 + 1;
+	  int groupEnd = groupCurrent * 5;
+	
+	  if(groupEnd > lastPageNum) {
+	      groupEnd = lastPageNum;
+	  }
+	
+	  int[] groups = {groupStart, groupEnd};
+	
+	  return groups;
+	}
     
     
 }

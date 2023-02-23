@@ -1,5 +1,4 @@
 <th:block th:include="@{_header.html}"/>
-   </aside>
    <section class="list">
        <!-- 제목, 페이지 네비 -->
        <nav>
@@ -22,11 +21,11 @@
         <table border="0">
             <tr th:each="prod,i:${products}">
                 <td>
-                    <a th:href="@{/view(prodNo=${prod.prodNo})}" class="thumb"><img th:src="|${imagesEndpoint}${filename}|" alt="상품이미지"></a>
+                    <a th:href="@{/view(prodNo=${prod.prodNo},cate1${prod.cate1},cate2${prod.cate2})}" class="thumb"><img th:src="${prod.thumb1}" alt="상품이미지"></a>
                 </td>
                 <td>
                     <h3 class="name">[[${prod.prodName}]]</h3>
-                    <a href="#" class="desc">[[${prod.descript}]]</a>
+                    <a href="@{/view(prodNo=${prod.prodNo},cate1${prod.cate1},cate2${prod.cate2})}" class="desc">[[${prod.descript}]]</a>
                 </td>
                 <td>
                     <ul>
