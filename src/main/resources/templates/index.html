@@ -107,24 +107,24 @@
     <!-- 최신 상품 -->
     <section class="new">
         <h3><span>최신상품</span></h3>
-         <article th:each="new, i:${new}">
-            <a th:href="@{/view(prodNo=${new.prodNo})}">
+         <article th:each="latest, i:${latest}">
+            <a th:href="@{/view(prodNo=${latest.prodNo})}">
                 <div class="thumb">
                     <img src="https://via.placeholder.com/230" alt="상품사진">
                 </div>
-                <h2>[[${new.prodName}]]</h2>
-                <p>[[${new.descript}]]</p>
+                <h2>[[${latest.prodName}]]</h2>
+                <p>[[${latest.descript}]]</p>
                 <div class="org-price">
                     <del>[[${new.price}]]</del>
                     <span>[[${new.discount}]]%</span>
                 </div>
-                <div class="dis-price" th:if="${new.delivery} == 0">
+                <div class="dis-price" th:if="${latest.delivery} == 0">
                     <ins>[[${new.price}*(100-${new.discount}/100)]]</ins>
                     <span class="free-delivery">무료배송</span>
                 </div>
-                <div class="dis-price" th:unless="${new.delivery} == 0">
-                    <ins>[[${new.price}*(100-${new.discount}/100)]]</ins>
-                    <span class="delivery">배송비 [[${new.delivery}]]</span>
+                <div class="dis-price" th:unless="${latest.delivery} == 0">
+                    <ins>[[${latest.price}*(100-${latest.discount}/100)]]</ins>
+                    <span class="delivery">배송비 [[${latest.delivery}]]</span>
                 </div>
             </a>
         </article>

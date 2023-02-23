@@ -333,7 +333,7 @@ main > aside > .best > ol > li > a .dis-price > span{
     vertical-align: text-bottom;
     width: 55px;
     height: 13px;
-    background: url("../img/ico_freeshipping.gif") no-repeat;
+    background: url("/Kmarket2/img/ico_freeshipping.gif") no-repeat;
 }
 
 /* main section */

@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import kr.co.kmarket2.dao.ProductDAO;
 import kr.co.kmarket2.vo.ProductCartVO;
+import kr.co.kmarket2.vo.ProductOrderVO;
 import kr.co.kmarket2.vo.ProductReviewVO;
 import kr.co.kmarket2.vo.ProductVO;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 public class ProductService {
@@ -18,6 +20,7 @@ public class ProductService {
 	
 	//main list
 	public List<ProductVO> selectProductsBest(){
+		
 		return dao.selectProductsBest();
 	}
 	public List<ProductVO> selectProductsHit(){
@@ -46,9 +49,16 @@ public class ProductService {
 		return dao.selectProductReview(prodNo);
 	}
 	
+	public int insertCart(ProductCartVO vo) {
+		return dao.insertCart(vo);
+	}
+	
+	public int insertOrder(ProductOrderVO ovo) {
+		return dao.insertOrder(ovo);
+	}
 
 	public int deleteCart(String uid, int prodNo) {
-		return dao.deleteCart(uid, prodNo);
+		return dao.deleteCart(prodNo, uid);
 
 	}
 	
@@ -64,7 +74,9 @@ public class ProductService {
 		return dao.selectCountTotalRe(prodNo);
 	}
 	
-	
+	public List<ProductOrderVO> selectOrder(String uid){
+		return dao.selectOrder(uid);
+	}
 
     // 현재 페이지 번호
     public int getCurrentPage(String pg) {
