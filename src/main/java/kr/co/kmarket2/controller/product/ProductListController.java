@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.kmarket2.service.ProductService;
 import kr.co.kmarket2.vo.ProductVO;
@@ -17,8 +19,9 @@ public class ProductListController {
 	@Autowired
 	private ProductService service;
 	
+	@ResponseBody
 	@GetMapping("product/list")
-	public String list(Model model, String cate1, String cate2, String sort, String pg){
+	public String list(Model model,  String cate1, String cate2, String sort, String pg){
 		
         int currentPage = service.getCurrentPage(pg);
         int start = service.getLimitStart(currentPage);

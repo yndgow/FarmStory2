@@ -69,6 +69,26 @@ $(() => {
 		} 
 	});
 	
+	// 장바구니 order 버튼
+	$('input[name=cartOrder]').click(function(e){
+		e.preventDefault;
+		if($('input:checkbox[name]ckBox').is(':unchecked')){
+			alert('상품이 선택되지 않았습니다.');
+			return false;
+		}else{
+			if(confirm('주문하시겠습니까?')){
+				$('#cartOrder').submit();
+			}else{
+				return false;
+			}
+			
+		}		
+	});
+	
+	
+	
+	
+	
 	// 체크박스 이벤트
 	
 	$().check(function(){

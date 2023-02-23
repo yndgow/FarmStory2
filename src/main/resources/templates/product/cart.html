@@ -10,7 +10,7 @@
                 > <strong>장바구니</strong>
             </p>
         </nav>
-        <form th:action="">
+        <form th:action="@{/order}">
             <!-- 장바구니 목록 -->
             <table>
                 <tr>
@@ -60,7 +60,6 @@
                 <tr>
                   <td>상품금액<input type="hidden" name="cartPrice" value=""></td>
                   <td id="cartPrice">0</td>
-                  
                 </tr>
                 <tr>
                   <td>할인금액<input type="hidden" name="cartDiscount" value=""></td>

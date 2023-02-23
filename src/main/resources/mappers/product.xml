@@ -27,15 +27,32 @@
 
 	<insert id="insertCart" useGeneratedKeys="true">
 		insert into `km_product_cart` set
-		`uid`=${uid},
-		`prodNo`=${prodNo},
-		`count`=${count},
-		`price`=${price},
-		`discount`=${discount},
-		`point`=${point},
-		`delivery`=${delivery},
-		`total`=${total},
+		`uid`=${vo.uid},
+		`prodNo`=${vo.prodNo},
+		`count`=${vo.count},
+		`price`=${vo.price},
+		`discount`=${vo.discount},
+		`point`=${vo.point},
+		`delivery`=${vo.delivery},
+		`total`=${vo.total},
 		`rdate`= now();
+	</insert>
+	
+	<insert id="insertOrder" useGeneratedKeys="true">
+		insert into `km_product_order` set
+		`ordUid`=${ovo.ordUid},
+		`ordCount`=${ovo.ordCount},
+		`ordPrice`=${ovo.ordPrice},
+		`ordDiscount`=${ovo.ordDiscount},
+		`ordDelivery`=${ovo.ordDelivery},
+		`savePoint`=${ovo.savePoint},
+		`ordTotPrice`=${ovo.ordTotPrice},
+		`recipName`=${ovo.recipName},
+		`recipHp`=${ovo.recipHp},
+		`recipZip`=${ovo.recipZip},
+		`recipAddr1`=${ovo.recipAddr1},
+		`recipAddr2`=${ovo.recipAddr2},
+		`ordDate`= now();
 	</insert>
 	
 	
