@@ -9,7 +9,7 @@
           <div id="my_qna_list">
             <h3>문의내역</h3>
             <table>
-              <thead>
+              <thead class="text-center">
                 <tr>
                   <th>번호</th>
                   <th>문의채널</th>
@@ -20,61 +20,16 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>5</td>
-                  <td>고객센터</td>
-                  <td>주문/결제</td>
-                  <td>
-                    <p><a href="" class="prd_name"></a></p>
-                    <a href="">신용카드 결제 중 오류가 난 경우 어떻게 하나요?</a>
-                  </td>
-                  <td>2023-12-12</td>
-                  <td class="qna_stat">0</td>
+                <tr th:each="el : ${qnaList}">
+                  <td th:text="${elStat.size - elStat.index}">5</td>
+                  <td th:if="${el.seller} == null">고객센터</td>
+                  <td th:if="${el.seller} != null">판매자 게시판</td>
+                  <td th:text="${el.c1Name}">주문/결제</td>
+                  <td th:text="${el.title}">신용카드 결제 중 오류가 난 경우 어떻게 하나요?</td>
+                  <td th:text="${#dates.format(el.rdate, 'yyyy-MM-dd')}">2023-12-12</td>
+                  <td class="qna_stat" th:text="${el.status}">0</td>
                 </tr>
-                <tr>
-                  <td>4</td>
-                  <td>고객센터</td>
-                  <td>주문/결제</td>
-                  <td>
-                    <a href="" class="prd_name"></a>
-                    <a href="">배송기간이 보통 얼마나 걸리나요?</a>
-                  </td>
-                  <td>2023-12-12</td>
-                  <td class="qna_stat">1</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>판매자게시판</td>
-                  <td>배송</td>
-                  <td>
-                    <p><a href="" class="prd_name">상품명</a></p>
-                    <a href="">흰색 상품은 없나요?</a>
-                  </td>
-                  <td>2023-12-12</td>
-                  <td class="qna_stat">1</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>판매자게시판</td>
-                  <td>상품</td>
-                  <td>
-                    <p><a href="" class="prd_name">상품명</a></p>
-                    <a href="">사이즈가 너무 작아요. 반품 요청합니다.</a>
-                  </td>
-                  <td>2023-12-12</td>
-                  <td class="qna_stat">1</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>판매자게시판</td>
-                  <td>반품</td>
-                  <td>
-                    <p><a href="" class="prd_name">상품명</a></p>
-                    <a href="">신용카드 결제 중 오류가 난 경우 어떻게 하나요?</a>
-                  </td>
-                  <td>2023-12-12</td>
-                  <td class="qna_stat">1</td>
-                </tr>
+
               </tbody>
             </table>
           </div>

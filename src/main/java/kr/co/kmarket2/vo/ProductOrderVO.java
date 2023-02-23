@@ -1,5 +1,8 @@
 package kr.co.kmarket2.vo;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -20,11 +23,13 @@ public class ProductOrderVO {
 	private String recipAddr2;
 	private int ordPayment;
 	private int ordComplete;
-	private String ordDate;
-	private int deliveryStatus; // 배송상태 추가 김지홍 02/23 
+	private LocalDateTime ordDate;
+	private int deliveryStatus; // 배송상태 추가 김지홍 02/23
+	private int revNo; // 리뷰 번호 리뷰를 적지않으면 0 적으면 리뷰번호
 	
 	// 추가필드 my
 	private String thumb1;
 	private String company;
 	private String prodName;
+	
 }

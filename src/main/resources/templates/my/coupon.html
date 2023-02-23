@@ -10,10 +10,10 @@
             <h3>쿠폰</h3>
             <p>고객님께서 보유하고 있는 할인쿠폰을 확인하세요! 상품구매 시 더욱 저렴하게 구매할 수 있습니다.</p>
             <div id="my_coupon_bg">
-              <p id="my_coupon_count">ㆍ 나의 보유 쿠폰<span>2</span><span>장</span></p>
+              <p id="my_coupon_count">ㆍ 나의 보유 쿠폰<span>[[${couponCount}]]</span><span>장</span></p>
             </div>
             <table>
-              <thead>
+              <thead class="text-center">
                 <tr>
                   <th>쿠폰명</th>
                   <th>할인금액</th>
@@ -23,19 +23,14 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1만원 할인 중복쿠폰</td>
-                  <td>10,000원</td>
-                  <td>10,100원 이상 구매시</td>
-                  <td>~12/29</td>
-                  <td>사용가능</td>
-                </tr>
-                <tr>
-                  <td>회원가입 축하 5천원 할인쿠폰</td>
-                  <td>5,000원</td>
-                  <td>5,100원 이상 구매시</td>
-                  <td>~12/29</td>
-                  <td>사용가능</td>
+                <tr th:each="el : ${couponList}">
+                  <td th:text="${el.name}">1만원 할인 중복쿠폰</td>
+                  <td th:text="${el.discount}">10,000원</td>
+                  <td th:text="${el.condition}">10,100원 이상 구매시</td>
+                  <td th:text="${#dates.format(el.expdate, 'yyyy-MM-dd')}">~12/29</td>
+                  <td th:if="${el.status} == 0">기간만료</td>
+                  <td th:if="${el.status} == 1">사용가능</td>
+                  <td th:if="${el.status} == 2">사용완료</td>
                 </tr>
             </table>
             <div>

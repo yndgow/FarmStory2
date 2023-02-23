@@ -1,5 +1,7 @@
 package kr.co.kmarket2.vo;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -25,8 +27,8 @@ public class MemberVO {
 	private String managerHp;
 	private String fax;
 	private String regip;
-	private String wdate;
-	private String rdate;
+	private Date wdate;
+	private Date rdate;
 	private int etc1;
 	private int etc2;
 	private String etc3;

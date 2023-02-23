@@ -1,97 +1,98 @@
 package kr.co.kmarket2.service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import kr.co.kmarket2.dao.MyDAO;
+import kr.co.kmarket2.vo.CouponVO;
 import kr.co.kmarket2.vo.CsQnaVO;
 import kr.co.kmarket2.vo.MemberPointVO;
 import kr.co.kmarket2.vo.MemberVO;
 import kr.co.kmarket2.vo.ProductOrderVO;
 import kr.co.kmarket2.vo.ProductReviewVO;
+/*
+ * 날짜 : 2023/02/23
+ * 이름 : 김지홍
+ * 내용 : my service
+ */
+@Service
+public class MyService{
+	
+	private final MyDAO dao;
 
-public class MyService implements MyDAO{
-
-	@Override
+	public MyService(MyDAO dao) {
+		this.dao = dao;
+	}
+	
+	// top info my 페이지 고정
 	public int selectMemberPointByUid(String uid) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.selectMemberPointByUid(uid);
 	}
 
-	@Override
 	public int countDeliveryByUid(String uid) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.countDeliveryByUid(uid);
 	}
 
-	@Override
 	public int countCouponByUid(String uid) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.countCouponByUid(uid);
 	}
 
-	@Override
 	public int countQnaStatByUid(String uid) {
-		// TODO Auto-generated method stub
-		return 0;
+		return dao.countQnaStatByUid(uid);
 	}
 
-	@Override
-	public ProductOrderVO selectOrderByUid(String uid) {
-		// TODO Auto-generated method stub
-		return null;
+	// 최근 5개 
+	//// 주문내역
+	public List<ProductOrderVO> selectOrderByUid(String uid) {
+		return dao.selectOrderByUid(uid);
 	}
-
-	@Override
-	public MemberPointVO selectPointByUid(String uid) {
-		// TODO Auto-generated method stub
-		return null;
+	// 포인트적립내역
+	public List<MemberPointVO> selectPointByUid(String uid) {
+		return dao.selectPointByUid(uid);
 	}
-
-	@Override
-	public ProductReviewVO selectReviewByUid(String uid) {
-		// TODO Auto-generated method stub
-		return null;
+	// 상품평
+	public List<ProductReviewVO> selectReviewByUid(String uid) {
+		return dao.selectReviewByUid(uid);
 	}
-
-	@Override
-	public CsQnaVO selectQnaByUid(String uid) {
-		// TODO Auto-generated method stub
-		return null;
+	// 문의내역
+	public List<CsQnaVO> selectQnaByUid(String uid) {
+		return dao.selectQnaByUid(uid);
 	}
-
-	@Override
+	// 내정보
 	public MemberVO selectMemberInfoByUid(String uid) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.selectMemberInfoByUid(uid);
 	}
 
-	@Override
-	public ProductOrderVO selectOrderByUidForPeriod(String uid, int periodNum, String period) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ProductOrderVO> selectOrderByUidForPeriod(String uid, int periodNum, String period) {
+		return dao.selectOrderByUidForPeriod(uid, periodNum, period);
 	}
 
-	@Override
-	public ProductOrderVO selectOrderByUidBetween(String uid, String startDate, String endDate) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ProductOrderVO> selectOrderByUidBetween(String uid, String startDate, String endDate) {
+		return dao.selectOrderByUidBetween(uid, startDate, endDate);
 	}
 
-	@Override
-	public MemberPointVO selectPointByUidForPeriod(String uid, int periodNum, String period) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<MemberPointVO> selectPointByUidForPeriod(String uid, int periodNum, String period) {
+		return dao.selectPointByUidForPeriod(uid, periodNum, period);
 	}
 
-	@Override
-	public MemberPointVO selectPointByUidBetween(String uid, String startDate, String endDate) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<MemberPointVO> selectPointByUidBetween(String uid, String startDate, String endDate) {
+		return dao.selectPointByUidBetween(uid, startDate, endDate);
 	}
 
-	@Override
-	public ProductReviewVO selectReviewListByUid(String uid) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ProductReviewVO> selectReviewListByUid(String uid) {
+		return dao.selectReviewListByUid(uid);
 	}
 
+	public List<CouponVO> selectCouponByUid(String uid){
+		return dao.selectCouponByUid(uid);
+	}
+	
+	public int countCouponAllByUid(String uid) {
+		return dao.countCouponAllByUid(uid);
+	}
+	public List<CsQnaVO> selectQnaALLByUid(String uid){
+		return dao.selectQnaALLByUid(uid);
+	}
 
 }

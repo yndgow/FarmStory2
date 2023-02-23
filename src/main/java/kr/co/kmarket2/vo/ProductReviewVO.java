@@ -1,5 +1,7 @@
 package kr.co.kmarket2.vo;
 
+import java.time.LocalDateTime;
+
 import lombok.Data;
 
 @Data
@@ -10,7 +12,7 @@ public class ProductReviewVO {
 	private String uid;
 	private int rating;
 	private String regip;
-	private String rdate;
+	private LocalDateTime rdate;
 	//추가필드
 	private String prodName;
 }

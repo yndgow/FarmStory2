@@ -178,9 +178,9 @@ strong{
     display: block;
     position: absolute;
     width: 8px;
-    height: 13px;
-    right: -10px;
-    top: -13px;
+    height: 12px;
+    right: -9px;
+    top: -12px;
     background: url(/kmarket2/img/my/my_sprites.png);
     background-position: -160px -50px;
 }
@@ -207,7 +207,9 @@ strong{
     display: block;
     color: white;
     font-size: 16px;
-    line-height: 60px;
+    /* line-height: 60px; */
+    line-height: 48px;
+    
 }
 
 /* main common */
@@ -274,8 +276,16 @@ strong{
     text-align: center;
 }
 #wrapper > main > section > #my_recent_order > table td:nth-child(3){
+	width: 250px;
     text-align: left;
 }
+
+#wrapper > main > section > div > table .orderImg{
+	width: 80px;
+	height: 80px;
+    object-fit: cover;
+}
+
 #wrapper > main > section > #my_review_list .star{
     display: block;
     width: 90px;

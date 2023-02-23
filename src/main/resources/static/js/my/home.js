@@ -31,7 +31,18 @@ function asideAddClass(){
     // str의 
     for(let i = 0; i<asideNameList.length; i++){
         if(str === asideNameList[i]){
-            asideOn[i].setAttribute("class", "on");
+            asideOn[i].setAttribute("class", "on list-group-item");
         }    
     }
+}
+function setDeliveryStat(){
+	let stat = document.getElementsByClassName('deli_Stat');
+	for(let i = 0; i < stat.length; i++){
+		switch(stat[i].textContent){
+			case '0' : stat[i].textContent = '구매완료';break;
+			case '1' : stat[i].textContent = '배송중';break;
+			case '2' : stat[i].textContent = '배송완료';break;
+			case '3' : stat[i].textContent = '수취확인';break;
+		}
+	}
 }

@@ -1,6 +1,8 @@
 package kr.co.kmarket2.vo;
 
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -11,5 +13,6 @@ public class CouponVO {
 	private int discount;
 	private int condition;
 	
-	private MemberCoupon memberCoupon;
+	private int status;
+	private Date expdate;
 }
