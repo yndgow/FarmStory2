@@ -21,6 +21,23 @@
 		SELECT * from `km_product` order by `discount` desc limit 8;
 	</select>
 	
+	<select id="selectCartProducts" resultType="kr.co.kmarket2.vo.ProductCartVO">>
+		SELECT * FROM `km_product_cart` WHERE `uid` = #{uid};
+	</select>
+
+	<insert id="insertCart" useGeneratedKeys="true">
+		insert into `km_product_cart` set
+		`uid`=${uid},
+		`prodNo`=${prodNo},
+		`count`=${count},
+		`price`=${price},
+		`discount`=${discount},
+		`point`=${point},
+		`delivery`=${delivery},
+		`total`=${total},
+		`rdate`= now();
+	</insert>
+	
 	
 	<select id="selectProducts" resultType="kr.co.kmarket2.vo.ProductVO">
 		SELECT a.*, b.c1Name, c.c2Name FROM `km_product` AS a 
@@ -30,14 +47,15 @@
 		<if test="sort != null and !sort.equals('')">
 			<choose>
 				<when test="sort == 'row'">
-					order by `price` esc
+					order by `price` esc;
 				</when>
 				<otherwise>
-					order by #{sort} desc
+					order by #{sort} desc;
 				</otherwise>
 			</choose>
 		</if>
 	</select>
+
 	<select id="selectProduct" resultType="kr.co.kmarket2.vo.ProductVO">
 		SELECT * FROM `km_product` WHERE `prodNo` = #{prodNo};
 	</select>
@@ -48,8 +66,6 @@
 		WHERE b.`prodNo` = ${prodNo}
 		order by `rdate` desc;
 	</select>
-		
-	
 	
 	
 	<select id="selectCountTotal" resultType="int">

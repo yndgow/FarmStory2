@@ -7,7 +7,7 @@
 		getAdminCate2Qna(); // 묻고답하기 cate2 바뀔때 테이블 업데이트
 		qnaStat(); // 문의내역 - 상태 변경(0 = 검토중, 1 = 답변완료)
 		checkAll(); // 모두 체크 설정
-		deleteCheckCs() // 선택삭제
+		deleteCheck('/kmarket2/admin/cs/qna/delete/check', '/kmarket2/admin/cs/qna/list'); // 선택삭제(삭제요청url, 삭제후이동url)
 	});
 </script>
     <main id="main_admin_qna_list" class="flex-shrink-0">

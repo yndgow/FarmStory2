@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.kmarket2.dao.ProductDAO;
+import kr.co.kmarket2.vo.ProductCartVO;
 import kr.co.kmarket2.vo.ProductReviewVO;
 import kr.co.kmarket2.vo.ProductVO;
 
@@ -45,10 +46,15 @@ public class ProductService {
 		return dao.selectProductReview(prodNo);
 	}
 	
+
 	public int deleteCart(String uid, int prodNo) {
 		return dao.deleteCart(uid, prodNo);
+
 	}
 	
+	public List<ProductCartVO> selectCartProduct(String uid){
+		return dao.selectCartProducts(uid);
+	}
 	
 	public int selectCountTotal(String cate1, String cate2) {
 		return dao.selectCountTotal(cate1, cate2);
@@ -110,4 +116,7 @@ public class ProductService {
         return groups;
     }
 	
+    
+    
+    
 }

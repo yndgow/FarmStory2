@@ -26,11 +26,11 @@
           </div>
           <div>
             <select name="" id="admin_cs_cate1" class="form-select mb-2">
-              <option value="0" selected>1차 유형</option>
-              <option value="8">고객서비스</option>
-              <option value="9">안전거래</option>
-              <option value="10">위해상품</option>
-              <option value="11">이벤트당첨</option>
+              <option value="0"  selected>1차 유형</option>
+              <option value="8" th:selected="${cate1}==8">고객서비스</option>
+              <option value="9" th:selected="${cate1}==9">안전거래</option>
+              <option value="10" th:selected="${cate1}==10">위해상품</option>
+              <option value="11" th:selected="${cate1}==11">이벤트당첨</option>
             </select>
             <table class="table border-top text-center align-middle" id="admin_cs_table">
               <thead class="table-light align-middle">
@@ -49,12 +49,12 @@
                   </td>
                   <td th:text="${totalPosts - (noticeStat.index + (currentPage-1) * 10)}">75</td>
                   <td th:text="${notice.cate1Entity.c1Name}">이벤트당첨</td>
-                  <td class="text-start ellipsis"><span><a th:href="@{/admin/cs/notice/view(no=${notice.no})}" th:text="${notice.title}">테스트 이벤트 당첨 테스트</a></span></td>
+                  <td class="text-start ellipsis"><span><a th:href="@{/admin/cs/notice/view(cate1=${cate1}, pageNum=${currentPage}, no=${notice.no})}" th:text="${notice.title}">테스트 이벤트 당첨 테스트</a></span></td>
                   <td th:text="${notice.hit}">1000</td>
                   <td th:text="${#dates.format(notice.rdate, 'yy-MM-dd')}">22-12-30</td>
                   <td>
                     <a th:href="@{/admin/cs/notice/delete(no = ${notice.no})}" class="btnDeleteNotice" th:id="${notice.no}">[삭제]</a>
-                    <a th:href="@{/admin/cs/notice/modify(no = ${notice.no})}">[수정]</a>
+                    <a th:href="@{/admin/cs/notice/modify(cate1 = ${cate1}, pageNum = ${currentPage}, no = ${notice.no})}">[수정]</a>
                   </td>
                 </tr>
                
@@ -66,7 +66,7 @@
                 <button type="button" class="btn btn-secondary">선택삭제</button>
               </div>
               <div>
-                <a class="btn btn-primary" th:href="@{/admin/cs/notice/write}" role="button">작성하기</a>
+                <a class="btn btn-primary" th:href="@{/admin/cs/notice/write(cate1 = ${cate1}, pageNum = ${currentPage})}" role="button">작성하기</a>
               </div>
             </div>
             

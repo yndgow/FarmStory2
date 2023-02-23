@@ -76,12 +76,13 @@ public class AdminCsController {
 		return "admin/cs/notice/list";
 		
 	}
-	
 	// 공지사항
 	
 	// 공지사항 이동 등록
 	@GetMapping("admin/cs/notice/write")
-	public String write() {
+	public String write(Model model, int pageNum, int cate1) {
+		model.addAttribute("cate1", cate1);
+		model.addAttribute("currentPage", pageNum);
 		return "admin/cs/notice/write";
 	}
 	
@@ -94,9 +95,12 @@ public class AdminCsController {
 	
 	// 공지사항 이동 수정
 	@GetMapping("admin/cs/notice/modify")
-	public String modifyNotice(Model model, int no)	{
+	public String modifyNotice(Model model, int no, int pageNum, int cate1)	{
 		CsNoticeEntity entity= adminService.getNoticeOne(no);
 		model.addAttribute("entity", entity);
+		model.addAttribute("cate1", cate1);
+		model.addAttribute("currentPage", pageNum);
+
 		return "admin/cs/notice/modify";
 	}
 	
@@ -109,9 +113,11 @@ public class AdminCsController {
 	
 	// 공지사항 이동 보기
 	@GetMapping("admin/cs/notice/view")
-	public String view(int no, Model model) {
+	public String view(int no, Model model, int pageNum, int cate1) {
 		CsNoticeEntity entity= adminService.getNoticeOne(no);
 		model.addAttribute("entity", entity);
+		model.addAttribute("cate1", cate1);
+		model.addAttribute("currentPage", pageNum);
 		return "admin/cs/notice/view";
 	}
 

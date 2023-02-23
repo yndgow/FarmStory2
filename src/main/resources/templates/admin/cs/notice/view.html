@@ -41,9 +41,9 @@
               </tbody>
             </table>
             <div class="text-end">
-           	  <a th:href="@{/admin/cs/notice/delete(no=${entity.no})}" class="btn btn-secondary btn-lg btnDeleteNotice" th:id="${no}" role="button">삭제</a>
-              <a th:href="@{/admin/cs/notice/modify(no=${entity.no})}" class="btn btn-secondary btn-lg btnModifyNotice" role="button">수정</a>
-              <a th:href="@{/admin/cs/notice/list}" class="btn btn-primary btn-lg" role="button">목록</a>
+           	  <a th:href="@{/admin/cs/notice/delete(no=${entity.no})}" class="btn btn-secondary btn-lg btnDeleteNotice" th:id="${entity.no}" role="button">삭제</a>
+              <a th:href="@{/admin/cs/notice/modify(cate1=${cate1}, pageNum=${currentPage}, no=${entity.no})}" class="btn btn-secondary btn-lg btnModifyNotice" role="button">수정</a>
+              <a th:href="@{/admin/cs/notice/list(cate1=${cate1}, pageNum=${currentPage})}" class="btn btn-primary btn-lg" role="button">목록</a>
             </div>
           </form>
         </div>
