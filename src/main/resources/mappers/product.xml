@@ -75,6 +75,9 @@
 		select count(`revMo`) from `km_product_review` WHERE `prodNo`=${prodNo};
 	</select>
 	
+	<delete id="deleteCart">
+		delete from `km_product_cart` where `prodNo`= ${prodNo} and `uid` = ${uid};
+	</delete>
 
 
 </mapper>
