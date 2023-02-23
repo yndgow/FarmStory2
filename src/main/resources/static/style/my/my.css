@@ -303,7 +303,7 @@ strong{
     text-indent: 6px;
     line-height: 20px;
     letter-spacing: -1px;
-    background: url(/kmarket2/img/my/my_sprites.png)
+    background: url(/kmarket2/img/my/my_sprites.png);
 }
 #wrapper > main > section > div > table .my_order_btn.my_receive{background-position: -368px -179px;}
 #wrapper > main > section > div > table .my_order_btn.my_review{background-position: -368px -203px;}

@@ -1,18 +1,15 @@
 package kr.co.kmarket2.vo;
 
-import java.time.LocalDateTime;
 
 import lombok.Data;
 
 @Data
 public class CouponVO {
 
-	private int no;
+	private int id;
 	private String name;
 	private int discount;
-	private String condition;
-	private int status;
-	private LocalDateTime rdate;
-	private LocalDateTime rexpdate;
+	private int condition;
 	
+	private MemberCoupon memberCoupon;
 }

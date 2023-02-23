@@ -17,6 +17,7 @@ public class CsQnaVO {
 	private int hit;
 	private String regip;
 	private Date rdate;
+	private String seller; // 추가 0223 판매자 null 이면 관리자문의, not null 이면 판매자문의
 	
 	// 추가필드 김지홍
 	private String c1Name;
