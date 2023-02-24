@@ -13,67 +13,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
     <link rel="stylesheet" th:href="@{/style/main/style.css}"/>
     <link rel="stylesheet" th:href="@{/style/product/style.css}"/>
-	<script>
-	    $(document).ready(function(){
-	    
-      		  $('#top').click(function(){
-	            $(window).scrollTop(0);
-	  	      });
-	       
-	    
-	          $(".slider > ul").bxSlider({
-	            easing: "linear",
-	          });
-	          
-	          /* 스크롤 이동 */
-	          $('.scrollBtnHit').on('click', function(e){
-	        	  e.preventDefault();
-	        	  let location = document.querySelector("#hit").offsetTop;
-	
-	        	  window.scrollTo({top:location, behavior:'smooth'});
-	        	  
-	          });
-	          $('.scrollBtnScore').on('click', function(e){
-	        	  e.preventDefault();
-	        	  let location = document.querySelector("#recommend").offsetTop;
-	
-	        	  window.scrollTo({top:location, behavior:'smooth'});
-	        	  
-	          });
-	          $('.scrollBtnNew').on('click', function(e){
-	        	  e.preventDefault();
-	        	  let location = document.querySelector("#new").offsetTop;
-	
-	        	  window.scrollTo({top:location, behavior:'smooth'});
-	        	  
-	          });
-	          $('.scrollBtnDis').on('click', function(e){
-	        	  e.preventDefault();
-	        	  let location = document.querySelector("#discount").offsetTop;
-	
-	        	  window.scrollTo({top:location, behavior:'smooth'});
-	        	  
-	          });
-	          
-	        });
-	        $(function(){
-	            let best = $("aside > .best");
-	            
-	            $(window).scroll(function(){
-	
-	              let t = $(this).scrollTop();
-	
-	              if(t > 620){
-	                best.css({
-	                  position: "fixed",
-	                  top: "0",
-	                });
-	              }else{
-	                best.css({position: "static"});
-	              }
-	            });
-	        });
-	</script>
 </head>
 <body>
     <div id="wrapper">
@@ -119,7 +58,7 @@
                 </div>
             </div>
         </header>
-        <main>
+        <main id="product">
             <aside>
                 <!-- 카테고리 -->
                 <ul class="category">
@@ -212,3 +151,4 @@
                         </ol>
                     </li>
                 </ul>
+			</aside>
