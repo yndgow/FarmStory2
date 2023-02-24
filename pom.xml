@@ -82,6 +82,20 @@
 		    <groupId>com.google.code.gson</groupId>
 		    <artifactId>gson</artifactId>
 		</dependency>
+
+	<!--[출처] Spring Ajax 를 사용하여 Map 으로 값 받기 ( DB Insert 리턴 값 받기 )|작성자 피실 -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <version>2.10.1</version>
+		</dependency>
+		
 	</dependencies>
 	
 	<build>
