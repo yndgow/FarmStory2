@@ -1,5 +1,11 @@
 package kr.co.kmarket2.controller;
 
+/*
+ * 날짜: 2023/02/15
+ * 이름:   
+ * 내용: admin/cs controller 
+ */
+ 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +24,10 @@ public class CsController {
 	private CsService service;
 	
 	@GetMapping("cs/index")
-	public String index(Model model) {
+	public String index(Model model, String cate1) {
 		List<CsNoticeVO> notice = service.selectIndexNotice();
-		List<CsQnaVO> qna = service.selectIndexQna();
+		List<CsQnaVO> qna = service.selectIndexQna(cate1);
+		
 		model.addAttribute("notice", notice);
 		model.addAttribute("qna", qna);
 		

@@ -23,8 +23,8 @@ public class CsService {
 		return dao.selectIndexNotice();
 	}
 	
-	public List<CsQnaVO> selectIndexQna() {
-		return dao.selectIndexQna();
+	public List<CsQnaVO> selectIndexQna(String cate1) {
+		return dao.selectIndexQna(cate1);
 	}
 	
 	// notice
