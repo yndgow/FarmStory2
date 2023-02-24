@@ -27,15 +27,15 @@
         <table border="0">
             <tr th:each="prod,i:${products}">
                 <td>
-                    <a th:href="@{/product/view(prodNo=${prod.prodNo},cate1=${prodcate1},cate2=${prodcate2})}" class="thumb"><img th:src="${prod.thumb1}" alt="상품이미지"></a>
+                    <a th:href="@{/product/view(prodNo=${prod.prodNo},cate1=${prod.prodCate1},cate2=${prod.prodCate2})}" class="thumb"><img th:src="${prod.thumb1}" alt="상품이미지"></a>
                 </td>
                 <td>
                     <h3 class="name">[[${prod.prodName}]]</h3>
-                    <a href="@{/product/view(prodNo=${prod.prodNo},cate1=${prodcate1},cate2=${prodcate2})}" class="desc">[[${prod.descript}]]</a>
+                    <a th:href="@{/product/view(prodNo=${prod.prodNo},cate1=${prod.prodCate1},cate2=${prod.prodCate2})}" class="desc">[[${prod.descript}]]</a>
                 </td>
                 <td>
                     <ul>
-                        <li th:if="not ${#strings.isEmpty(prod.discount)}"><ins class="dis-price">[[${prod.price}*(100-${prod.discount}/100)]]</ins></li>
+                        <li th:if="not ${#strings.isEmpty(prod.discount)}"><ins class="dis-price">[[${prod.price}*(100-${prod.discount})/100]]</ins></li>
                         <li>
                             <del class="org-price">[[${prod.price}]]]</del>
                             <span th:if="not ${#strings.isEmpty(prod.discount)}" class="discount">10%</span>
