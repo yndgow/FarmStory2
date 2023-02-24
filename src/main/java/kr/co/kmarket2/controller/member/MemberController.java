@@ -19,6 +19,11 @@ public class MemberController {
 		return "member/login";
 	}
 	
+	@GetMapping("accessDenied")
+	public String denied() {
+		return "denied";
+	}
+	
 	@GetMapping("member/join")
 	public String join() {
 		return "member/join";

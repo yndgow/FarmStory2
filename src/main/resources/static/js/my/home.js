@@ -22,15 +22,13 @@ function qnaStat(){
 function asideAddClass(){
     
     let cur_url = window.location.href;
-    let last_index = cur_url.lastIndexOf("/"); // /의 마지막 인덱스 가져오기
-    let str = cur_url.substring(last_index+1 ); // 현재 주소에서 확장자를 뺀 마지막 경로 이름 가져오기 ex) home
 
     let asideOn = document.getElementsByClassName("aside_on");
     let asideNameList = ["ordered", "point", "coupon", "review", "qna", "info"];
 
-    // str의 
+    // 배열을 순회하며 단어가 포함되면 클래스 추가해서 시각효과 표현
     for(let i = 0; i<asideNameList.length; i++){
-        if(str === asideNameList[i]){
+        if(cur_url.includes(asideNameList[i])){
             asideOn[i].setAttribute("class", "on list-group-item");
         }    
     }
