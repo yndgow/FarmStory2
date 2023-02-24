@@ -68,6 +68,7 @@ public class CsQnaController {
 		
 		model.addAttribute("c1Names", c1Names);
 		model.addAttribute("c2Names", c2Names);
+		model.addAttribute("cate1", cate1);
 		
 		return "cs/qna/write";
 	}
