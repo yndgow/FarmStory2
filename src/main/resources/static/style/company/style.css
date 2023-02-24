@@ -134,9 +134,9 @@ p.desc {
     min-width: 1600px;
     height: auto;            
 }
-.slide2 {background-image: url('/Kmarket2/company/img/bg_system_sec.jpg');}
-.slide3 {background-image: url('/Kmarket2/company/img/bg_product_sec.jpg');}
-.slide4 {background-image: url('/Kmarket2/company/img/bg_service_sec.jpg');}
+.slide2 {background-image: url('/kmarket2/company/img/bg_system_sec.jpg');}
+.slide3 {background-image: url('/kmarket2/company/img/bg_product_sec.jpg');}
+.slide4 {background-image: url('/kmarket2/company/img/bg_service_sec.jpg');}
 
 .scroll-icon {
     position: absolute;
@@ -245,7 +245,7 @@ main > .content > p {
 
 /* introduce */
 #introduce > .cover {
-    background-image: url('/Kmarket2/company/img/bg_company_introduce.jpg');
+    background-image: url('/kmarket2/company/img/bg_company_introduce.jpg');
 }
 
 #introduce img {
@@ -256,7 +256,7 @@ main > .content > p {
 
 /* notice */
 #notice > .cover {
-    background-image: url('/Kmarket2/company/img/bg_company_notice.jpg');
+    background-image: url('/kmarket2/company/img/bg_company_notice.jpg');
 }
 
 #notice img {
@@ -268,7 +268,7 @@ main > .content > p {
 /* promote */
 #promote {}
 #promote > .cover {
-    background-image: url('/Kmarket2/company/img/bg_company_promote.jpg');
+    background-image: url('/kmarket2/company/img/bg_company_promote.jpg');
 }
 #promote > .content {}
 #promote > .content > article {
@@ -294,7 +294,7 @@ main > .content > p {
 
 /* manage */
 #manage > .cover {
-    background-image: url('/Kmarket2/company/img/bg_company_manage.jpg');
+    background-image: url('/kmarket2/company/img/bg_company_manage.jpg');
 }
 
 #manage > .content > ul {
@@ -376,12 +376,12 @@ main > .content > p {
 }
 #board.list > .page > .prev {
     font-size: 0;
-    background-image: url('/Kmarket2/company/img/cs_sprites.png');
+    background-image: url('/kmarket2/company/img/cs_sprites.png');
     background-position: -706px -652px;
 }
 #board.list > .page > .next {
     font-size: 0;
-    background-image: url('/Kmarket2/company/img/cs_sprites.png');
+    background-image: url('/kmarket2/company/img/cs_sprites.png');
     background-position: -628px -652px;
 }
 #board.list > .page > .num {}

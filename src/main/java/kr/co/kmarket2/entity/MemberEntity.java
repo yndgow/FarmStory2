@@ -4,8 +4,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /*
  * 날짜 : 2023/02/16
@@ -13,7 +18,11 @@ import lombok.Data;
  * 내용 : Member Entity
  */
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity
 @Builder
 @Table(name = "km_member")
@@ -42,8 +51,8 @@ public class MemberEntity {
 	private String regip;
 	private String wdate;
 	private String rdate;
-	private int etc1;
-	private int etc2;
+	private Integer etc1;
+	private Integer etc2;
 	private String etc3;
 	private String etc4;
 	private String etc5;

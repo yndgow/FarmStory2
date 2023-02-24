@@ -39,7 +39,7 @@
                         <span class="essential">(필수)</span>
                         케이마켓 이용약관
                     </h3>
-                    <input type="text" name="type" th:value="${type}">
+                    <input type="hidden" name="type" th:value="${type}">
                     <textarea th:if="${type=='buyer'}" class="terms" readonly>[[${vo.terms}]]</textarea>
                     <textarea th:if="${type=='seller'}" class="terms" readonly>[[${vo.tax}]]</textarea>
                     <label>

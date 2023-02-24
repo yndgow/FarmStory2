@@ -25,10 +25,10 @@ public interface ProductMapper {
 	
 	ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
 	
-    @Mapping(source = "dto.thumb1", target = "thumb1", qualifiedByName = "title")
-    @Mapping(source = "dto.thumb2", target = "thumb2", qualifiedByName = "title")
-    @Mapping(source = "dto.thumb3", target = "thumb3", qualifiedByName = "title")
-    @Mapping(source = "dto.detail", target = "detail", qualifiedByName = "title")
+    @Mapping(source = "thumb1", target = "thumb1", qualifiedByName = "title")
+    @Mapping(source = "thumb2", target = "thumb2", qualifiedByName = "title")
+    @Mapping(source = "thumb3", target = "thumb3", qualifiedByName = "title")
+    @Mapping(source = "detail", target = "detail", qualifiedByName = "title")
     ProductEntity toEntity(ProductDTO dto);
 	
     @Named("title")

@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,43 +26,46 @@ public class SecurityConfig {
 	@Autowired
 	private DataSource dataSource;
 	
+	@Autowired
+	private SecurityUserService securityUserService;
+	
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
     	// 접근권한 설정
         http.authorizeHttpRequests()
-        	.antMatchers("/").permitAll();
-//        	.antMatchers("/list").hasAnyRole("2","3","4","5")
+        	.antMatchers("/").permitAll()
+        	.antMatchers("/my/**","/admin/**").hasAnyRole("2","3","4","5");
 //        	.antMatchers("/write").hasAnyRole("3","4","5")
 //        	.antMatchers("/view").hasAnyRole("3","4","5");
 //        	.antMatchers("/admin/**").hasRole("ADMIN")
 //        	.antMatchers("/manager/**").hasAnyRole("ADMIN", "MANAGER")
 //        	.antMatchers("/member/**").hasAnyRole("ADMIN", "MANAGER", "MEMBER");
         	
-//		http.formLogin()
-//			.loginPage("/user/login")
-//			.defaultSuccessUrl("/list")
-//			.failureUrl("/user/login?success=100")
-//			.usernameParameter("uid")
-//			.passwordParameter("pass");
+		http.formLogin()
+			.loginPage("/member/login")
+			.defaultSuccessUrl("/")
+			.failureUrl("/member/login?success=100")
+			.usernameParameter("uid")
+			.passwordParameter("pass");
         
         // 사이트 위조 방지 설정
         http.csrf().disable();
         
         // 로그아웃
-//        http.logout()
-//			.invalidateHttpSession(true)
-//			.logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))
-//			.logoutSuccessUrl("/user/login?success=200");
+        http.logout()
+			.invalidateHttpSession(true)
+			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+			.logoutSuccessUrl("/member/login?success=200");
         
         // 자동 로그인
-//        http.rememberMe()
-//        				.userDetailsService(securityUserService)
-//        				.tokenRepository(tokenRepository())
-//        				.tokenValiditySeconds(600);
-//        
-//        http.exceptionHandling()
-//        	.accessDeniedPage("/accessDenied");
+        http.rememberMe()
+        				.userDetailsService(securityUserService)
+        				.tokenRepository(tokenRepository())
+        				.tokenValiditySeconds(600);
+        
+        http.exceptionHandling()
+        	.accessDeniedPage("/member/login?success=300");
         
         
         
