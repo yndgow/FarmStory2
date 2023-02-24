@@ -18,7 +18,7 @@ public class MainController {
 	@Autowired
 	private ProductService service;
 	
-	@GetMapping(value={"", "index"})
+	@GetMapping(value={"/", "index"})
 	public String main(Principal principal ,Model model) {
 		List<ProductVO> productsbest = service.selectProductsBest();
 		List<ProductVO> productshit = service.selectProductsHit();

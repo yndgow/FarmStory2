@@ -65,7 +65,7 @@
 		`rdate`= now();
 	</insert>
 	
-	 <select id="selectCartByCartNo" resultType="kr.co.kmarket2.vo.CartVO">
+	 <select id="selectCartByCartNo" resultType="kr.co.kmarket2.vo.ProductCartVO">
     	select a.*, b.`prodName`, b.`thumb1`, b.`descript`, b.`prodCate1`, b.`prodCate2` from `km_product_cart` as a join `km_product` as b on a.prodNo=b.prodNo where `cartNo` in (<foreach collection="list" item="cartNo" separator=",">#{cartNo}</foreach>);
     </select>
 	

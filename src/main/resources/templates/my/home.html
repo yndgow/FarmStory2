@@ -29,9 +29,10 @@
                    
                   <td><img th:src="@{|/images/${el.thumb1}|}" alt="" class="orderImg"></td>
                   <td>
+                  	<p><a href="#">주문번호 :[[${el.ordNo}]]</a></p>
                     <p th:text="${el.company}">상호명</p>
                     <p th:text="${el.prodName}">상품명</p>
-                    <p>수량 : [[${el.ordCount}]]개 / 주문번호 : [[${el.ordNo}]]</p>
+                    <p>수량 : [[${el.ordCount}]]개</p>
                     <p th:text="|${#numbers.formatInteger(el.ordTotPrice, '3','COMMA')}원|"></p>
                   </td>
                   <td th:text="${el.deliveryStatus}" class="deli_Stat">배송완료</td>
