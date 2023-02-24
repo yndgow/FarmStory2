@@ -350,6 +350,8 @@ main > section > section{
 }
 main > section > section > article{
     float: left;
+    width: 25%;
+    height: 345px;
 }
 main > section > section > h3 > span{
     display: inline-block;

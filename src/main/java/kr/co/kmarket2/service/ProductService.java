@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import kr.co.kmarket2.dao.ProductDAO;
 import kr.co.kmarket2.vo.ProductCartVO;
+import kr.co.kmarket2.vo.ProductCate1VO;
+import kr.co.kmarket2.vo.ProductCate2VO;
 import kr.co.kmarket2.vo.ProductOrderVO;
 import kr.co.kmarket2.vo.ProductReviewVO;
 import kr.co.kmarket2.vo.ProductVO;
@@ -17,6 +19,13 @@ public class ProductService {
 	
 	@Autowired
 	private ProductDAO dao;
+	
+	public List<ProductCate1VO> selectCate1(){
+		return dao.selectCate1();
+	}
+	public List<ProductCate2VO> selectCate2(){
+		return dao.selectCate2();
+	}
 	
 	//main list
 	public List<ProductVO> selectProductsBest(){
@@ -36,12 +45,12 @@ public class ProductService {
 	}
 	
 	// list
-	public List<ProductVO> selectProducts(String cate1, String cate2, String sort){
-		return dao.selectProducts(cate1,cate2,sort);
+	public List<ProductVO> selectProducts(String prodcate1, String prodcate2, String sort){
+		return dao.selectProducts(prodcate1,prodcate2,sort);
 	}
 
-	public int selectCountTotal(String cate1, String cate2) {
-		return dao.selectCountTotal(cate1, cate2);
+	public int selectCountTotal(String prodcate1, String prodcate2) {
+		return dao.selectCountTotal(prodcate1, prodcate2);
 	}
 	
 	// view
