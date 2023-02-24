@@ -52,7 +52,7 @@
 		SELECT * FROM `km_product` WHERE `prodNo` = #{prodNo};
 	</select>
 
-	<select id="selectProductReview" resultType="kr.co.kmarket2.vo.ProductReviewVO">
+	<select id="selectReview" resultType="kr.co.kmarket2.vo.ProductReviewVO">
 		SELECT a.*, b.prodName FROM `km_product_review` AS a
 		JOIN `km_product` AS b ON a.`prodNo` = b.`prodNo`
 		WHERE a.`prodNo` = ${prodNo}
@@ -61,14 +61,14 @@
 	
 	<insert id="insertCart" useGeneratedKeys="true">
 		insert into `km_product_cart` set
-		`uid`=${uid},
-		`prodNo`=${prodNo},
-		`count`=${count},
-		`price`=${price},
-		`discount`=${discount},
-		`point`=${point},
-		`delivery`=${delivery},
-		`total`=${total},
+		`uid`=${vo.uid},
+		`prodNo`=${vo.prodNo},
+		`count`=${vo.count},
+		`price`=${vo.price},
+		`discount`=${vo.discount},
+		`point`=${vo.point},
+		`delivery`=${vo.delivery},
+		`total`=${vo.total},
 		`rdate`= now();
 	</insert>
 	

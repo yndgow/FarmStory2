@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -66,13 +67,18 @@ public class ProductController {
 	}
 
 	@GetMapping("product/view")
-	public String view(Model model, String cate1, String cate2, String prodNo, String pg) {
+	public String view(Model model, String prodCate1, String prodCate2, String prodNo, String pg) {
+		// 카테 출력
+		List<ProductCate1VO> cate1 = service.selectCate1();
+		List<ProductCate2VO> cate2 = service.selectCate2();
 		model.addAttribute("cate1",cate1);
 		model.addAttribute("cate2",cate2);
 		
 		//상품출력
 		ProductVO product = service.selectProduct(prodNo);
 		model.addAttribute("product", product);
+		model.addAttribute("prodCate1", prodCate1);
+		model.addAttribute("prodCate2", prodCate2);
 		
 		// review
 		int currentPage = service.getCurrentPage2(pg);
@@ -96,9 +102,8 @@ public class ProductController {
 	}
 	
 	@ResponseBody
-	@PostMapping("product/view")
-	public Map<String, Integer> view(ProductCartVO vo, int proNo){
-		
+	@PostMapping("product/cartInert")
+	public Map<String, Integer> cartInert(@RequestBody ProductCartVO vo, int prodNo){
 		Map<String, Integer> map = new HashMap<>();
 		int	result = service.insertCart(vo);
 		map.put("result", result);
