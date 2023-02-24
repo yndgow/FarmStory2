@@ -61,7 +61,7 @@ $(function(){
                     <td>
                       <select name="type">
                         <option value="0">1차 선택</option>
-                        <option th:each="cate:${c1Names}" th:value="2">[[${cate.c1Name}]]</option>
+                        <option th:each="cate:${c1Names}" th:value="${cate.cate1}">[[${cate.c1Name}]]</option>
                       </select>
 					  
                     </td>

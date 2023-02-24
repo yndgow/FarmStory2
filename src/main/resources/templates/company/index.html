@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title>케이마켓 회사소개</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="/kmarket2/style/company/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-    <script src="./js/company.js"></script>
+    <script src="/kmarket2/js/company/company.js"></script>
     <script>
         $(function(){
 
@@ -59,7 +59,7 @@
     <div class="swiper">
         <header>
             <div>
-                <a href="./index.html"><img src="./img/company_header_logo1.png" width="200" alt="로고"></a>
+                <a th:href="@{company}"><img th:src="@{/img/company/company_header_logo1.png}" width="200" alt="로고"></a>
                 <ul>
                     <li><a href="./introduce.html">회사소개</a></li>
                     <li><a href="./notice.html">전자공시</a></li>
@@ -73,7 +73,7 @@
         <div class="swiper-wrapper">
           <!-- Slides -->
           <div class="swiper-slide slide1">
-            <video src="./img/movie.mp4" loop autoplay muted></video>
+            <video th:src="@{/img/company/movie.mp4}" loop autoplay muted></video>
             <div class="scroll-icon">
                 <span></span>
                 <span></span>

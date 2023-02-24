@@ -28,7 +28,7 @@
 	</select>
 	
 	<select id="selectCartProducts" resultType="kr.co.kmarket2.vo.ProductCartVO">>
-		SELECT * FROM `km_product_cart` WHERE `uid` = #{uid};
+		select a.*, b.`prodName`, b.`thumb1`, b.`descript`, b.`prodCate1`, b.`prodCate2` from `km_product_cart` as a join `km_product` as b on a.prodNo=b.prodNo where `uid`=#{uid};
 	</select>
 
 	<select id="selectProducts" resultType="kr.co.kmarket2.vo.ProductVO">
@@ -61,14 +61,14 @@
 	
 	<insert id="insertCart" useGeneratedKeys="true">
 		insert into `km_product_cart` set
-		`uid`=#{vo.uid},
-		`prodNo`=#{vo.prodNo},
-		`count`=#{vo.count},
-		`price`=#{vo.price},
-		`discount`=#{vo.discount},
-		`point`=#{vo.point},
-		`delivery`=#{vo.delivery},
-		`total`=#{vo.total},
+		`uid`=#{uid},
+		`prodNo`=#{prodNo},
+		`count`=#{count},
+		`price`=#{price},
+		`discount`=#{discount},
+		`point`=#{point},
+		`delivery`=#{delivery},
+		`total`=#{total},
 		`rdate`= now();
 	</insert>
 	

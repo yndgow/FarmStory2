@@ -11,7 +11,8 @@
 	</select>
 	
 	<select id="selectIndexQna" resultType="kr.co.kmarket2.vo.CsQnaVO">
-		select * from `km_cs_qna`
+		select a.*, b.c1Name from `km_cs_qna` as a
+		join `km_cs_cate1` as b on a.cate1 = b.cate1
 		order by `no` desc
 		limit 0, 5;
 	</select>
@@ -89,7 +90,7 @@
 	</insert>
 	
 	<select id="selectCate1" resultType="kr.co.kmarket2.vo.Cate1VO">
-		select distinct `c1Name` from `km_cs_cate1` AS a
+		select distinct `c1Name`, a.`cate1` from `km_cs_cate1` AS a
 		join `km_cs_cate2` as b on a.cate1 = b.cate1 ;
 	</select>
 	<select id="selectCate2" resultType="kr.co.kmarket2.vo.Cate2VO">

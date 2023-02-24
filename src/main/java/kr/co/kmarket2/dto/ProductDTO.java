@@ -28,6 +28,7 @@ public class ProductDTO {
 	private Integer hit;
 	private Integer score;
 	private Integer review;
+	
 	private MultipartFile thumb1;
 	private MultipartFile thumb2;
 	private MultipartFile thumb3;

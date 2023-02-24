@@ -18,7 +18,7 @@ public interface CsDAO {
 	
 	// index
 	public List<CsNoticeVO> selectIndexNotice();
-	public List<CsQnaVO> selectIndexQna();
+	public List<CsQnaVO> selectIndexQna(String cate1);
 	
 	// notice
 	public CsNoticeVO selectNotice(int no);
