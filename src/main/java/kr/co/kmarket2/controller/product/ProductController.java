@@ -103,7 +103,7 @@ public class ProductController {
 	
 	@ResponseBody
 	@PostMapping("product/cartInert")
-	public Map<String, Integer> cartInert(@RequestBody ProductCartVO vo, int prodNo){
+	public Map<String, Integer> cartInert(@RequestBody ProductCartVO vo){
 		Map<String, Integer> map = new HashMap<>();
 		int	result = service.insertCart(vo);
 		map.put("result", result);

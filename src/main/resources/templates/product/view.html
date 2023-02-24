@@ -54,11 +54,11 @@
 				console.log(jsonData);
 				if(uid){
 					$.ajax({
-						url: '/kmarket2/product/view',
+						url: '/kmarket2/product/cartInert',
 						type: 'post',
 						data: jsonData,
 						dataType: 'json',
-						contentType:'applcation//json',
+						contentType:'application/json',
 						success: function(data){
 							if(confirm('장바구니에 추가되었습니다.\n장바구니로 이동하시겠습니까?')){
 								location.href = "/kmarket2/product/cart";
