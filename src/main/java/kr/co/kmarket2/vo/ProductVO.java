@@ -3,6 +3,8 @@ package kr.co.kmarket2.vo;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 public class ProductVO {
@@ -41,8 +43,8 @@ public class ProductVO {
 	private String etc5;
 	
 	//추가 필드
+	private String c1Name;
 	private int cate1;
 	private int cate2;
-	private String c1Name;
 	private String c2Name;
 }

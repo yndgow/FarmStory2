@@ -30,7 +30,7 @@ public class MainController {
 		
 		model.addAttribute("best", productsbest);
 		model.addAttribute("hit", productshit);
-		model.addAttribute("socore", productsscore);
+		model.addAttribute("score", productsscore);
 		model.addAttribute("latest", productsnew);
 		model.addAttribute("discount", productsdiscount);
 		model.addAttribute("imagesEndpoint", "images/");

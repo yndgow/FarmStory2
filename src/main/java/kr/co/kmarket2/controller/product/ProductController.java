@@ -19,10 +19,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.kmarket2.service.ProductService;
 import kr.co.kmarket2.vo.MemberVO;
 import kr.co.kmarket2.vo.ProductCartVO;
+import kr.co.kmarket2.vo.ProductCate1VO;
+import kr.co.kmarket2.vo.ProductCate2VO;
 import kr.co.kmarket2.vo.ProductReviewVO;
 import kr.co.kmarket2.vo.ProductVO;
+import lombok.extern.slf4j.Slf4j;
 
-
+@Slf4j
 @Controller
 public class ProductController {
 	
@@ -30,18 +33,27 @@ public class ProductController {
 	private ProductService service;
 
 	@GetMapping("product/list")
-	public String list(Model model, String cate1, String cate2, String pg, String sort) {
+	public String list(Model model, String prodcate1, String prodcate2, String pg, String sort) {
+		// 카테 출력
+		List<ProductCate1VO> cate1 = service.selectCate1();
+		List<ProductCate2VO> cate2 = service.selectCate2();
+
 		// 페이징 처리
 		int currentPage = service.getCurrentPage(pg);
         int start = service.getLimitStart(currentPage);
         int total = 0;
-        total = service.selectCountTotal(cate1,cate1);
+        total = service.selectCountTotal(prodcate1,prodcate2);
         int lastPageNum = service.getLastPageNum(total);
         int pageStartNum = service.getpageStartNum(total, start);
         int[] groups = service.getPageGroup(currentPage, lastPageNum);
-
-        List<ProductVO> products = service.selectProducts(cate1, cate2, sort);
+//        log.info("1 : " + groups[0]);
+        List<ProductVO> products = service.selectProducts(prodcate1, prodcate1, sort);
 		
+        
+        model.addAttribute("cate1", cate1);
+        model.addAttribute("cate2", cate2);
+        model.addAttribute("prodcate1", prodcate1);
+        model.addAttribute("prodcate2", prodcate2);
         model.addAttribute("products", products);
 		model.addAttribute("sort", sort);
 		model.addAttribute("pg", pg);
@@ -69,7 +81,7 @@ public class ProductController {
         int total = service.selectCountTotalReview(prodNo);
         int lastPageNum = service.getLastPageNum2(total);
         int pageStartNum = service.getpageStartNum2(total, start);
-        int groups[] = service.getPageGroup2(currentPage, lastPageNum);
+        int[] groups = service.getPageGroup2(currentPage, lastPageNum);
 		
         List<ProductReviewVO> reviews = service.selectReview(prodNo, start);
         model.addAttribute("reviews", reviews);

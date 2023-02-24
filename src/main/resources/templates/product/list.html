@@ -1,11 +1,17 @@
-<th:block th:include="@{_header.html}"/>
+<th:block th:include="@{product/_header.html}"/>
    <section class="list">
        <!-- 제목, 페이지 네비 -->
        <nav>
            <h1>상품목록</h1>
            <p>
-               HOME > <span>[[${products.c1Name]]</span>
-               > <strong>[[${products.c2Name]]</strong>
+               HOME > 
+               <th:block th:each="ca1, i:${cate1}">
+               	<th:block th:if="${prodcate1} == ${ca1.cate1}"><span>[[${ca1.c1Name}]]</span></th:block>
+               	</th:block>
+                >
+                <th:block th:each="ca2, i:${cate2}">
+              		<th:block th:if="${prodcate1} == ${ca2.cate1} and ${prodcate2} == ${ca2.cate2}"><strong>[[${ca2.c2Name}]]</strong></th:block>
+           		</th:block>
            </p>
        </nav>
        <!-- 정렬메뉴 -->
@@ -21,11 +27,11 @@
         <table border="0">
             <tr th:each="prod,i:${products}">
                 <td>
-                    <a th:href="@{/view(prodNo=${prod.prodNo},cate1${prod.cate1},cate2${prod.cate2})}" class="thumb"><img th:src="${prod.thumb1}" alt="상품이미지"></a>
+                    <a th:href="@{/product/view(prodNo=${prod.prodNo},cate1=${prodcate1},cate2=${prodcate2})}" class="thumb"><img th:src="${prod.thumb1}" alt="상품이미지"></a>
                 </td>
                 <td>
                     <h3 class="name">[[${prod.prodName}]]</h3>
-                    <a href="@{/view(prodNo=${prod.prodNo},cate1${prod.cate1},cate2${prod.cate2})}" class="desc">[[${prod.descript}]]</a>
+                    <a href="@{/product/view(prodNo=${prod.prodNo},cate1=${prodcate1},cate2=${prodcate2})}" class="desc">[[${prod.descript}]]</a>
                 </td>
                 <td>
                     <ul>
@@ -49,21 +55,21 @@
             </tr>
         </table>
         <div class="paging">
-        	<th:block th:if="#{groups[0]>1}">
-	            <span class="prev"><a href="@{/list(pg=${groups[0]-1},cate1=${cate1},cate2=${cate2},sort${sort})}">&lt;이전</a></span>
+        	<th:block th:if="${groups[0]>1}">
+	            <span class="prev"><a href="@{/list(pg=${groups[0]-1},cate1=${cate1},cate2=${cate2},sort=${sort})}">&lt;이전</a></span>
         	</th:block>
-
-        	<th:block th:each="num:${#numbers.sequence(groups[0].groups[1])}">
+			<th:block th:if="${groups[1] != 0}">
+        	<th:block th:each="num:${#numbers.sequence(groups[0], groups[1])}">
 	            <span class="num">
-	                <a th:href="@{/list(pg=${num},cate1=${cate1},cate2=${cate2},sort${sort})}" 
+	                <a th:href="@{/list(pg=${num},cate1=${cate1},cate2=${cate2},sort=${sort})}" 
 	                   th:class="${num == currentPage ? 'num on' : 'num'}">[[${num}]]</a>
 	            </span>
         	</th:block>
-    
-        	<th:block th:if="#{groups[1]<lastPageNum}">
-	            <span class="prev"><a href="@{/list(pg=${groups[1]+1},cate1=${cate1},cate2=${cate2},sort${sort})}">다음&gt;</a></span>
+        	</th:block>
+        	<th:block th:if="${groups[1]<lastPageNum}">
+	            <span class="prev"><a href="@{/list(pg=${groups[1]+1},cate1=${cate1},cate2=${cate2},sort=${sort})}">다음&gt;</a></span>
         	</th:block>
         </div>
     </section>
 </main>
-<th:block th:include="@{_footer.html}"/>
+<th:block th:include="@{product/_footer.html}"/>
