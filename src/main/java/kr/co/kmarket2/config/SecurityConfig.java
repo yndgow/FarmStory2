@@ -29,13 +29,15 @@ public class SecurityConfig {
 	@Autowired
 	private SecurityUserService securityUserService;
 	
+	
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
     	// 접근권한 설정
         http.authorizeHttpRequests()
-        	.antMatchers("/").permitAll()
-        	.antMatchers("/my/**","/admin/**").hasAnyRole("2","3","4","5");
+        	.antMatchers("/index").permitAll()
+        	.antMatchers("/my/**","/admin/**")
+        	.hasAnyRole("2","3","4","5");
 //        	.antMatchers("/write").hasAnyRole("3","4","5")
 //        	.antMatchers("/view").hasAnyRole("3","4","5");
 //        	.antMatchers("/admin/**").hasRole("ADMIN")
@@ -64,8 +66,8 @@ public class SecurityConfig {
         				.tokenRepository(tokenRepository())
         				.tokenValiditySeconds(600);
         
-        http.exceptionHandling()
-        	.accessDeniedPage("/member/login?success=300");
+//        http.exceptionHandling().accessDeniedPage("/accessDenied");
+//        	.accessDeniedPage("/accessDenied");
         
         
         

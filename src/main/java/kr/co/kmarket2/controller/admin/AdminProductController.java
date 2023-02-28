@@ -48,19 +48,15 @@ public class AdminProductController {
 	// 관리자 상품 목록
 	@GetMapping("admin/product/list")
 	public String list(Model model,
-						@RequestParam(defaultValue = "1") int pageNum,
-						@RequestParam(required = false) String prodName,
-						@RequestParam(required = false) String prodNo,
-						@RequestParam(required = false) String company,
-						@RequestParam(required = false) String seller,
-						String condition, String search_value) {
+						@RequestParam(defaultValue = "1") int pageNum
+					) {
 		
 		Pageable pageable = PageRequest.of(pageNum-1, 10, Sort.by("rdate").descending());
 		Page<ProductEntity> products = productRepo.findAll(pageable);
 		
 		int[] pageNumbers = adminService.getPageNumbers(products);
 
-		model.addAttribute("products", products);
+		model.addAttribute("products", products.getContent());
 		model.addAttribute("currentPage", pageNum);
 		model.addAttribute("totalPages", products.getTotalPages());
 		model.addAttribute("startPages", pageNumbers[0]);

@@ -91,7 +91,10 @@ async function updateTable(page) {
 		<td>${product.stock}</td>
 		<td>${product.seller}</td>
 		<td>${product.hit}</td>
-        <td><a href="">[수정]</a><a href="">[삭제]</a></td>`;
+        <td>
+          <button class="btn btn-info">수정</button>
+          <button class="btn btn-secondary btnDeleteProd" th:id="${product.prodNo}">삭제</button>
+        </td>`;
         table.tBodies[0].appendChild(row);
   	});
   	updatePagination(page);
@@ -298,6 +301,12 @@ function adminDeleteProd(){
 			}) 
 		});	
 	}
+}
+function adminDeleteProdEvent(){
+	let table = document.getElementById('admin_table');
+	table.addEventListener('click', function(e){
+		alert('tableEvent');
+	});
 }
 // 문의내역 - 상태 변경(0 = 검토중, 1 = 답변완료) 
 function qnaStat(){

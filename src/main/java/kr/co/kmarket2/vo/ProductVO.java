@@ -24,10 +24,10 @@ public class ProductVO {
 	private int hit;
 	private int score;
 	private int review;
-	private MultipartFile thumb1;
-	private MultipartFile thumb2;
-	private MultipartFile thumb3;
-	private MultipartFile detail;
+	private String thumb1;
+	private String thumb2;
+	private String thumb3;
+	private String detail;
 	private String status;
 	private String duty;
 	private String receipt;
