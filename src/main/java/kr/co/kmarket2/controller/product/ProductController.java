@@ -34,7 +34,7 @@ public class ProductController {
 	private ProductService service;
 
 	@GetMapping("product/list")
-	public String list(Model model, String prodcate1, String prodcate2, String pg, String sort) {
+	public String list(Model model, String prodCate1, String prodCate2, String pg, String sort) {
 		// 카테 출력
 		List<ProductCate1VO> cate1 = service.selectCate1();
 		List<ProductCate2VO> cate2 = service.selectCate2();
@@ -43,18 +43,18 @@ public class ProductController {
 		int currentPage = service.getCurrentPage(pg);
         int start = service.getLimitStart(currentPage);
         int total = 0;
-        total = service.selectCountTotal(prodcate1,prodcate2);
+        total = service.selectCountTotal(prodCate1,prodCate2);
         int lastPageNum = service.getLastPageNum(total);
         int pageStartNum = service.getpageStartNum(total, start);
         int[] groups = service.getPageGroup(currentPage, lastPageNum);
 //        log.info("1 : " + groups[0]);
-        List<ProductVO> products = service.selectProducts(prodcate1, prodcate1, sort);
+        List<ProductVO> products = service.selectProducts(prodCate1, prodCate2, sort);
 		
         
         model.addAttribute("cate1", cate1);
         model.addAttribute("cate2", cate2);
-        model.addAttribute("prodcate1", prodcate1);
-        model.addAttribute("prodcate2", prodcate2);
+        model.addAttribute("prodcate1", prodCate1);
+        model.addAttribute("prodcate2", prodCate2);
         model.addAttribute("products", products);
 		model.addAttribute("sort", sort);
 		model.addAttribute("pg", pg);
@@ -112,8 +112,14 @@ public class ProductController {
 	}
 	
 	@GetMapping("product/cart")
-	public String cart(Model model,HttpSession session, String prodNo, String cartNo) {
-		String uid = session.getId();
+	public String cart(Model model,Principal principal, String prodNo, String cartNo) {
+		// 카테 출력
+		List<ProductCate1VO> cate1 = service.selectCate1();
+		List<ProductCate2VO> cate2 = service.selectCate2();
+		model.addAttribute("cate1",cate1);
+		model.addAttribute("cate2",cate2);
+
+		String uid = "admin";
 		
 		List<ProductCartVO> carts = service.selectCartProduct(uid);
 		
@@ -123,7 +129,7 @@ public class ProductController {
 		
 		
 		
-		return "prduct/cart";
+		return "product/cart";
 	}
 	
 	@ResponseBody
@@ -140,6 +146,12 @@ public class ProductController {
 	@GetMapping("product/order")
 	public String order(Model model, @AuthenticationPrincipal MemberVO mem, @RequestParam(value="cartNo", required=false) List<String> cartNo, 
 			@RequestParam(value="prodNo", required=false)  String prodNo, @RequestParam(value="count", required=false) String count) {
+		
+		// 카테 출력
+		List<ProductCate1VO> cate1 = service.selectCate1();
+		List<ProductCate2VO> cate2 = service.selectCate2();
+		model.addAttribute("cate1",cate1);
+		model.addAttribute("cate2",cate2);
 		
 		List<ProductCartVO> cart= null;
 		ProductVO product = null;
