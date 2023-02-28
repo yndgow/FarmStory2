@@ -161,6 +161,7 @@ main > aside > .category > li:first-child{
     line-height: 40px;
 }
 main > aside > .category > li > a{
+	height: 40px;
     display: block;
     padding: 0 20px;
     line-height: 40px;

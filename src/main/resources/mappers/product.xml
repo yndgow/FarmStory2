@@ -27,8 +27,11 @@
 		SELECT * from `km_product` order by `discount` desc limit 8;
 	</select>
 	
-	<select id="selectCartProducts" resultType="kr.co.kmarket2.vo.ProductCartVO">>
-		SELECT * FROM `km_product_cart` WHERE `uid` = #{uid};
+	<select id="selectCartProducts" resultType="kr.co.kmarket2.vo.ProductCartVO">
+		select a.*, b.`prodName`, b.`thumb1`, b.`descript`, b.`prodCate1`, b.`prodCate2` from `km_product_cart`
+		 as a join `km_product` as b 
+		 on a.`prodNo`=b.`prodNo` 
+		 where `uid`=#{uid};
 	</select>
 
 	<select id="selectProducts" resultType="kr.co.kmarket2.vo.ProductVO">
@@ -55,8 +58,8 @@
 	<select id="selectReview" resultType="kr.co.kmarket2.vo.ProductReviewVO">
 		SELECT a.*, b.prodName FROM `km_product_review` AS a
 		JOIN `km_product` AS b ON a.`prodNo` = b.`prodNo`
-		WHERE a.`prodNo` = ${prodNo}
-		order by `rdate` desc limit #{start} ,5;
+		WHERE a.`prodNo` = #{prodNo}
+		order by `rdate` desc limit #{start} , 5;
 	</select>
 	
 	<insert id="insertCart" useGeneratedKeys="true">

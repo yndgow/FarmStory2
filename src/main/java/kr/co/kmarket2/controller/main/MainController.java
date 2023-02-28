@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import kr.co.kmarket2.service.ProductService;
+import kr.co.kmarket2.vo.ProductCate1VO;
+import kr.co.kmarket2.vo.ProductCate2VO;
 import kr.co.kmarket2.vo.ProductVO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,6 +22,12 @@ public class MainController {
 	
 	@GetMapping(value={"/", "index"})
 	public String main(Principal principal ,Model model) {
+		// 카테 출력
+		List<ProductCate1VO> cate1 = service.selectCate1();
+		List<ProductCate2VO> cate2 = service.selectCate2();
+		model.addAttribute("cate1",cate1);
+		model.addAttribute("cate2",cate2);
+		
 		List<ProductVO> productsbest = service.selectProductsBest();
 		List<ProductVO> productshit = service.selectProductsHit();
 		List<ProductVO> productsscore = service.selectProductsScore();

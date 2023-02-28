@@ -28,7 +28,7 @@
 			});
 			
 			// 장바구니 클릭
-			$('.cart').click(function(){
+/* 			$('.cart').click(function(){
 				
 				//let uid = $('span[name=uid]').text();
 				let uid = "admin";
@@ -54,11 +54,19 @@
 				console.log(jsonData);
 				if(uid){
 					$.ajax({
+<<<<<<< HEAD
+						url: '/kmarket2/product/view',
+						type: 'POST',
+						data: jsonData,
+						dataType: 'json',
+						contentType:'application/json; charset=utf-8',
+=======
 						url: '/kmarket2/product/cartInert',
 						type: 'post',
 						data: jsonData,
 						dataType: 'json',
 						contentType:'application/json',
+>>>>>>> 92b8eb3341a341a7f1bc869c3268ef1b68d1f87e
 						success: function(data){
 							if(confirm('장바구니에 추가되었습니다.\n장바구니로 이동하시겠습니까?')){
 								location.href = "/kmarket2/product/cart";
@@ -71,7 +79,7 @@
 				}else{
 					alert('로그인 후 이용 가능합니다.');
 				}
-			});
+			}); */
 			
 			// 주문하기 클릭
 			$('.order').click(function(){
@@ -93,7 +101,7 @@
          
     <!-- 상품 상세페이지 시작 -->
     <section class="view">
-    <label sec:authorize="isAuthenticated()"><span class="uid" name="uid" sec:authentication="principal.member.uid">길동</span></label>
+    <label><span class="uid" name="uid" sec:authentication property="principal.member.uid">길동</span></label>
     <input type="hidden" name="price" th:value="${product.price}">
     <input type="hidden" name="prodNo" th:value="${product.prodNo}">
     <input type="hidden" name="discount" th:value="${product.discount}">

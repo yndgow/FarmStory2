@@ -14,6 +14,7 @@ import kr.co.kmarket2.vo.ProductReviewVO;
 import kr.co.kmarket2.vo.ProductVO;
 import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class ProductService {
 	

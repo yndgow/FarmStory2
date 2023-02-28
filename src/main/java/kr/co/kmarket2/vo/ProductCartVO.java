@@ -23,4 +23,6 @@ public class ProductCartVO {
 	private String prodName;
 	private String thumb1;
 	private String descript;
+	private int prodCate1;
+	private int prodCate2;
 }
