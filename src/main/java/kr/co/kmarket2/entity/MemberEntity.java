@@ -1,12 +1,17 @@
 package kr.co.kmarket2.entity;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,6 +30,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Builder
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "km_member")
 public class MemberEntity {
 	@Id
@@ -49,10 +55,12 @@ public class MemberEntity {
 	private String managerHp;
 	private String fax;
 	private String regip;
-	private String wdate;
-	private String rdate;
-	private Integer etc1;
-	private Integer etc2;
+	@CreatedDate
+	private LocalDateTime wdate;
+	@CreatedDate
+	private LocalDateTime rdate;
+	private int etc1;
+	private int etc2;
 	private String etc3;
 	private String etc4;
 	private String etc5;

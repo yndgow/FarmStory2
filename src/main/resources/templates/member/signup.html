@@ -12,18 +12,14 @@
 			let agree3 = $('input:checkbox[name=agree3]').is(':checked');
 			let agree4 = $('input:checkbox[name=agree4]').is(':checked');
 			
-			if(type == 'buyer'){
-				if(agree1 && agree2 && agree3){
+			if(agree1 && agree2 && agree3){
+				if(type == 'buyer'){
 					location.href ='/kmarket2/member/register';
-				}else{
-					alert('모든 항목에 동의하셔야 다음으로 넘어갈 수 있습니다');
-				}
-			}else if(type == 'seller'){
-				if(agree1 && agree2 && agree3){
+				}else if(type == 'seller'){
 					location.href ='/kmarket2/member/registerSeller';
-				}else{
-					alert('모든 항목에 동의하셔야 다음으로 넘어갈 수 있습니다');
 				}
+			}else{
+				alert('필수 항목에 동의하셔야 합니다.');
 			}
 		});
 	});

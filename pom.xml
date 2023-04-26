@@ -83,11 +83,18 @@
 		    <artifactId>gson</artifactId>
 		</dependency>
 
-	<!--[출처] Spring Ajax 를 사용하여 Map 으로 값 받기 ( DB Insert 리턴 값 받기 )|작성자 피실 -->
+	<!--[출처] Spring Ajax 를 사용하여 Map 으로 값 받기 ( DB Insert 리턴 값 받기 ) -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.13</version>
+		</dependency>
+		<!-- mybatis sql 보기 -->
+		<!-- https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4.1 -->
+		<dependency>
+		    <groupId>org.bgee.log4jdbc-log4j2</groupId>
+		    <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
+		    <version>1.16</version>
 		</dependency>
 	</dependencies>
 	

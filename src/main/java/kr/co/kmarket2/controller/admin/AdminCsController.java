@@ -1,7 +1,5 @@
 package kr.co.kmarket2.controller.admin;
 
-
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,8 +20,6 @@ import kr.co.kmarket2.entity.CsCate2Entity;
 import kr.co.kmarket2.entity.CsFaqEntity;
 import kr.co.kmarket2.entity.CsNoticeEntity;
 import kr.co.kmarket2.entity.CsQnaEntity;
-import kr.co.kmarket2.repository.CsFaqRepo;
-import kr.co.kmarket2.repository.CsNoticeRepo;
 import kr.co.kmarket2.service.AdminService;
 import kr.co.kmarket2.utils.PaginationUtils;
 import kr.co.kmarket2.vo.CsQnaVO;
@@ -41,13 +37,9 @@ import lombok.extern.slf4j.Slf4j;
 public class AdminCsController {
 	
 	private final AdminService adminService;
-	private final CsNoticeRepo csNoticeRepo;
-	private final CsFaqRepo csFaqRepo;
 
-	public AdminCsController(AdminService adminService, CsNoticeRepo csNoticeRepo, CsFaqRepo csFaqRepo) {
+	public AdminCsController(AdminService adminService) {
 		this.adminService = adminService;
-		this.csNoticeRepo = csNoticeRepo;
-		this.csFaqRepo = csFaqRepo;
 	}
 
 	// 관리자 이동 메인

@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kr.co.kmarket2.entity.CsCate2Entity;
 import kr.co.kmarket2.entity.ProductCate2Entity;
 import kr.co.kmarket2.entity.ProductEntity;
-import kr.co.kmarket2.repository.ProductRepo;
 import kr.co.kmarket2.service.AdminService;
-import kr.co.kmarket2.vo.ProductCate2VO;
 
 /*
  * 날짜: 2023/02/15
@@ -25,11 +23,9 @@ import kr.co.kmarket2.vo.ProductCate2VO;
 @RestController
 public class AdminRestController {
 	
-	private final ProductRepo productRepo;
 	private final AdminService adminService;
 	
-	public AdminRestController(ProductRepo productRepo, AdminService adminService) {
-		this.productRepo = productRepo;
+	public AdminRestController(AdminService adminService) {
 		this.adminService = adminService;
 	}
 
