@@ -59,9 +59,4 @@ public class MemberEntity {
 	private LocalDateTime wdate;
 	@CreatedDate
 	private LocalDateTime rdate;
-	private int etc1;
-	private int etc2;
-	private String etc3;
-	private String etc4;
-	private String etc5;
 }

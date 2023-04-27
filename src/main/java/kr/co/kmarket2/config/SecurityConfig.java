@@ -4,6 +4,8 @@ package kr.co.kmarket2.config;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -35,35 +37,23 @@ public class SecurityConfig {
     	// 접근권한 설정
         http.authorizeHttpRequests()
         	.anyRequest().permitAll();
-//        	.antMatchers("/my/**","/admin/**")
-//        	.hasAnyRole("2","3","4","5");
-//        	.antMatchers("/write").hasAnyRole("3","4","5")
-//        	.antMatchers("/view").hasAnyRole("3","4","5");
-//        	.antMatchers("/admin/**").hasRole("ADMIN")
-//        	.antMatchers("/manager/**").hasAnyRole("ADMIN", "MANAGER")
-//        	.antMatchers("/member/**").hasAnyRole("ADMIN", "MANAGER", "MEMBER");
-        	
-		http.formLogin()
-			.loginPage("/member/login")
-			.defaultSuccessUrl("/notice")
-			.failureUrl("/member/login?success=100")
-			.usernameParameter("uid")
-			.passwordParameter("pass");
-        
+        http.formLogin(login -> login
+                .loginPage("/member/login")
+                .defaultSuccessUrl("/")
+                .failureUrl("/member/login?success=100")
+                .usernameParameter("uid")
+                .passwordParameter("pass"));
+
         // 사이트 위조 방지 설정
-        http.csrf().disable();
-        
-        // 로그아웃
-        http.logout()
-			.invalidateHttpSession(true)
-			.logoutUrl("/logout")
-			.logoutSuccessUrl("/member/login?success=200");
-        
-        // 자동 로그인
-        http.rememberMe()
-        				.userDetailsService(securityUserService)
-        				.tokenRepository(tokenRepository())
-        				.tokenValiditySeconds(600);
+        http.csrf(csrf -> csrf.disable());
+        http.logout(logout -> logout
+                .invalidateHttpSession(true)
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/member/login?success=200"));
+        http.rememberMe(me -> me
+                .userDetailsService(securityUserService)
+                .tokenRepository(tokenRepository())
+                .tokenValiditySeconds(600));
         
 //        http.exceptionHandling().accessDeniedPage("/accessDenied");
 //        	.accessDeniedPage("/accessDenied");
