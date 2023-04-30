@@ -2,13 +2,18 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
       
 <th:block th:include="@{member/_header.html}"/>
+<script>
+$(()=>{
+	validateForm();
+})
 
+</script>
         <main id="member">
             <div class="register">
                 <nav>
                     <h1>일반 회원가입</h1>
                 </nav>
-                <form th:action="@{/member/register}" method="post" id="registerMember">
+                <form th:action="@{/member/register}" method="post">
                     <section>
                         <table>
                             <caption>필수 정보입력</caption>
@@ -18,8 +23,8 @@
                                     아이디
                                 </th>
                                 <td>
-                                    <input type="text" name="uid" placeholder="아이디를 입력" required>
-                                    <span class="msgId">영문, 숫자로 4~12자까지 설정해 주세요.</span>
+                                    <input type="text" name="uid" placeholder="아이디를 입력" required pattern="^[a-zA-Z0-9]{4,12}$">
+                                    <!-- <span class="msgId">영문, 숫자로 4~12자까지 설정해 주세요.</span> -->
                                 </td>
                             </tr>
                             <tr>
@@ -28,8 +33,8 @@
                                     비밀번호
                                 </th>
                                 <td>
-                                    <input type="password" name="pass1" placeholder="비밀번호를 입력" required>
-                                    <span class="msgPass">영문, 숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span>
+                                    <input type="password" name="pass1" id="pass1" placeholder="비밀번호를 입력" required pattern="^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,12}$">
+                                    <!-- <span class="msgPass">영문, 숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span> -->
                                 </td>
                             </tr>
                             <tr>
@@ -39,7 +44,7 @@
                                 </th>
                                 <td>
                                     <input type="password" name="pass2" placeholder="비밀번호를 확인" required>
-                                    <span class="msgPass">비밀번호 재입력</span>
+                                    <!-- <span class="msgPass">비밀번호 재입력</span> -->
                                 </td>
                             </tr>
                         </table>
@@ -88,7 +93,7 @@
                                 </th>
                                 <td>
                                     <input type="text" name="hp" maxlength="13" placeholder="휴대폰번호 입력" required>
-                                    <span class="msgHp"> - 포함 13자리를 입력하세요.</span>
+                                    <!-- <span class="msgHp"> - 포함 13자리를 입력하세요.</span> -->
                                 </td>
                             </tr>
                             <tr class="addr">

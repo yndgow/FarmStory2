@@ -285,3 +285,9 @@
 }
 
 /* register(판매 회원) */
+#member > .register table label.error{
+	width: auto;
+	margin-left: 10px;
+	font-size: 12px;
+	color: red;
+}
