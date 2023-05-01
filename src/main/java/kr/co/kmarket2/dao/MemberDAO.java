@@ -19,4 +19,6 @@ public interface MemberDAO {
 	public void deleteMember(String uid);
 	
 	public MemberTermsVO selectTerms();
+	
+	int countUid(String uid);
 }

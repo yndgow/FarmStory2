@@ -2,7 +2,15 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
       
 <th:block th:include="@{member/_header.html}"/>
+<script>
+$(()=>{
+	validateForm();
+	$('#zip').click(function(){
+		execDaumPostcode();
+	});
+})
 
+</script>
         <main id="member">
             <div class="register">
                 <nav>
@@ -19,7 +27,6 @@
                                 </th>
                                 <td>
                                     <input type="text" name="uid" placeholder="아이디를 입력" required>
-                                    <span class="msgId">영문, 숫자로 4~12자까지 설정해 주세요.</span>
                                 </td>
                             </tr>
                             <tr>
@@ -28,8 +35,7 @@
                                     비밀번호
                                 </th>
                                 <td>
-                                    <input type="password" name="pass1" placeholder="비밀번호를 입력" required>
-                                    <span class="msgPass">영문, 숫자, 특수문자를 조합하여 8~12자까지 설정해 주세요.</span>
+                                    <input type="password" name="pass1" id="pass1" placeholder="비밀번호를 입력" required>
                                 </td>
                             </tr>
                             <tr>
@@ -39,7 +45,6 @@
                                 </th>
                                 <td>
                                     <input type="password" name="pass2" placeholder="비밀번호를 확인" required>
-                                    <span class="msgPass">비밀번호 재입력</span>
                                 </td>
                             </tr>
                         </table>
@@ -53,8 +58,7 @@
                                     회사명
                                 </th>
                                 <td>
-                                    <input type="text" name="company" placeholder="회사명 입력" required>
-                                    <span class="msgCompany">(주)포함 입력, 예) (주)케이마켓</span>
+                                    <input type="text" name="company" placeholder="회사명 입력" required pattern="^\(주\).{0,18}$">
                                 </td>
                             </tr>
                             <tr>
@@ -73,7 +77,7 @@
                                 </th>
                                 <td>
                                     <input type="text" name="bizRegNum" placeholder="사업자등록번호 입력" required>
-                                    <span class="msgCorp"> - 표시 포함 12자리 입력, 예) 123-45-67890 </span>
+                                    <span class="msgbizRegNum">- 표시 포함</span>
                                 </td>
                             </tr>
                             <tr>
@@ -83,7 +87,8 @@
                                 </th>
                                 <td>
                                     <input type="text" name="comRegNum" placeholder="통신판매업신고 입력" required>
-                                    <span class="msgOnline"> - 표시 포함, 예) 강남-12345, 제 1-01-23-4567호, 2017-경기성남-0011</span>
+									<span class="msgcomRegNum">- 표시 포함</span>
+                                    
                                 </td>
                             </tr>
                             <tr>
@@ -93,7 +98,6 @@
                                 </th>
                                 <td>
                                     <input type="text" name="tel" placeholder="전화번호 입력" required>
-                                    <span class="msgTel"> - 표시 포함, 지역번호 포함, 예) 02-234-1234 </span>
                                 </td>
                             </tr>
                             <tr>
@@ -103,7 +107,6 @@
                                 </th>
                                 <td>
                                     <input type="text" name="fax" placeholder="팩스번호 입력" required>
-                                    <span class="msgFax"> - 표시 포함, 지역번호 포함, 예) 02-234-1234</span>
                                 </td>
                             </tr>
                             <tr>
@@ -150,7 +153,6 @@
                                 </th>
                                 <td>
                                     <input type="text" name="managerHp" maxlength="13" placeholder="휴대폰번호 입력" required>
-                                    <span class="msgHp">- 포함 13자리를 입력하세요.</span>
                                 </td>
                             </tr>
                         </table>

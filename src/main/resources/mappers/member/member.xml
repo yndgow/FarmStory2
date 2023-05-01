@@ -18,5 +18,8 @@
 		#{etc1}, #{etc2}, #{etc3}, #{etc4}, #{etc5}
 		);
 	</insert>
+	<select id="countUid" resultType="int">
+		select count(uid) from km_member where uid = #{uid};
+	</select>
 
 </mapper>

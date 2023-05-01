@@ -9,5 +9,7 @@ import kr.co.kmarket2.entity.MemberEntity;
  * 내용 : JPA 의 Member Repository
  */
 public interface MemberRepo extends JpaRepository<MemberEntity, String>{
-
+	int countByUid(String uid);
+	int countByEmail(String email);
+	int countByHp(String hp);
 }
