@@ -139,3 +139,6 @@ footer p > strong{
     font-size: 12px;
     font-weight: bold;
 }
+button, input[type=submit]{
+	cursor: pointer;
+}

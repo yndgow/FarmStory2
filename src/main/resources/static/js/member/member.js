@@ -57,21 +57,21 @@ const validateForm = () => {
 			
 			/* 판매자 회원가입 */
 			company:{
-				pattern: "^\(주\).{0,18}$",
+				pattern: /^\(주\).{0,18}$/,
 			},
 			ceo:{
 				pattern: "^([가-힣a-zA-Z]{2,20})$",
 			},
 			bizRegNum:{
-				pattern: "^\d{3}-\d{2}-\d{4}$",
+				pattern: /^\d{3}-\d{2}-\d{5}$/,
 			},
 			comRegNum:{
 			},
 			tel:{
-				pattern: "^\d{2,3}-\d{3,4}-\d{4}$",
+				pattern: /^\d{2,3}-\d{3,4}-\d{4}$/,
 			},
 			fax:{
-				pattern: "^\d{2,3}-\d{3,4}-\d{4}$",
+				pattern: /^\d{2,3}-\d{3,4}-\d{4}$/,
 			},
 			manager:{
 				pattern: "^([가-힣a-zA-Z]{2,20})$",
@@ -125,7 +125,7 @@ const validateForm = () => {
 			},
 			bizRegNum:{
 				required: "사업자 등록번호는 필수 입력사항입니다.",
-				pattern: "12자리 입력, 예) 123-45-67890",
+				pattern: "-표시 포함, 12자리 입력, 예) 123-45-67890",
 			},
 			comRegNum:{
 				required: "통신판매업신고 번호는 필수 입력사항입니다.",

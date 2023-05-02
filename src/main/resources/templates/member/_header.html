@@ -24,7 +24,7 @@
         <header>
             <div class="top">
                 <div>
-                    <a th:href="@{/member/login}">로그인</a>
+					<a th:href="@{/member/login}">로그인</a>
                     <a th:href="@{/member/join}">회원가입</a>
                     <th:block sec:authorize="isAuthenticated()">
                     	<a th:href="@{/my}">마이페이지</a>
