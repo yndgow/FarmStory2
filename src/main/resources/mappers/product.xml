@@ -42,7 +42,7 @@
 		<if test="sort != null and !sort.equals('')">
 			<choose>
 				<when test="sort == 'row'">
-					order by `price` esc;
+					order by `price` desc;
 				</when>
 				<otherwise>
 					order by #{sort} desc;

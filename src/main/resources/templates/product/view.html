@@ -28,10 +28,9 @@
 			});
 			
 			// 장바구니 클릭
-/* 			$('.cart').click(function(){
+ 			$('.cart').click(function(){
 				
-				//let uid = $('span[name=uid]').text();
-				let uid = "admin";
+				let uid = $('span[name=uid]').text();
 				let prodNo = $('input[name=prodNo]').val();
 				let count = $('input[name=num]').val();
 				let price = $('input[name=price]').val();
@@ -54,19 +53,11 @@
 				console.log(jsonData);
 				if(uid){
 					$.ajax({
-<<<<<<< HEAD
-						url: '/kmarket2/product/view',
-						type: 'POST',
-						data: jsonData,
-						dataType: 'json',
-						contentType:'application/json; charset=utf-8',
-=======
 						url: '/kmarket2/product/cartInert',
 						type: 'post',
 						data: jsonData,
 						dataType: 'json',
 						contentType:'application/json',
->>>>>>> 92b8eb3341a341a7f1bc869c3268ef1b68d1f87e
 						success: function(data){
 							if(confirm('장바구니에 추가되었습니다.\n장바구니로 이동하시겠습니까?')){
 								location.href = "/kmarket2/product/cart";
@@ -79,20 +70,24 @@
 				}else{
 					alert('로그인 후 이용 가능합니다.');
 				}
-			}); */
+			}); 
 			
 			// 주문하기 클릭
 			$('.order').click(function(){
 				let count = $('input[name=num]').val();
-				//let uid = $('span[name=uid]').text();
-				let uid = "admin";
+				let uid = $('span[name=uid]').text();
 				let prodNo = $('input[name=prodNo]').val();
 				
 				if(uid){
 					location.href = "/kmarket2/product/order?prodNo="+prodNo+"&count="+count;
 				}else{
-					alert('로그인 후 이용 가능합니다.');				
-					return;
+					alert('로그인 후 이용 가능합니다.');
+					if(confirm('로그인 페이지로 이동하시겠습니까?')){
+						location.href = "/kmarket2/member/login";
+					}else{
+						return;
+						
+					}
 				}
 			});
 			
@@ -101,7 +96,7 @@
          
     <!-- 상품 상세페이지 시작 -->
     <section class="view">
-    <label><span class="uid" name="uid" sec:authentication property="principal.member.uid">길동</span></label>
+    <label><span class="uid" name="uid" sec:authentication property="principal.member.uid"></span></label>
     <input type="hidden" name="price" th:value="${product.price}">
     <input type="hidden" name="prodNo" th:value="${product.prodNo}">
     <input type="hidden" name="discount" th:value="${product.discount}">
@@ -113,18 +108,18 @@
             <p>
                 HOME > 
                <th:block th:each="ca1, i:${cate1}">
-               	<th:block th:if="${prodcate1} == ${ca1.cate1}"><span>[[${ca1.c1Name}]]</span></th:block>
+               	<th:block th:if="${prodCate1} == ${ca1.cate1}"><span>[[${ca1.c1Name}]]</span></th:block>
                	</th:block>
                 >
                 <th:block th:each="ca2, i:${cate2}">
-              		<th:block th:if="${prodcate1} == ${ca2.cate1} and ${prodcate2} == ${ca2.cate2}"><strong>[[${ca2.c2Name}]]</strong></th:block>
+              		<th:block th:if="${prodCate1} == ${ca2.cate1} and ${prodCate2} == ${ca2.cate2}"><strong>[[${ca2.c2Name}]]</strong></th:block>
            		</th:block>
             </p>
         </nav>
         <!-- 상품 전체 정보 -->
         <article class="info">
             <div class="image">
-                <img src="|${imagesEndpoint}${filename}|" alt="상품 이미지">
+                <img th:src="@{|/images/${product.thumb3}|}" alt="상품 이미지">
             </div>
             <div class="summary">
                 <nav>
@@ -134,7 +129,7 @@
                 <nav>
                     <h3>[[${product.prodName}]]</h3>
                     <p>[[${product.descript}]]</p>
-                    <h5 class="rating [[${product.rating}]]">
+                    <h5 class="rating star" th:attrappend="class=${product.score}">
                         <a href="#">상품평보기</a>
                     </h5>
                 </nav>
@@ -180,9 +175,7 @@
         <article class="detail">
             <nav><h1>상품정보</h1></nav>
             <!-- 상품 상세페이지 이미지 -->
-            <img src="https://via.placeholder.com/860x460" alt="상세페이지1">
-            <img src="https://via.placeholder.com/860x460" alt="상세페이지2">
-            <img src="https://via.placeholder.com/860x460" alt="상세페이지3">
+            <img th:src="@{|/images/${product.detail}|}" alt="상세페이지1">
         </article>
         <!-- 상품 정보 제공 고시 내용 -->
         <article class="notice">
@@ -283,27 +276,27 @@
             <ul>
                 <li th:each="re,i:${reviews}">
                     <div>
-                        <h5 class="rating ${re.rating}">[[${re.content}]]</h5>
-                        <span>[[${re.uid.substring(0,3)}]]**** [[${re.rdatesubstring(2, 10)}]]</span>
+                        <h5 class="rating star" th:attrappend="class=${re.rating}">[[${re.content}]]</h5>
+                        <span>[[${re.uid.substring(0,3)}]]**** [[${re.rdate.substring(2, 10)}]]</span>
                     </div>
                     <h3>[[${re.prodName}]]</h3>
                     <p>[[${re.content}]]</p>
                 </li>
             </ul>
-            <div>
+            <div class="paging">
                 <th:block th:if="${groups[0]>1}">
-	            <span class="prev"><a href="@{/product/view(pg=${groups[0]-1},prodNo=${product.prodNo},cate1=${cate1},cate2=${cate2})}">&lt;이전</a></span>
+	            <span class="prev"><a href="@{/product/view(pg=${groups[0]-1},prodNo=${product.prodNo},cate1=${product.prodCate1},cate2=${product.prodCate2})}">&lt;이전</a></span>
         	</th:block>
 
         	<th:block th:each="num:${#numbers.sequence(groups[0], groups[1])}">
 	            <span class="num">
-	                <a th:href="@{/product/view(pg=${num},prodNo=${product.prodNo},cate1=${cate1},cate2=${cate2})}" 
+	                <a th:href="@{/product/view(pg=${num},prodNo=${product.prodNo},prodCate1=${product.prodCate1},prodCate2=${product.prodCate2})}" 
 	                   th:class="${num == currentPage ? 'num on' : 'num'}">[[${num}]]</a>
 	            </span>
         	</th:block>
     
         	<th:block th:if="${groups[1]<lastPageNum}">
-	            <span class="prev"><a href="@{/product/view(pg=${groups[1]+1},prodNo=${product.prodNo},cate1=${cate1},cate2=${cate2})}">다음&gt;</a></span>
+	            <span class="prev"><a href="@{/product/view(pg=${groups[1]+1},prodNo=${product.prodNo},prodCate1=${product.prodCate1},prodCate2=${product.prodCate2})}">다음&gt;</a></span>
         	</th:block>
             </div>
         </article>
