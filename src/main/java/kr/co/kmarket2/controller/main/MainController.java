@@ -34,8 +34,6 @@ public class MainController {
 		List<ProductVO> productsnew = service.selectProductsNew();
 		List<ProductVO> productsdiscount = service.selectProductsDiscount();
 		
-		
-		
 		model.addAttribute("best", productsbest);
 		model.addAttribute("hit", productshit);
 		model.addAttribute("score", productsscore);

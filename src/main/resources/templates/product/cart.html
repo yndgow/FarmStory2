@@ -1,139 +1,4 @@
-<th:block th:include="@{_header.html}"/>
-<script>
-	$(function(){
-	
-		// 전체선택
-		$('.allBox').on('click', function(){
-			var chk = $('.allBox').prop('checked');
-			if(chk){
-				$('.ckBox').prop('checked', true);
-			}else{
-				$('.ckBox').prop('checked', false);
-			}
-		});
-		
-		// 전체 선택 후 개별 체크박스 해제시 전체선택 해제
-		$('.ckBox').click(function(){
-			$('.allBox').prop('checked', false);
-		});
-	
-		// 선택 삭제
-		$('.delete').click(function(){
-			
-			var chkArr = new Array();
-			
-			$(".ckBox:checked").each(function(){
-				let chk = $(this).val();
-				chkArr.push(chk);
-			})
-			console.log(chkArr);
-			
-			let chks = chkArr.toString();
-			console.log(chks);
-			
-			let jsonData = {
-					"chks":chks
-			}
-			if(chks.length < 1){
-				alert('삭제할 상품을 선택해주세요.');
-				return false;
-			}
-			let isCheck = confirm('정말 삭제하시겠습니까?');
-			
-			if(isCheck){
-				$.ajax({
-						url: '/Kmarket2/product/cart',
-						method: 'post',
-						data: jsonData,
-						dataType:"json",
-						success: function(data){
-							if(data.result > 0){
-								location.reload();
-							}else{
-								alert('삭제에 실패하였습니다.');
-							}
-						}
-					});
-				}else{
-					return;
-				}
-		});
-		
-		
-		// 총 합계
-		$('.allCheck, .check').click(function(){
-			
-			let dis = $('input[name=discount]').val();
-			var totalCount = 0;
-			var totalPrice = 0;
-			var totalDiscount = 0;
-			var totalDelivery = 0;
-			var totalPoint = 0;
-			var totalSum = 0;
-			
-			$('.check').each(function(){
-				if($(this).is(':checked') == true){
-					var totalcount = parseInt($(this).parents('tr').find('input[name=count]').val());
-					totalCount = totalCount + totalcount;
-				}
-				if($(this).is(':checked') == true){
-					var totalprice = parseInt($(this).parents('tr').find('input[name=price]').val());
-					totalPrice = totalPrice + totalprice;
-				}
-				if($(this).is(':checked') == true){
-					var totaldiscount = parseInt($(this).parents('tr').find('input[name=discount]').val());
-					totalDiscount = totalDiscount + totaldiscount;
-				}
-				if($(this).is(':checked') == true){
-					var totaldelivery = parseInt($(this).parents('tr').find('input[name=delivery]').val());
-					totalDelivery = totalDelivery + totaldelivery;
-				}
-				if($(this).is(':checked') == true){
-					var totalpoint = parseInt($(this).parents('tr').find('input[name=point]').val());
-					totalPoint = totalPoint + totalpoint;
-				}
-				if($(this).is(':checked') == true){
-					var total = parseInt($(this).parents('tr').find('input[name=total]').val());
-					totalSum = totalSum + total;
-				}
-				totalDiscount = Math.round(totalPrice*(dis/100));
-			});
-		$('.totalCount').text(totalCount);
-		$('.totalPrice').text(Number(totalPrice).toLocaleString());			
-		$('.totalDiscount').text('-'+Number(totalDiscount).toLocaleString());			
-		$('.totalDelivery').text(Number(totalDelivery).toLocaleString());			
-		$('.totalPoint').text(Number(totalPoint).toLocaleString());			
-		$('.totalSum').text(Number(totalSum).toLocaleString()+'원');			
-			
-		});
-		
-		
-		// 주문하기
-		$('.btnOrder').click(function(e){
-			e.preventDefault();
-			
-			let chkArr = [];
-			$("input[name=check]:checked").each(function(){
-				let chk = $(this).val();
-				chkArr.push(chk);
-			})
-			if(chkArr.length == 0){
-				alert('주문할 상품을 선택해주세요.');
-				return false;
-			}
-			let chks = chkArr.toString();
-			
-			if(confirm('주문하기로 이동하시겠습니까?')){
-				location.href = "/Kmarket2/product/order?cartNo="+chks;
-			}else{
-				return false;
-			}
-		});
-	
-	});
-	
-
-</script>
+<th:block th:include="@{product/_header.html}"/>
     <section class="cart">
         <!-- 제목, 페이지 네비 -->
         <nav>
@@ -158,39 +23,39 @@
 	                  <th>소계</th>
 	                </tr>
             	</thead>
-                <th:block th:if="#{cart} == ''">
-	                <tr class="empty">
-	                  <td colspan="7">장바구니에 상품이 없습니다.</td>
-	                </tr>
-				</th:block>
-                <tr th:each="cart,i:${carts}">
-                  <td>
-                  	<input type="checkbox" name="ck" class="ckBox">
-                  	<input type="hidden" name="prodNo" th:value="${cart.prodNo}">
-                	<input type="hidden" name="count" th:value="${cart.count}">
-                	<input type="hidden" name="price" th:value="${cart.price}">
-                	<input type="hidden" name="discount" th:value="${cart.discount}">
-                	<input type="hidden" name="delivery" th:value="${cart.delivery}">
-                	<input type="hidden" name="point" th:value="${cart.point}">
-                	<input type="hidden" name="total" th:value="${cart.total}">
-                  </td>
-                  <td>
-                    <article>
-                      <a href="#"><img src="https://via.placeholder.com/80x80" alt=""></a>
-                      <div>
-                        <h2><a href="#">[[${cart.prodName}]]</a></h2>
-                        <p>[[${cart.descript]}]]</p>
-                      </div>
-                    </article>
-                  </td>
-                  <td>[[${cart.cartNo}]]</td>
-                  <td>[[${cart.price}]]</td>
-                  <td>[[${cart.discount}]]%</td>
-                  <td>[[${cart.point}]]</td>
-                  <td th:if="${cart.delivery} == 0">무료배송</td>
-                  <td th:unless="${cart.delivery} == 0">[[${cart.delivery}]]</td>
-                  <td>[[${cart.price}*(100-${cart.discount}/100)]]</td>
-                </tr>
+                <th:block th:if="${carts} == null">
+			      <tr class="empty">
+			        <td colspan="7">장바구니에 상품이 없습니다.</td>
+			      </tr>
+			    </th:block>
+			      <tr th:each="cart,i:${carts}">
+			        <td>
+			          <input type="checkbox" name="ck" class="ckBox" th:value="${cart.cartNo}">
+			          <input type="hidden" name="prodNo" th:value="${cart.prodNo}">
+			          <input type="hidden" name="count" th:value="${cart.count}">
+			          <input type="hidden" name="price" th:value="${cart.price}">
+			          <input type="hidden" name="discount" th:value="${cart.discount}">
+			          <input type="hidden" name="delivery" th:value="${cart.delivery}">
+			          <input type="hidden" name="point" th:value="${cart.point}">
+			          <input type="hidden" name="total" th:value="${cart.total}">
+			        </td>
+			        <td>
+			          <article>
+			            <a href="#"><img th:src="@{|/images/${cart.thumb1}|}" alt=""></a>
+			            <div>
+			              <h2><a href="#">[[${cart.prodName}]]</a></h2>
+			              <p>[[${cart.descript}]]</p>
+			            </div>
+			          </article>
+			        </td>
+			        <td>[[${cart.cartNo}]]</td>
+			        <td>[[${cart.price}]]</td>
+			        <td>[[${cart.discount}]]%</td>
+			        <td>[[${cart.point}]]</td>
+			        <td th:if="${cart.delivery} == 0">무료배송</td>
+			        <td th:unless="${cart.delivery} == 0">[[${cart.delivery}]]</td>
+			        <td>[[${cart.price}*(100-${cart.discount}/100)]]원</td>
+			      </tr>
             </table>
             <input type="button" name="del" class="delete" value="선택삭제">
             <!-- 장바구니 전체합계 -->
@@ -229,5 +94,5 @@
         <!-- 장바구니 페이지 끝 -->
     </section>
 </main>
-<th:block th:include="@{_footer.html}"/>
+<th:block th:include="@{product/_footer.html}"/>
 

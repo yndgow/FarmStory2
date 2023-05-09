@@ -55,7 +55,7 @@
         </ul>
     </section>
     <!-- 히트 상품 -->
-    <section class="hit">
+    <section class="hit" id="hit">
         <h3><span>히트상품</span></h3>
         <th:block th:each="hit, i:${hit}">
 	       <article>
@@ -82,7 +82,7 @@
         </th:block>
     </section>
     <!-- 추천 상품 -->
-    <section class="recommend">
+    <section class="recommend" id="recommend">
         <h3><span>추천상품</span></h3>
         <th:block th:each="score, i:${score}"> 
         <article>
@@ -109,7 +109,7 @@
         </th:block>
     </section>
     <!-- 최신 상품 -->
-    <section class="new">
+    <section class="new" id="new">
         <h3><span>최신상품</span></h3>
          <th:block th:each="latest, i:${latest}"> 
          <article th:each="latest, i:${latest}">
@@ -136,7 +136,7 @@
         </th:block>
     </section>
     <!-- 할인 상품 -->
-        <section class="discount">
+        <section class="discount" id="discount">
             <h3><span>할인상품</span></h3>
             <th:block th:each="discount, i:${discount}"> 
             <article th:each="discount, i:${discount}">

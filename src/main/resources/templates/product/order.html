@@ -1,40 +1,7 @@
-<th:block th:include="@{_header.html}"/>
+<th:block th:include="@{product/_header.html}"/>
 <script src="http://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>        
 <script>
-
-	$(function() {
-		let isOnce = 0;
-		
-		$('.btnPoint').click(function() {
-			let point = $('input[name=point]').val();
-			let userPoint = $('.userPoint').text();
-			
-			if(point < 5000){
-				alert('5,000점 이상부터 사용 가능합니다.');
-				return false;
-			}else if(point >= 5000){
-				if(point > userPoint){
-					alert('현재 포인트보다 많이 사용할 수 없습니다.');
-					return false;
-				}
-				
-				if(isOnce == 0){
-					$('.pointDC').text(Number(point).toLocaleString());
-					const finTot = parseInt($('.finTot').text().replaceAll(',',''));
-					let result = finTot-point;
-					$('.pointDC').removeAttr("style");
-					$('.finTot').text(result.toLocaleString());
-					isOnce = 1;
-				}else{
-					alert('한 번 적용이 가능합니다.');
-					return false;
-				}
-			}
-		});
-	
-	});
-
-	function postcode() {
+function postcode() {
     new daum.Postcode({
         oncomplete: function(data) {
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -127,12 +94,12 @@
                 <table border="0">
                     <tr>
                         <td>총</td>
-                        <td class="ordCount" th:text="${product==null?cartList.size():'1'}+건"></td>
+                        <td class="ordCount" th:text="${product!=null?cartList.size():'1'}+건"></td>
                     </tr>
                     <tr>
                         <td>상품금액</td>
                         <th:block th:if="${product == null}">
-                       		<td class="ordPrice" th:text=${}></td>
+                       		<td class="ordPrice"></td>
                         </th:block>
                         <th:block th:unless="${product == null}">
                         	<td class="ordPrice" th:text="${product.price * count}"></td>
@@ -163,29 +130,39 @@
                 <table>
                     <tr>
                         <td>주문자</td>
+                        <!--
                         <td><input type="text" name="orderer" th:value="${mem.name}"></td>
+                        -->
                     </tr>
                     <tr>
                         <td>휴대폰</td>
                         <td>
+                        <!--
                             <input type="text" name="hp" th:value="${mem.hp}">
+                            -->
                             <span>- 포함 입력</span>
                         </td>
                     </tr>
                     <tr>
                         <td>우편번호</td>
                         <td>
-                            <input type="text" name="zip" th:value="${mem.zip}">
+							<!--
+							<input type="text" name="zip" th:value="${mem.zip}">
+							-->                            
                             <input type="button" value="검색" th:onclick="postcode()">
                         </td> 
                     </tr>
                     <tr>
                         <td>기본주소</td>
+                        <!-- 
                         <td><input type="text" name="addr1" th:value="${mem.addr1}"></td>
+                         -->
                     </tr>
                     <tr>
                         <td>상세주소</td>
-                        <td><input type="text" name="addr2" th:value="${mem.addr2}"></td>
+                        <!-- 
+                         <td><input type="text" name="addr2" th:value="${mem.addr2}"></td>
+                         -->
                     </tr>
                     <tr>
                         <td>요청사항</td>
@@ -197,7 +174,8 @@
             <article class="discount">
                 <h1>할인정보</h1>
                 <div>
-                    <p>현재 포인트 : <span class="userPoint" sec:authentication="principal.member.point"></span>점</p>
+                    <p>현재 포인트 : <span class="userPoint"></span>점</p>
+                    <!--sec:authentication="principal.member.point"-->
                     <label>
                         <input type="text" name="point">점
                         <input type="button" class="btnPoint" value="적용">
@@ -260,4 +238,4 @@
         </form>
     </section>
 </main>
-<th:block th:include="@{_footer.html}"/>        
+<th:block th:include="@{product/_footer.html}"/>

@@ -12,7 +12,7 @@ public class ProductReviewVO {
 	private String uid;
 	private int rating;
 	private String regip;
-	private LocalDateTime rdate;
+	private String rdate;
 	//추가필드
 	private String prodName;
 }
