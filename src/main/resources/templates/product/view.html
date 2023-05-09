@@ -1,99 +1,4 @@
 <th:block th:include="@{product/_header.html}"/>
-<script>
-	//수량 변경 + 자동 총 합계 계산
-		$(function(){
-			
-			let price = parseInt($('input[name=price]').val());
-			let discount = parseInt($('input[name=discount]').val());
-			let delivery = parseInt($('input[name=delivery]').val());
-			let totalPrice = 1 * Math.round(price*(100-discount)/100) + delivery;
-			$('.total > span').text(totalPrice.toLocaleString());
-			
-			$('.increase').on('click', function(){
-				let quantity = $(this).parent("div").find("input").val();
-				$(this).parent("div").find("input").val(++quantity);
-				let count = parseInt($('input[name=num]').val());
-				let totalPrice = count * Math.round(price*(100-discount)/100) + delivery;
-				$('.total > span').text(totalPrice.toLocaleString());
-			});
-			
-			$(".decrease").on("click", function(){
-				let quantity = $(this).parent("div").find("input").val();
-				if(quantity > 1){
-					$(this).parent("div").find("input").val(--quantity);		
-				}
-				let count = parseInt($('input[name=num]').val());
-				let totalPrice = count * Math.round(price*(100-discount)/100) + delivery;
-				$('.total > span').text(totalPrice.toLocaleString());
-			});
-			
-			// 장바구니 클릭
- 			$('.cart').click(function(){
-				
-				let uid = $('span[name=uid]').text();
-				let prodNo = $('input[name=prodNo]').val();
-				let count = $('input[name=num]').val();
-				let price = $('input[name=price]').val();
-				let discount = $('input[name=discount]').val();
-				let point = $('input[name=point]').val();
-				let delivery = $('input[name=delivery]').val();
-				let total = $('.total > span').text().replaceAll(',','');
-				console.log(uid);
-				
-				let jsonData = {
-						"uid": uid,
-						"prodNo": prodNo,
-						"count": count,
-						"price": price,
-						"discount": discount,
-						"point": point,
-						"delivery": delivery,
-						"total": total,
-				};
-				console.log(jsonData);
-				if(uid){
-					$.ajax({
-						url: '/kmarket2/product/cartInert',
-						type: 'post',
-						data: jsonData,
-						dataType: 'json',
-						contentType:'application/json',
-						success: function(data){
-							if(confirm('장바구니에 추가되었습니다.\n장바구니로 이동하시겠습니까?')){
-								location.href = "/kmarket2/product/cart";
-							
-							}else{
-								return;
-							}
-						}
-					});
-				}else{
-					alert('로그인 후 이용 가능합니다.');
-				}
-			}); 
-			
-			// 주문하기 클릭
-			$('.order').click(function(){
-				let count = $('input[name=num]').val();
-				let uid = $('span[name=uid]').text();
-				let prodNo = $('input[name=prodNo]').val();
-				
-				if(uid){
-					location.href = "/kmarket2/product/order?prodNo="+prodNo+"&count="+count;
-				}else{
-					alert('로그인 후 이용 가능합니다.');
-					if(confirm('로그인 페이지로 이동하시겠습니까?')){
-						location.href = "/kmarket2/member/login";
-					}else{
-						return;
-						
-					}
-				}
-			});
-			
-		});
-</script>
-         
     <!-- 상품 상세페이지 시작 -->
     <section class="view">
     <label><span class="uid" name="uid" sec:authentication property="principal.member.uid"></span></label>
@@ -166,7 +71,7 @@
                     <em>총 상품 금액</em>
                 </div>
                 <div class="button">
-                    <input type="button" class="cart" value="장바구니">
+                    <input type="button" class="cart" name="cart" value="장바구니">
                     <input type="button" class="order" value="구매하기">
                 </div>
             </div>

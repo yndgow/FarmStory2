@@ -106,13 +106,14 @@ public class ProductController {
 	public Map<String, Integer> cartInert(@RequestBody ProductCartVO vo){
 		Map<String, Integer> map = new HashMap<>();
 		int	result = service.insertCart(vo);
+		System.out.println("result" + result);
 		map.put("result", result);
 		
 		return map;
 	}
 	
 	@GetMapping("product/cart")
-	public String cart(Model model,Principal principal, String prodNo, String cartNo) {
+	public String cart(Model model,Principal principal) {
 		// 카테 출력
 		List<ProductCate1VO> cate1 = service.selectCate1();
 		List<ProductCate2VO> cate2 = service.selectCate2();
@@ -123,9 +124,7 @@ public class ProductController {
 		
 		List<ProductCartVO> carts = service.selectCartProduct(uid);
 		
-		model.addAttribute("carts ", carts );
-		model.addAttribute("cartNo", cartNo);
-		model.addAttribute("prodNo", prodNo);
+		model.addAttribute("carts", carts);
 		
 		
 		
@@ -135,8 +134,8 @@ public class ProductController {
 	@ResponseBody
 	@PostMapping("product/cart")
 	public Map<String, Integer> cart(@RequestParam("chks") List<String> chks){
-		
 		Map<String, Integer> map = new HashMap<>();
+		
 		int result = service.deleteCart(chks);
 		map.put("result", result);
 		
